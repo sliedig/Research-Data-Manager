@@ -1,0 +1,165 @@
+﻿@using Urdms.Dmp.Models.Enums
+@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataManagementPlanViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("research-data");
+    AddScript("jquery.prettyPhoto");
+    AddStylesheet("prettyPhoto");
+
+    var preExistingDataHints = new[]
+                                         {
+                                             new FaqItem {Text = "Where can I find pre-existing research data?", Url = "#faq1"}
+                                         };
+    var researchDataHints = new[]
+                                      {
+                                          new FaqItem { Text = "What can I include in a data description?", Url = "#faq2" }
+                                      };
+    var ownersHints = new[]
+                                {
+                                    new FaqItem { Text = "How can I determine who owns the data?", Url = "#faq3" }
+                                };
+
+
+    var relationshipHints = new[]
+                                {
+                                    new FaqItem { Text = "How do I integrate new and pre-existing data?", Url = "#faq4"}
+                                };
+                                
+                                
+}
+@helper ExistingDataInstructions()
+    {
+    <p>Identifying pre-existing data that could be reused, before commencing a project,
+        may eliminate the need to regenerate or recollect data. To search descriptions of
+        some existing research data as contributed by researchers within Australia visit
+        the <a href='http://ands.org.au/' target='_blank'>ANDS website</a>.</p>
+}
+@helper NewDataIntroduction()
+    {
+    <p>Providing sufficient information to highlight the key aspects of the research data,
+        including a description of the data, the means for data collection and ownership,
+        will demonstrate context and make the research data easier to understand in the
+        future, increasing visibility and potentially the number of citations for your work.</p>
+}
+@helper DataRelationshipsInstructions()
+    {
+    <p>Relationships between pre-existing research data and new research data help to identify
+        and clarify the difference between new areas of research. This will help you to
+        define the importance of your research and what exactly you are measuring. Examining
+        how your manage the integration of the new and pre-existing research data will assist
+        in clarifying the difference and added value you are contributing to research as
+        a whole</p>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ProjectId)
+    @Html.HiddenFor(m => m.Step)
+    @Html.HiddenFor(m => m.Start)
+    @f.Steps(ViewBag.Steps, 1, ViewBag.MaxStep, true, true)
+    
+    @f.Header("Information About Research Data")
+    <h2>Data Management Plan for: @Model.ProjectTitle</h2>
+    using (var s = f.BeginSection("Pre-existing Research Data", "existing-data", ExistingDataInstructions()))
+    {
+    @s.RadioFor(m => m.ExistingDataDetail.UseExistingData, "No", "Yes", new FieldConfiguration { Before = preExistingDataHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.ExistingDataDetail.ExistingDataOwner)
+    @s.FieldFor(m => m.ExistingDataDetail.ExistingDataAccessTypes, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { ExistingDataAccessTypes.None } })
+    @s.FieldFor(m => m.ExistingDataDetail.AccessTypesDescription)
+    }
+
+    using (var s = f.BeginSection("New Research Data", "new-data", NewDataIntroduction()))
+    {
+    @s.FieldFor(m => m.NewDataDetail.ResearchDataDescription, new FieldConfiguration { Before = researchDataHints.GenerateFaqPlaceHolder(), HtmlAttributes = new { @class = "largeHeight" } })
+    @s.FieldFor(m => m.NewDataDetail.DataOwners, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { DataOwners.None }, Before = ownersHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.NewDataDetail.DataOwnersDescription)
+    }
+
+    using (var s = f.BeginSection("Relationship Between New and Pre-existing Data", "data-relationship", DataRelationshipsInstructions()))
+    {
+    @s.FieldFor(m => m.DataRelationshipDetail.RelationshipBetweenExistingAndNewData, new FieldConfiguration { As = ElementType.RadioButtons, Exclude = new Enum[] { DataRelationship.None }, Before = relationshipHints.GenerateFaqPlaceHolder() })
+    }
+
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit(ViewBag.NavigationButton.Next, name: "stepAction", id: "NextButton", classes: "float-right")
+        }
+    </div>
+    
+    
+    
+        // Put the faqs in partial maybe?
+    <div id="faq1" class="hide">
+        <h2>Where can I find pre-existing data?</h2>
+        <p>The <a href="http://www.ada.edu.au/" target="_blank">Australian Data Archive</a>
+            (ADA) and the <a href="http://192.43.239.51/asedaDisclaimer.php" target="_blank">Aboriginal
+                Studies Electronic Data Archive (ASEDA)</a> are some examples of national digital
+            repositories. There are also data discovery services such as <a target="_blank" href="http://services.ands.org.au/home/orca/rda/">
+                Research Data Australia</a> (RDA).<br />
+            Examples of discipline-specific research data repositories include:</p>
+        <ul>
+            <li><a href="http://www.cmar.csiro.au/datacentre/" target="_blank">CSIRO Marine and
+                Atmospheric Research Data Centre</a></li>
+            <li><a href="http://www.ga.gov.au/energy/projects/petroleum-data-repository.html"
+                target="_blank">Geoscience Australia Petroleum Data Repository Project</a></li>
+            <li><a href="http://www.data-archive.ac.uk/find" target="_blank">UK Data archive</a></li>
+            <li><a href="http://archaeologydataservice.ac.uk/" target="_blank">Archaeology Data
+                Service</a></li>
+            <li><a href="http://data-search.nerc.ac.uk/" target="_blank">Natural Environment Research
+                Council Data Discovery Service</a></li>
+            <li><a href="http://www.pangaea.de/" target="_blank">Pangae: Data Publisher for Earth
+                &amp; Environmental Science</a></li>
+            <li><a href="http://edcsns17.cr.usgs.gov/NewEarthExplorer/" target="_blank">United States
+                Geological Survey (USGS)</a></li>
+        </ul>
+    </div>
+
+    
+    <div id="faq2" class="hide">
+        <h2>What needs to be included in a data description?</h2>
+        <p>Data description can include:</p>
+        <ul>
+            <li>Type of data (e.g., survey, interviews, sensors, etc.)</li>
+            <li>Data capture methods</li>
+            <li>Source of data</li>
+            <li>Data analysis methodology</li>
+        </ul>
+    </div>
+    
+    <div id="faq3" class="hide">
+        <h2>How can I determine who owns the data?</h2>
+        <p><strong>Data ownership</strong> refers to the control and rights over the data as
+            well as data management and use. Ownership of research is a complex issue that involves
+            the principal investigator, the sponsoring institution, the funding agency, and
+            any participating human subjects. Ownership terms can often be stipulated by contracts
+            with the funder. Clarifying <strong>data ownership</strong> and <strong>rights</strong>
+            is an important part of data management as they will determine how the data can
+            be managed and used in the future. Where specific permissions are needed to use
+            the data, the copyright holder or cited agency should be contacted. <a href="http://www.surffoundation.nl/en/publicaties/Pages/Juridischestatusvanruwedata.aspx"
+                target="_blank">The legal status of raw data: a guide for research practice</a>
+            may help clarify the legal protection applying to research data. </p>
+    </div>
+    
+    <div id="faq4" class="hide">
+        <h2>How do I integrate new and pre-existing data?</h2>
+        <p>You might collect new research data that needs to be combined or analysed with pre-existing
+            data. Strategies for managing the relationship between pre-existing and new research
+            data include:</p>
+        <ul>
+            <li>Capture new data in the same format as pre-existing data</li>
+            <li>Transform pre-existing data to match format of new data</li>
+            <li>Transform both new and pre-existing data to a unified format</li>
+        </ul>
+    </div>
+    
+    
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ default_width: 600 });
+        });
+    </script>
+}

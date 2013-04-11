@@ -1,0 +1,33 @@
+﻿@{
+    Helper.FlowFormCssAndJs(this);
+}
+
+@helper Introduction()
+{
+    <p>Below is a brief description of the project. This will help give the DMP context, and ensure the background to the data is clear, and understood during and beyond the life of the project. Go to @Html.RouteLink("My Projects", "MyProjects") to edit Research-Initiated projects.</p>
+}
+
+@using (var f = Html.BeginFlowForm())
+ {
+     @f.Header("Data Management Planning")
+     using (f.BeginSection("Introduction to Data Management Planning", "DMP-introduction1"))
+     {
+         <dt><label>What is a Data Management Plan?</label></dt>
+         <dd>A Data Management Plan (DMP) documents information about the data that will be created during a research project and how it will be managed. It details practices, responsibilities, procedures and policies that apply to the management of research data. Putting time into creating a robust data management plan before you start a project will save you time during the project, as the major considerations will have been explored and addressed.</dd>
+         <dt><label>Benefits of a Data Management Plan</label></dt>
+        <ul style="margin-top: 0px">
+            <li>Improve accessibility to the data. By ensuring the quality and integrity of the data and its preservation, this will enable you, or others, to examine or re-use the data during and beyond the life of the project.</li>
+            <li>Prevent unauthorised use. Any privacy and confidentiality issues that exist with the data will be addressed. This includes the collection, preservation or distribution of the research data. A plan is particularly important in the context of collaborative research.</li>
+        </ul>
+         <dt><label>Compliance with Australian Code for the Responsible Conduct of Research</label></dt>
+         <dd>The <a href="http://www.nhmrc.gov.au/_files_nhmrc/publications/attachments/r39.pdf" target="_blank" rel="external">Australian Code for the Responsible Conduct of Research</a> requires proper management and retention of research data. Compliance with the Code is currently a condition for ARC and NHMRC funding. Evidence of data management planning is likely to be mandated by other funding bodies, government and institutions in the near future.</dd>
+     }
+    
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Next", name: "stepAction", id: "NextButton", classes:"float-right")
+        }
+    </div>
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+}

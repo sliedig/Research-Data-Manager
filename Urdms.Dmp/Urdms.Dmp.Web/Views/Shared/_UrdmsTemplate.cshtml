@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_UrdmsBase.cshtml";
+    var menus = PageSettings.Menu.GetMenus();
+}
+
+@section head {
+    @RenderSection("head", required:false)
+}
+
+@Html.Partial("~/Views/Shared/_UrdmsBranding.cshtml")
+
+<div id="site_heading">
+    <div class="page_positioning">
+        <a href="@Url.Content("~/")">
+            @PageSettings.SiteTitle
+        </a>
+    </div>
+</div>
+<div id="top_navigation">
+    <div class="page_positioning">
+        @if (PageSettings.TopNavDisplay) {
+            @Html.Partial("~/Views/Menu/_TopNav.cshtml", menus.TopNav)
+        }
+        <div class="clearing">
+        </div>
+    </div>
+</div>
+<div class="page_positioning">
+    @if (PageSettings.MenuNavDisplay || PageSettings.GlobalNavDisplay) {
+        <div id="menu_navigation">
+        @if (PageSettings.MenuNavDisplay) {
+            @Html.Partial("~/Views/Menu/_MenuNav.cshtml", menus.MenuNav)
+        }
+        @if (PageSettings.GlobalNavDisplay) {
+            <ul class="global">
+                @Html.Partial("~/Views/Menu/_GlobalNav.cshtml")
+            </ul>
+        }
+        @if (User.Identity.IsAuthenticated) {
+            <p style="text-align: center;">
+                @Html.ActionLink("Log Off " + User.Identity.Name, "LogOff", "Auth", null, new { @class = "submitButton", @style = "float: none;" })
+            </p>
+        }
+        </div>
+    }
+    <a name="skip_to_content" id="skip_to_content"></a>
+    <div id="content"
+    @if (!PageSettings.MenuNavDisplay && !PageSettings.GlobalNavDisplay) {
+        if (PageSettings.SideContentDisplay) {
+            @:class="no_menu"
+        } else {
+            @:class="no_small no_menu"
+        }
+    } else if (!PageSettings.SideContentDisplay) {
+        @:class="no_small"
+    }
+    >
+        @RenderBody()
+    </div>
+    @if (PageSettings.SideContentDisplay) {
+        <div id="small_content">
+            @RenderSection("side_content", required:false)
+        </div>
+    }
+</div>
+@Html.Partial("~/Views/Shared/_UrdmsFooter.cshtml")
+
+

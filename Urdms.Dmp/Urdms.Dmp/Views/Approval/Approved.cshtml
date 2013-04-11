@@ -1,0 +1,37 @@
+﻿@using Urdms.Dmp.Models.Enums
+@model Urdms.Dmp.Models.ApprovalModels.ApprovalConfirmationViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    ViewBag.Title = "Thank you";
+}
+
+@functions {
+    public MvcHtmlString GetMessage(DataCollectionStatus status)
+    {
+        switch (status)
+        {
+            case DataCollectionStatus.QaApproved:
+                return MvcHtmlString.Create("Thank you for performing a quality check on the data collection description. It will now be sent to secondary approval for contract and confidentiality approval.");
+            case DataCollectionStatus.SecondaryApproved:
+                return MvcHtmlString.Create("Thank you for performing a contract and confidentiality approval on the data collection description. It will now be sent to QA for public release to Research Data Australia via VIVO");
+            case DataCollectionStatus.Published:
+                return MvcHtmlString.Create("Thank you for publishing the data collection description. It will appear in VIVO and eventually Research Data Australia within 48 hours.");
+            case DataCollectionStatus.RecordAmended:
+                return MvcHtmlString.Create("The data collection description is sent to the secondary approver for re-approval.");
+            default:
+                return MvcHtmlString.Empty;
+        }
+    }
+
+}
+
+@using (var f = Html.BeginFlowForm())
+{
+    <div class="confirmation_message">
+        <h2>Thank you</h2>
+        <div class="message">
+            <p>@GetMessage(Model.ProposedState)</p>
+            <p>Return to the @Html.ActionLink("approvals", "Index") page</p>
+        </div>
+    </div>
+}

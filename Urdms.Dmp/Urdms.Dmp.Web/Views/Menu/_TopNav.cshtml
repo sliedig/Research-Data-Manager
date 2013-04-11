@@ -1,0 +1,28 @@
+﻿@model IList<Urdms.Dmp.Web.Menu.MenuItem>
+@using System.Text.RegularExpressions
+@using Urdms.Dmp.Web.Menu
+
+@helper OutputUrl(MenuItem item)
+    {
+    if(new Regex(@"^\w+\://").Match(item.Path).Success) {
+        @item.Path
+    } else {
+        @Url.Content("~" + item.Path)
+    }
+}
+
+<ul>
+@foreach (var item in Model)
+{
+    var show = !item.Auth.HasValue ||
+               (
+                   item.Auth == User.Identity.IsAuthenticated &&
+                   (item.Roles.Count == 0 || (item.Roles.Any(r => User.IsInRole(r))))
+               );
+    if (show)
+    {
+        var cssClass = item.Selected ? "selected" : "";
+        <li class="@cssClass"><a href="@OutputUrl(item)">@item.Title</a></li>
+    }
+}
+</ul>

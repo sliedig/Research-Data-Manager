@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.Workflows</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.Workflow.Application.IssueTracking"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.CheckFlags(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.ClearFlags(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.Dispose"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.FalseFunction(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.FIssueNotClosed(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.FIssueNotResolved(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.FShouldCompleteFirstTask(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.FShouldCompleteSecondTask(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.GetTaskProps(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.IsTaskDeleted(System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.String)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.LogCompletionHistory(System.Object,System.EventArgs)"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_afterProperties"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_afterProps"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_alertEventFrequency"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_alertEventType"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_beforeProperties"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_beforeProps"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_creationProperties"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_creationProps"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_emailBody"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_emailHeaders"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_executor"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_historyDescEnd"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_historyDescStart"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_historyDuration"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_historyOutcome"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_historyUserId"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_initProps"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_itemAProperties"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_itemBProperties"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_outcome"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_reason"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_taskId"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_taskId2"></member>
+    <member name="F:Microsoft.SharePoint.Workflow.Application.IssueTracking.m_workflowId"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.NeedProcessEvent(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.NeedRollback(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnBeforeStartedEmail(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnItemChanged(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnItemDeleted(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnMyTaskChanged(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnMyTaskDeleted(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnTaskChanged(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnTaskDeleted(System.Guid,Microsoft.SharePoint.Workflow.SPWorkflowTaskProperties,System.String)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.OnWorkflowActivated(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.ResetTaskIds(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.SendEmailState(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.ShouldDelete(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.TrueFunction(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.WaitingForTask(System.Object,System.Workflow.Activities.ConditionalEventArgs)"></member>
+    <member name="P:Microsoft.SharePoint.Workflow.Application.IssueTracking.WorkflowItem"></member>
+    <member name="M:Microsoft.SharePoint.Workflow.Application.IssueTracking.WorkflowTaskItem(System.Guid)"></member>
+    <member name="P:Microsoft.SharePoint.Workflow.Application.IssueTracking.WorkflowTaskList"></member>
+    <member name="P:Microsoft.SharePoint.Workflow.Application.IssueTracking.WorkflowWeb"></member>
+  </members>
+</doc>

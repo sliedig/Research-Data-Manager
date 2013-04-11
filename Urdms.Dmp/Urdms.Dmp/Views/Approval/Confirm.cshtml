@@ -1,0 +1,77 @@
+@using Urdms.Dmp.Models.Enums
+@model Urdms.Dmp.Models.ApprovalModels.ApprovalConfirmationViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    var modelState = ViewContext.ViewData.ModelState;
+    var agreementViolationErrors = modelState.Keys.Contains("DoesNotViolateAgreements") && modelState["DoesNotViolateAgreements"].Errors.Count > 0;
+    var confidentialityErrors = modelState.Keys.Contains("DoesNotViolateConfidentialityAndEthics") && modelState["DoesNotViolateConfidentialityAndEthics"].Errors.Count > 0;
+    var qaApprovalErrors = modelState.Keys.Contains("IsQaApproved") && modelState["IsQaApproved"].Errors.Count > 0;
+    var publicationErrors = modelState.Keys.Contains("IsPublicationApproved") && modelState["IsPublicationApproved"].Errors.Count > 0;
+}
+<h1>Confirm</h1>
+@using (var f = Html.BeginFlowForm(htmlAttributes: new { @class = "fullwidth" }))
+{
+    @Html.HiddenFor(o => o.DataCollectionId)
+    @f.Steps(ViewBag.Steps, 3, ViewBag.MaxStep, true, true)
+    switch (Model.State)
+    {
+        case DataCollectionStatus.Submitted:
+            using (var s = f.BeginSection("Quality check approval", "confirm"))
+            {
+                <dd @if (qaApprovalErrors)
+                    {<text>class="invalid"</text>}>@Html.ValidationMessageFor(o => o.IsQaApproved, null, new { @class = "invalid-message" })
+                    <label>@Html.CheckBoxFor(o => o.IsQaApproved) @Html.LabelFor(o => o.IsQaApproved)</label></dd>
+            }
+            break;
+
+        case DataCollectionStatus.QaApproved:
+        case DataCollectionStatus.RecordAmended:
+            using (var s = f.BeginSection("Secondary approval", "confirm"))
+            {
+                <dl><dt></dt><dd @if (agreementViolationErrors)
+                                 {<text>class="invalid"</text>}>@Html.ValidationMessageFor(o => o.DoesNotViolateAgreements, null, new { @class = "invalid-message" })
+                    <label>@Html.CheckBoxFor(o => o.DoesNotViolateAgreements) @Html.LabelFor(o => o.DoesNotViolateAgreements)</label></dd>
+                <dt></dt><dd @if (confidentialityErrors)
+                             {<text>class="invalid"</text>}>@Html.ValidationMessageFor(o => o.DoesNotViolateConfidentialityAndEthics, null, new { @class = "invalid-message" }) 
+                    <label>@Html.CheckBoxFor(o => o.DoesNotViolateConfidentialityAndEthics) @Html.LabelFor(o => o.DoesNotViolateConfidentialityAndEthics)</label></dd></dl>
+            }
+            break;
+
+        case DataCollectionStatus.SecondaryApproved:
+            if (Model.IsChanged)
+            {
+                using (var s = f.BeginSection("Re-approval Required", "re-approve"))
+                {
+                    <p>This Data Collection has been modified. It will need to be re-approved by the secondary approver. Please click on the button below to continue.</p>
+                }
+            }
+            else
+            {
+                using (var s = f.BeginSection("Publish", "confirm"))
+                {
+                    <dl><dt></dt><dd @if (publicationErrors)
+                                     {<text>class="invalid"</text>}>@Html.ValidationMessageFor(o => o.IsPublicationApproved, null, new { @class = "invalid-message" })
+                        <label>@Html.CheckBoxFor(o => o.IsPublicationApproved) @Html.LabelFor(o => o.IsPublicationApproved)</label></dd></dl>
+                }
+            }
+            break;
+    }
+
+    <div class="container">
+        @if (Model.IsChanged & Model.State == DataCollectionStatus.SecondaryApproved)
+        {
+            using (var n = f.BeginNavigation())
+            {
+                @n.Submit("Submit for Re-approval", name: "reapproval", classes: "float-right")
+            }
+        }
+        else
+        {
+            using (var n = f.BeginNavigation())
+            {
+                @n.Submit("Cancel", name: "cancel", classes: "float-left")
+                @n.Submit("Approve", name: "approve", classes: "float-right")
+            }
+        }
+    </div>
+}

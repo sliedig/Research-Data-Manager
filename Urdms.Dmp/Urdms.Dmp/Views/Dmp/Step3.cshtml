@@ -1,0 +1,43 @@
+﻿@model Urdms.Dmp.Models.DataManagementPlanViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("dmp-ethics");             
+}
+@helper EthicalRequirementsInstructions() {
+    <p>As a researcher you are responsible for treating your data ethically. Particularly if your project involves humans as subjects, there will be ethical requirements issued by professional bodies, your institution or funding organisation that you must adhere to in the manner you manage the confidential and private information you will generate or collect. Consider how to best protect and store your data, as well as your ability to share it both ethically and legally.</p>
+}
+@helper ConfidentialityAndPrivacyRequirements() {
+    <p>Confidential data is information that is secret and cannot be disclosed to a third party, it may relate to health and medical details, commercial or political information or matters of cultural sensitivity. Sensitive information often includes personal data, such as an individual’s race or ethnic origin, religious beliefs or proceedings for alleged criminal offences. If your dataset contains this type of information, you must take appropriate measures to safeguard the privacy of individuals or organisations by protecting the data from unauthorised access and use.</p>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ProjectId)
+    @Html.HiddenFor(m => m.Step)
+    @Html.HiddenFor(m => m.Start)
+    @f.Steps(ViewBag.Steps, 3, ViewBag.MaxStep, true, true)
+	
+    @f.Header("Ethics, Confidentiality and Privacy Requirements")
+
+    <h2>Data Management Plan for: @Model.ProjectTitle</h2>
+    using (var s = f.BeginSection("Ethical Requirements", "ethical-requirements", EthicalRequirementsInstructions()))
+    {
+        @s.RadioFor(m => m.Ethic.EthicRequiresClearance)
+        @s.FieldFor(m => m.Ethic.EthicComments, new FieldConfiguration { HtmlAttributes = new { @class = "largeHeight" }})
+    }
+    using (var s = f.BeginSection("Confidentiality and Privacy Requirements", "confidentiality-requirements", ConfidentialityAndPrivacyRequirements()))
+    {
+        @s.RadioFor(m => m.Confidentiality.IsSensitive)
+        @s.FieldFor(m => m.Confidentiality.ConfidentialityComments, new FieldConfiguration { HtmlAttributes = new { @class = "largeHeight" } })
+    }
+
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit(ViewBag.NavigationButton.Previous, name: "stepAction", id: "PreviousButton", classes:"float-left")
+            @n.Submit(ViewBag.NavigationButton.Next, name: "stepAction", id: "NextButton", classes:"float-right")
+        }
+    </div>
+
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+}

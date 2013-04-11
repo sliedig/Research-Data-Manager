@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+body, p
+{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+body { padding: 75px 56px; }
+
+h1, h2, h3, h4, h5
+{
+	color: #c4970a;
+	font-weight: bold;
+}
+
+h1{padding-top:16px;}
+
+
+td.information
+{
+	padding: 0px 18px 18px 18px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #efe5b5;
+	background-color: #fdfbf2;
+}
+
+td.cricos
+{
+	padding-top: 10px;
+	text-align: center;
+	font-size: 10px;
+	color: #999999;
+}
+</style>
+</head>
+
+<body>
+<table>
+	<tr >
+		<td class="information">
+                <table>
+			<tr>
+			<td><img src="/images/urdms_assets/tick2.gif" align="left" alt="" /></td>
+			<td valign="middle"><h1>@Model.Subject</h1></td>
+			</tr>
+		</table>
+<p>Your access to the Project Storage Space @Model.ProjectName has been activated. It can be accessed via <a href="@Model.SiteUrl">@Model.SiteUrl</a></p>
+<p>The Project Storage Space will also appear in the list of research projects that you have access to.
+Please contact us via <a mailto="researchdata@yourdomain.edu.au">researchdata@yourdomain.edu.au</a> if you have trouble accessing your Project Storage Space.</p>
+</td>
+	</tr>
+	<tr>
+		<td class="cricos">CRICOS Provider Code ...</td>
+	</tr>
+</table>
+</body>
+</html>

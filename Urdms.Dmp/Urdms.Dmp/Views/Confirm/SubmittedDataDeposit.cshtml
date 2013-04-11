@@ -1,0 +1,16 @@
+﻿@model Urdms.Dmp.Database.Entities.Project
+@{
+    Helper.FlowFormCssAndJs(this);
+    ViewBag.Title = "Thank you";
+}
+
+@using (var f = Html.BeginFlowForm())
+{
+    <div class="confirmation_message">
+        <h2>Thank you</h2>
+        <div class="message">
+			<p>Thank you for submitting your Data Deposit form for <em>@Model.Title</em>.</p>
+            <p>YourProject Storage Space ID is: @Model.Id</p>
+        </div>
+    </div>
+}

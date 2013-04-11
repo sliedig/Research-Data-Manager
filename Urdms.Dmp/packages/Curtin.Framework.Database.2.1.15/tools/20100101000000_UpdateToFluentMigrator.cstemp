@@ -1,0 +1,69 @@
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using Curtin.Framework.Database.Migrations;
+using FluentMigrator;
+
+namespace %namespace%.Data.Migrations
+{
+    internal static class SqlCommandExtensions
+    {
+        public static int GetTableCount(this SqlConnection connection, string tableName, SqlTransaction transaction)
+        {
+            try
+            {
+                var command = new SqlCommand(string.Format("SELECT count(*) FROM [{0}]", tableName), connection) { Transaction = transaction };
+                var reader = command.ExecuteReader();
+                reader.Read();
+                var numRows = reader.GetInt32(0);
+                reader.Close();
+                return numRows;
+            }
+            catch(Exception)
+            {
+                return 0;
+            }
+        }
+    }
+
+    [Migration(20100101000000)]
+    public class UpdateToFluentMigrator : Migration
+    {
+
+        public override void Up()
+        {
+            // Check if this is the first time the Fluent Migrations have been run
+            var connection = new SqlConnection(FluentRunner.ConnectionString);
+            connection.Open();
+            var transaction = connection.BeginTransaction(IsolationLevel.Serializable);
+            if (connection.GetTableCount("VersionInfo", transaction) != 0)
+            {
+                Trace.WriteLine("Already converted to FluentMigrator. Nothing to do here.");
+                connection.Close();
+                return;
+            }
+
+            // Ensure there are old migrations
+            if (connection.GetTableCount("SchemaInfo", transaction) == 0)
+            {
+                Trace.WriteLine("No old migrations to apply. Nothing to do here.");
+                connection.Close();
+                return;
+            }
+
+            // Convert from old migrations to new ones and remove old migrations
+            Trace.WriteLine("This is the first time running FluentMigrator after MigratorDotNet; converting from Migratordotnet migrations to FluentMigrator migrations.");
+            var command2 = new SqlCommand(@"INSERT INTO [VersionInfo] SELECT [Version] FROM [SchemaInfo]", connection) { Transaction = transaction };
+            command2.ExecuteNonQuery();
+            var command3 = new SqlCommand(@"DELETE FROM [SchemaInfo]", connection) { Transaction = transaction };
+            command3.ExecuteNonQuery();
+            transaction.Commit();
+            connection.Close();
+            throw new Exception("Please re-run migrations once more so that the conversion from MigratorDotNet to FluentMigrator can take effect.");
+        }
+
+        public override void Down()
+        {}
+    }
+}

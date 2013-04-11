@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?> 
+<package>
+  <metadata>
+    <id>
+       Urdms.Messaging
+    </id>
+    <version>
+       1.0.0 
+    </version>
+    <authors>
+       Steve Liedig 
+    </authors>
+    <description>
+       Messages used for NServiceBus messaging framework
+    </description>
+    <language>
+       en-US 
+    </language>
+  </metadata>
+</package>

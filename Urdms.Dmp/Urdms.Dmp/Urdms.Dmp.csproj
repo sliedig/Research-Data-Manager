@@ -1,0 +1,908 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="TransformXml" AssemblyFile="C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
+  <UsingTask AssemblyFile="$(MSBuildProjectDirectory)\..\packages\MigratorDotNet.0.9.0.28138\tools\Migrator.MSBuild.dll" TaskName="Migrator.MSBuild.Migrate" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9BF477F9-CCE8-4DCF-A1B5-E2FBD32EE237}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Urdms.Dmp</RootNamespace>
+    <AssemblyName>Urdms.Dmp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Env Condition="'$(Env)'==''">CI</Env>
+    <BaseIntermediateOutputPath>$(ProjectDir)..\obj</BaseIntermediateOutputPath>
+    <DesktopBuildPackageLocation>..\Package\$(Env)\Urdms.Dmp.zip</DesktopBuildPackageLocation>
+    <ProjectConfigTransformFileName Condition="'$(Env)'!=''">Web.$(Env).config</ProjectConfigTransformFileName>
+    <MvcBuildViews>true</MvcBuildViews>
+    <AutoParameterizationWebConfigConnectionStrings>false</AutoParameterizationWebConfigConnectionStrings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Sandbox|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DUMMY_SERVICES</DefineConstants>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=2.5.2.830, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration, Version=2.5.2.830, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=2.5.2.830, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Autofac.Mvc3.2.5.2.830\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Commons.Web.Mvc.PrecompiledViews">
+      <HintPath>..\packages\MvcRazorClassGenerator.1.0.5.0\lib\Net40\Commons.Web.Mvc.PrecompiledViews.dll</HintPath>
+    </Reference>
+    <Reference Include="Curtin.Framework.Common">
+      <HintPath>..\packages\Curtin.Framework.Common.2.1.15\lib\NET40\Curtin.Framework.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Curtin.Framework.Database">
+      <HintPath>..\packages\Curtin.Framework.Database.2.1.15\lib\NET40\Curtin.Framework.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicJson, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicJson.1.2.0.1\lib\NET40\DynamicJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.1.1\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Contrib.Mvc">
+      <HintPath>..\packages\Elmah.Contrib.Mvc.1.0\lib\net40\Elmah.Contrib.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="FizzWare.NBuilder">
+      <HintPath>..\packages\NBuilder.3.0.1\lib\FizzWare.NBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\Curtin.FluentMigrator.1.0.8\lib\Net40\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Legacy.MigratorDotNet">
+      <HintPath>..\packages\Curtin.FluentMigrator.Legacy.MigratorDotNet.0.2.0.0\lib\net35\FluentMigrator.Legacy.MigratorDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner, Version=1.0.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\Curtin.FluentMigrator.1.0.8\lib\Net40\FluentMigrator.Runner.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=3.2.0.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.3.2.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Conversion.v4.0" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\MVC3\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc2Futures.2.0.50217.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\MvcContrib.2.0.95.0\lib\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\packages\valueinjecter.2.3\lib\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.DirectoryServices.Protocols" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Activation">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Activities">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\MVC3\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SharedLibs\MVC3\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.WorkflowServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Urdms.Approvals.ApprovalService.Commands">
+      <HintPath>..\lib\Urdms.Approvals.ApprovalService.Commands.dll</HintPath>
+    </Reference>
+    <Reference Include="Urdms.DocumentBuilderService.Commands">
+      <HintPath>..\lib\Urdms.DocumentBuilderService.Commands.dll</HintPath>
+    </Reference>
+    <Reference Include="Urdms.ProvisioningService.Commands">
+      <HintPath>..\lib\Urdms.ProvisioningService.Commands.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config\Autofac\DataAccessModule.cs" />
+    <Compile Include="Config\Autofac\NHibernateModule.cs" />
+    <Compile Include="Config\Autofac\NServiceBusModule.cs" />
+    <Compile Include="Config\Autofac\UserServiceModule.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\ApprovalController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DataCollectionBaseController.cs" />
+    <Compile Include="Controllers\DataCollectionController.cs" />
+    <Compile Include="Controllers\ConfirmController.cs" />
+    <Compile Include="Controllers\DataDepositController.cs" />
+    <Compile Include="Controllers\Filters\ProvideDataCollectionStepsAttribute.cs" />
+    <Compile Include="Controllers\Filters\RequiresAnyRoleType.cs" />
+    <Compile Include="Controllers\Filters\ProvideDataManagementPlanStepsAttribute.cs" />
+    <Compile Include="Controllers\Helpers\CsvHelper.cs" />
+    <Compile Include="Controllers\Helpers\NavigationButton.cs" />
+    <Compile Include="Controllers\Helpers\ResearchCodesHelper.cs" />
+    <Compile Include="Controllers\Helpers\UserManagementHelper.cs" />
+    <Compile Include="Controllers\LibGuideController.cs" />
+    <Compile Include="Controllers\ModelBinders\AppModelBinderProvider.cs" />
+    <Compile Include="Controllers\ModelBinders\DataDepositViewModelBinder.cs" />
+    <Compile Include="Controllers\ModelBinders\DataCollectionApprovalViewModelStep1Binder.cs" />
+    <Compile Include="Controllers\ModelBinders\DataCollectionApprovalViewModelStep2Binder.cs" />
+    <Compile Include="Controllers\ModelBinders\DataCollectionViewModelStep2Binder.cs" />
+    <Compile Include="Controllers\ModelBinders\DataCollectionListViewModelBinder.cs" />
+    <Compile Include="Controllers\ModelBinders\DataManagementPlanViewModelBinder.cs" />
+    <Compile Include="Controllers\ModelBinders\FlagEnumerationModelBinder.cs" />
+    <Compile Include="Controllers\ModelBinders\CreateProjectViewModelBinder.cs" />
+    <Compile Include="Controllers\ModelBinders\ProjectDetailsViewModelBinder.cs" />
+    <Compile Include="Controllers\ProjectBaseController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\Validators\BooleanRequiredToBeTrueAttribute.cs" />
+    <Compile Include="Controllers\Validators\GreaterThanDateAttribute.cs" />
+    <Compile Include="Controllers\Validators\OtherEnumRequiredAttribute.cs" />
+    <Compile Include="Database\Entities\Components\DataCollectionStatus.cs" />
+    <Compile Include="Database\Entities\FormTimer.cs" />
+    <Compile Include="Database\Entities\Components\DataOrganisation.cs" />
+    <Compile Include="Database\Entities\DataCollectionHashCode.cs" />
+    <Compile Include="Database\Entities\DataDeposit.cs" />
+    <Compile Include="Database\Entities\ClassificationBase.cs" />
+    <Compile Include="Database\Entities\DataCollectionParty.cs" />
+    <Compile Include="Database\Entities\Code.cs" />
+    <Compile Include="Database\Entities\Interfaces\IUserManagementParty.cs" />
+    <Compile Include="Database\Entities\ProjectParty.cs" />
+    <Compile Include="Database\Migrations\20100101000000_UpdateToFluentMigrator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815124300_CreateDmpTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815130800_CreateProjectTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815132200_CreateNewDataDetailTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815134500_CreateExistingDataDetailTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815135300_CreateDataDocumentationTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815140100_CreateEthicTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815140600_CreateIntellectualPropertyTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815140900_CreateCurtinUserTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815141700_CreateNonCurtinUserTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815142500_CreateBackupPolicyTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815144200_CreateDataRetentionTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815150600_CreateDataSharingTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815165200_AddStatusAndInvestigatorToDmpTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110815180500_AddEmailtoCurtinUserTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110816115000_RemoveEmailFromCurtinUserTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110816120800_UpdateForeignKeys.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110816151400_RenameKeyOnProjectTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110817153400_MakeDmpIdColumnsNullable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110818084500_AlterDmpTableToDataManagementPlan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110818085500_RenameDmpIdColumnToDataManagementPlanId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110822091800_Redesign.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110825120300_DataRelationshipDetail.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110825133200_AddHighestCompletedStepToDataManagementPlanTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110825150700_UpdateDataSharing.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110826124700_AddShareAccessDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110830172000_RefactorProject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110831124400_AddProjectColumnId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110831133200_CreateMemberRoleTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110831134200_MakeProjectIdNullable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110831134700_CreateMembersToRolesTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110831141000_AddDmpIdToProject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110901143700_MakeDmpIdNullable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110902081600_RedesignDmpBookmarkTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110906112600_RefactorMembers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110906123800_CreateProjectRelationship.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110906140400_CreateKeywords.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110906145800_CreateFieldOfResearchList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110906154800_CreateSocioEconomicObjective.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110906163800_UpdateProjectSeoAndProjectForCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110907141200_AddExtraDetailsToProjectTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110908135700_CreateProjectFunderTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110909095300_RemoveAllocationColumns.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110909155200_AlterDmpTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110912122800_AlterProjectAccessRoleData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110921110800_RenameNameColumnToTitleOnProjectTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110921112200_AddDmpStorageTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110921152400_CreatePrivacyRequirements.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110921160100_RenameSomeDataDetailsColumnsToDataStorageOnDataManagementPlanTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110921172800_RemoveDataManagementPlanBookmarkTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110922165700_AlterProjectAccessRoleDataTwo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110923091500_AddDataLicensingArrangementTypesToDataManagementPlanTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20110930142717_RemoveManyManyRelationshipForRoles.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111003084500_RefactorNewDataDetailOwnersFromStringToInt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111004132100_RefactorDataSharingAvailabilityDescriptionFromStringToDate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111004171000_CreateCollectionDescriptionTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111005084400_RefactorCollectionDescriptionTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111005095900_RefactorCollectionDescriptionTableRemoveIncorrectFields.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111005115600_AddFurtherFieldsToCollectionDescriptionTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111005135700_RefactorCollectionDescriptionTableMergePublishingRules.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111005155220_FixingCollectionDescriptionId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111005215200_RefactorPartyTableAddCollectionDescriptionRelationshipTables.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111007081700_RenamePartiesToCollectionDescriptionRelationshipsTables.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111010112600_RenameCollectionDescriptionColumns.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111010162200_RefactorForCodeAndSeoCodeIdColumnsToString.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111011105500_RefactorPartyRelationships.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111013160700_RefactorCollectionDescriptionIdToInt.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111018135347_RenameCollectionDescriptionToDataCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111018144205_RemoveDataCollectionApproverTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111018170800_AddStatusToDataCollections.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111019121600_AddSubmittedToDataCollections.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111021125951_RemoveStatusDatesFromDataCollection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111024165400_AddDataCollectionHashCodeTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111101133700_MoveDmpStatusColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111102154052_AddDataDepositTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111102164606_RemoveStatusFromDataDepositTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111103101440_RemoveStep2FieldsFromProject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111110143800_UpdatePartyMappingTables.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111111111111_RestorePartyMappingTables.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111117143500_ElmahSqlObjects.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111117154800_AddDepositToRepositoryColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111117163800_AddFieldToDataDepositTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111118101600_RemoveBackupFrequencyColumn.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111118140700_AddTimerTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111121105013_AddDataOrganisationToDataManagementPlanTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111121164100_RemoveNewDataDetailResearchDataProcessFromDataManagementPlanTable.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111122105516_RemoveComponentConventionFromDataManagementPlan.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111122153200_DataCollectionChanges.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20111130140000_MoreDataCollectionChanges.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20120131151300_DataCollectionFixes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20120312102500_AddSiteUrlColumnToProject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20120323094000_AddProvisioningRequestIdColumnToProject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20120327144800_AddInitialProvisioningRequestDate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Migrations\20200101000000_Dummy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Database\Repositories\TimerRepository.cs" />
+    <Compile Include="Database\Repositories\DataCollectionHashCodeRepository.cs" />
+    <Compile Include="Database\Repositories\DataCollectionRepository.cs" />
+    <Compile Include="Mappers\DataDepositMapper.cs" />
+    <Compile Include="Mappers\DataCollectionMapper.cs" />
+    <Compile Include="Mappers\DataManagementPlanMapper.cs" />
+    <Compile Include="Mappers\UserManagementMapper.cs" />
+    <Compile Include="Models\ApprovalModels\ApprovalConfirmationViewModel.cs" />
+    <Compile Include="Models\ApprovalModels\DataCollectionApprovalItemViewModel.cs" />
+    <Compile Include="Models\ApprovalModels\DataCollectionApprovalListViewModel.cs" />
+    <Compile Include="Models\ApprovalModels\DataCollectionApprovalViewModelStep1.cs" />
+    <Compile Include="Models\ApprovalModels\DataCollectionApprovalViewModelStep2.cs" />
+    <Compile Include="Models\CollectionListViewModel.cs" />
+    <Compile Include="Models\ConfirmDataDepositViewModel.cs" />
+    <Compile Include="Models\DataOrganisationViewModel.cs" />
+    <Compile Include="Models\DmpDumpListViewModel.cs" />
+    <Compile Include="Models\DumpViewModel.cs" />
+    <Compile Include="Models\Enums\DataCollectionIdentifier.cs" />
+    <Compile Include="Models\Enums\DataLicensingType.cs" />
+    <Compile Include="Models\NonCurtinUsersViewModel.cs" />
+    <Compile Include="Models\CurtinUsersViewModel.cs" />
+    <Compile Include="Models\DataDeposit\DataDepositViewModel.cs" />
+    <Compile Include="Models\DataManagementPlanInfoViewModel.cs" />
+    <Compile Include="Models\DataCollectionModels\DataCollectionItemViewModel.cs" />
+    <Compile Include="Models\DataCollectionModels\DataCollectionListViewModel.cs" />
+    <Compile Include="Models\DataCollectionModels\DataCollectionReadOnlyViewModel.cs" />
+    <Compile Include="Models\DataCollectionModels\DataCollectionViewModelTitles.cs" />
+    <Compile Include="Models\DataCollectionModels\DataCollectionViewModelStep1.cs" />
+    <Compile Include="Models\DataCollectionModels\DataCollectionViewModelStep2.cs" />
+    <Compile Include="Models\DataCollectionsForApprovalItemViewModel.cs" />
+    <Compile Include="Models\DataManagementViewModelTitles.cs" />
+    <Compile Include="Models\Enums\ApprovalType.cs" />
+    <Compile Include="Database\Entities\DataCollectionSocioEconomicObjective.cs" />
+    <Compile Include="Database\Entities\DataCollectionFieldOfResearch.cs" />
+    <Compile Include="Database\Entities\PublishingRule.cs" />
+    <Compile Include="Models\Enums\ApplicationRole.cs" />
+    <Compile Include="Models\Enums\DataCollectionStatus.cs" />
+    <Compile Include="Models\Enums\DataCollectionType.cs" />
+    <Compile Include="Database\Entities\Components\DataRelationshipDetail.cs" />
+    <Compile Include="Database\Entities\Components\DataStorage.cs" />
+    <Compile Include="Database\Entities\DataCollection.cs" />
+    <Compile Include="Database\Entities\FieldOfResearch.cs" />
+    <Compile Include="Database\Entities\ProjectFunder.cs" />
+    <Compile Include="Database\Entities\SocioEconomicObjective.cs" />
+    <Compile Include="Database\Repositories\FieldOfResearchRepository.cs" />
+    <Compile Include="Database\Repositories\ProjectRepository.cs" />
+    <Compile Include="Database\Repositories\SocioEconomicObjectiveRepository.cs" />
+    <Compile Include="Mappers\SameNameTypeWithRecursion.cs" />
+    <Compile Include="Models\ArcProjectFunderViewModel.cs" />
+    <Compile Include="Models\ConfirmDataManagementPlanViewModel.cs" />
+    <Compile Include="Models\CopyDataManagementPlanProjectViewModel.cs" />
+    <Compile Include="Models\DataStorageViewModel.cs" />
+    <Compile Include="Database\Entities\ProjectFieldOfResearch.cs" />
+    <Compile Include="Database\Entities\Project.cs" />
+    <Compile Include="Models\Enums\DataCollectionRelationshipType.cs" />
+    <Compile Include="Models\Enums\InstitutionalStorageTypes.cs" />
+    <Compile Include="Models\Enums\ExternalStorageTypes.cs" />
+    <Compile Include="Models\Enums\Funder.cs" />
+    <Compile Include="Models\Enums\LibGuideSource.cs" />
+    <Compile Include="Models\Enums\PersonalStorageTypes.cs" />
+    <Compile Include="Models\Enums\ProjectRelationship.cs" />
+    <Compile Include="Models\Enums\ProjectStatus.cs" />
+    <Compile Include="Database\Entities\ProjectSocioEconomicObjective.cs" />
+    <Compile Include="Models\Enums\AccessRole.cs" />
+    <Compile Include="Models\Enums\SourceProjectType.cs" />
+    <Compile Include="Database\Entities\Party.cs" />
+    <Compile Include="Mappers\ProjectMapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\BackupPolicyViewModel.cs" />
+    <Compile Include="Models\UrdmsUserViewModel.cs" />
+    <Compile Include="Models\DataDocumentationViewModel.cs" />
+    <Compile Include="Models\DataRelationshipDetailViewModel.cs" />
+    <Compile Include="Models\DataRetentionViewModel.cs" />
+    <Compile Include="Models\DataSharingViewModel.cs" />
+    <Compile Include="Controllers\DmpController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Models\EthicViewModel.cs" />
+    <Compile Include="Models\ExistingDataDetailViewModel.cs" />
+    <Compile Include="Models\ConfidentialityViewModel.cs" />
+    <Compile Include="Models\CreateProjectViewModel.cs" />
+    <Compile Include="Models\Interfaces\IResearchCodesViewModel.cs" />
+    <Compile Include="Models\Interfaces\IUserManagementViewModel.cs" />
+    <Compile Include="Models\NewDataDetailViewModel.cs" />
+    <Compile Include="Models\NmhrcProjectFunderViewModel.cs" />
+    <Compile Include="Models\NonUrdmsUserViewModel.cs" />
+    <Compile Include="Models\ProjectConfirmationViewModel.cs" />
+    <Compile Include="Models\ProjectDetailsViewModel.cs" />
+    <Compile Include="Models\ProjectFunderViewModel.cs" />
+    <Compile Include="Models\ProjectReadOnlyDetailsViewModel.cs" />
+    <Compile Include="Models\ProjectTitles.cs" />
+    <Compile Include="Models\ProjectViewModel.cs" />
+    <Compile Include="Models\DataManagementPlanViewModel.cs" />
+    <Compile Include="Controllers\Filters\FilterProvider.cs" />
+    <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Database\Entities\Components\BackupPolicy.cs" />
+    <Compile Include="Database\Entities\Components\DataDocumentation.cs" />
+    <Compile Include="Database\Entities\Components\DataRetention.cs" />
+    <Compile Include="Database\Entities\Components\DataSharing.cs" />
+    <Compile Include="Database\Entities\Components\Ethic.cs" />
+    <Compile Include="Database\Entities\Components\ExistingDataDetail.cs" />
+    <Compile Include="Database\Entities\Components\Confidentiality.cs" />
+    <Compile Include="Database\Entities\Components\NewDataDetail.cs" />
+    <Compile Include="Database\Entities\DataManagementPlan.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Config\NHibernate\NHibernateConfiguration.cs" />
+    <Compile Include="Models\Enums\DataSharingAvailability.cs" />
+    <Compile Include="Models\Enums\ProvisioningStatus.cs" />
+    <Compile Include="Models\Enums\ExistingDataAccessTypes.cs" />
+    <Compile Include="Models\Enums\BackupLocations.cs" />
+    <Compile Include="Models\Enums\DataResponsibilities.cs" />
+    <Compile Include="Models\Enums\DataOwners.cs" />
+    <Compile Include="Models\Enums\DataRelationship.cs" />
+    <Compile Include="Models\Enums\DataRetentionLocations.cs" />
+    <Compile Include="Models\Enums\DataRetentionPeriod.cs" />
+    <Compile Include="Models\Enums\DataActionFrequency.cs" />
+    <Compile Include="Models\Enums\MaxDataSize.cs" />
+    <Compile Include="Models\Enums\ShareAccess.cs" />
+    <Compile Include="Models\Enums\VersionControl.cs" />
+    <Compile Include="Models\ProjectListViewModel.cs" />
+    <Compile Include="Models\ProvisioningViewModel.cs" />
+    <Compile Include="Models\ResearchInitiatedProjectsViewModel.cs" />
+    <Compile Include="Models\ScriptProjectsViewModel.cs" />
+    <Compile Include="Models\SubmittedDataCollectionsViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\AcceptMethodByParameter.cs" />
+    <Compile Include="Utils\AppSettingsService.cs" />
+    <Compile Include="Utils\DataCollectionExtensions.cs" />
+    <Compile Include="Utils\DataManagementPlanExtensions.cs" />
+    <Compile Include="Utils\DateTimeValidationAttribute.cs" />
+    <Compile Include="Utils\DenyMethodByParameterAttribute.cs" />
+    <Compile Include="Utils\DummyServices.cs" />
+    <Compile Include="Utils\UrdmsUserExtensions.cs" />
+    <Compile Include="Utils\IDirectoryEntryService.cs" />
+    <Compile Include="Utils\SimpleWebRequestService.cs" />
+    <Compile Include="Utils\EnumExtensions.cs" />
+    <Compile Include="Utils\HtmlHelperExtensions.cs" />
+    <Compile Include="Utils\LibGuideService.cs" />
+    <Compile Include="Utils\ListExtensions.cs" />
+    <Compile Include="Utils\UrdmsRoleProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Css\datepicker.css" />
+    <Content Include="Content\Css\forms.css" />
+    <Content Include="Content\Css\layout.css" />
+    <Content Include="Content\Css\Login.css" />
+    <Content Include="Content\Css\Pdf.css" />
+    <Content Include="Content\Css\prettyPhoto.css" />
+    <Content Include="Content\Css\tinymce.css" />
+    <Content Include="Content\Images\ajax-loader.gif" />
+    <Content Include="Content\Images\datepicker\backstripes.gif" />
+    <Content Include="Content\Images\datepicker\bg_header.jpg" />
+    <Content Include="Content\Images\datepicker\bullet1.gif" />
+    <Content Include="Content\Images\datepicker\bullet2.gif" />
+    <Content Include="Content\Images\datepicker\cal-grey.gif" />
+    <Content Include="Content\Images\datepicker\cal.gif" />
+    <Content Include="Content\Images\datepicker\gradient-e5e5e5-ffffff.gif" />
+    <Content Include="Content\Images\instructions\datadescriptions.jpg" />
+    <Content Include="Content\Images\instructions\data_deposit.jpg" />
+    <Content Include="Content\Images\instructions\DMP.jpg" />
+    <Content Include="Content\Images\instructions\MyResearchProjects.jpg" />
+    <Content Include="Content\Images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="Content\Images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="Content\Images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="Content\Images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Content\Images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="Content\Images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="Content\Images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="Content\Images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="Content\Images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="Content\Images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="Content\Images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="Content\Images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="Content\Images\prettyPhoto\default\default_thumb.png" />
+    <Content Include="Content\Images\prettyPhoto\default\loader.gif" />
+    <Content Include="Content\Images\prettyPhoto\default\sprite.png" />
+    <Content Include="Content\Images\prettyPhoto\default\sprite_next.png" />
+    <Content Include="Content\Images\prettyPhoto\default\sprite_prev.png" />
+    <Content Include="Content\Images\prettyPhoto\default\sprite_x.png" />
+    <Content Include="Content\Images\prettyPhoto\default\sprite_y.png" />
+    <Content Include="Content\Images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="Content\Images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="Content\Images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="Content\Images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="Content\Images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="Content\Images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="Content\Images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="Content\Images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="Content\Images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="Content\Images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="Content\Images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="Content\Images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="Content\Images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="Content\Images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="Content\Images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="Content\Images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="Content\Images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="Content\Images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="Content\Images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Css\Site.css" />
+    <Content Include="Scripts\ajax-codes.js" />
+    <Content Include="Scripts\ajax-users.js" />
+    <Content Include="Scripts\collection-dependency.js" />
+    <Content Include="Scripts\ajax-timer.js" />
+    <Content Include="Scripts\datepicker.packed.js" />
+    <Content Include="Scripts\deposit-datasharing.js" />
+    <Content Include="Scripts\forms.js" />
+    <Content Include="Scripts\jquery.prettyPhoto.js" />
+    <Content Include="Scripts\jquery.qtip-1.0.0-rc3.min.js" />
+    <Content Include="Scripts\jquery.validate-1.6.0.pack.js" />
+    <Content Include="Scripts\prettyPhoto.js" />
+    <Content Include="Scripts\retention-and-sharing.js" />
+    <Content Include="Scripts\datacollection-details.js" />
+    <Content Include="Scripts\dmp-data-storage.js" />
+    <Content Include="Scripts\dmp-ethics.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\project-details.js" />
+    <Content Include="Scripts\project-ethics-safety.js" />
+    <Content Include="Scripts\research-data.js" />
+    <Content Include="Scripts\show-hide.js" />
+    <Content Include="Scripts\tiny_mce-3.3.9.2.js" />
+    <Content Include="Views\Shared\Project.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Dmp\Error.cshtml" />
+    <Content Include="Views\Dmp\Step1.cshtml" />
+    <Content Include="Views\Dmp\Step2.cshtml" />
+    <Content Include="Views\Dmp\Step3.cshtml" />
+    <Content Include="Views\Shared\ProjectNotFound.cshtml" />
+    <Content Include="Views\Shared\DmpNotFound.cshtml" />
+    <Content Include="Views\Shared\PageNotFound.cshtml" />
+    <Content Include="Views\Dmp\Step4.cshtml" />
+    <Content Include="Views\Dmp\Step5.cshtml" />
+    <Content Include="Views\Confirm\Review.cshtml" />
+    <Content Include="Views\Project\NewProjects.cshtml" />
+    <Content Include="Views\Project\Error.cshtml" />
+    <Content Include="Views\Project\CopyDmp.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Page\Instructions.cshtml" />
+    <Content Include="Views\Confirm\Submitted.cshtml" />
+    <Content Include="Views\DataCollection\Index.cshtml" />
+    <Content Include="Views\DataCollection\Submitted.cshtml" />
+    <Content Include="Views\Approval\Index.cshtml" />
+    <Content Include="Views\Shared\DataCollectionStep1.cshtml" />
+    <Content Include="Views\Shared\DataCollectionStep2.cshtml" />
+    <Content Include="Views\Shared\DataCollectionNotFound.cshtml" />
+    <Content Include="Views\Shared\DataCollectionInvalidState.cshtml" />
+    <Content Include="Views\Approval\Approved.cshtml" />
+    <Content Include="Views\Approval\Confirm.cshtml" />
+    <Content Include="Views\Shared\NoProjectAccessRight.cshtml" />
+    <Content Include="Views\DataCollection\ReadOnly.cshtml" />
+    <Content Include="Views\Confirm\Republish.cshtml" />
+    <Content Include="Views\Confirm\Pending.cshtml" />
+    <Content Include="Views\Confirm\Republished.cshtml" />
+    <Content Include="Views\Shared\DmpNotProvisioned.cshtml" />
+    <Content Include="Views\Shared\DmpProvisioned.cshtml" />
+    <Content Include="Views\Shared\DmpNotInProgress.cshtml" />
+    <Content Include="Views\DataDeposit\New.cshtml" />
+    <Content Include="Views\DataDeposit\CannotCreateDataDeposit.cshtml" />
+    <Content Include="Views\DataDeposit\DataDepositAlreadyExists.cshtml" />
+    <Content Include="Views\Shared\ProjectIntroduction.cshtml" />
+    <Content Include="Views\Project\ReadOnly.cshtml" />
+    <Content Include="Views\Shared\DataDepositNotProvisioned.cshtml" />
+    <Content Include="Views\Shared\DataDepositProvisioned.cshtml" />
+    <Content Include="Views\Shared\DataDepositNotFound.cshtml" />
+    <Content Include="Views\Shared\DataDepositNotInProgress.cshtml" />
+    <Content Include="Views\Confirm\ReviewDataDeposit.cshtml" />
+    <Content Include="Views\Confirm\SubmittedDataDeposit.cshtml" />
+    <Content Include="Views\Shared\IncorrectProjectType.cshtml" />
+    <Content Include="Views\Shared\_FieldsOfResearch.cshtml" />
+    <Content Include="Views\Shared\_SocioEconomicObjectives.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_UrdmsUsers.cshtml" />
+    <Content Include="Views\Shared\_NonUrdmsUsers.cshtml" />
+    <Content Include="Views\Shared\_FieldOfResearch.cshtml" />
+    <Content Include="Views\Shared\_SocioEconomicObjective.cshtml" />
+    <Content Include="Views\Shared\_UrdmsUser.cshtml" />
+    <Content Include="Views\Shared\_NonUrdmsUser.cshtml" />
+    <Content Include="Views\DataCollection\ProjectWithNoDmp.cshtml" />
+    <Content Include="Views\DataCollection\ProjectWithNoDataDeposit.cshtml" />
+    <Content Include="Views\DataDeposit\CannotEditDataDeposit.cshtml" />
+    <Content Include="Views\Shared\DmpNotSubmitted.cshtml" />
+    <Content Include="Views\Shared\DataDepositNotSubmitted.cshtml" />
+    <Content Include="Views\Admin\Provisioning.cshtml" />
+    <None Include="Web.CI.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web.Prod.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="CodeTemplates\AddView\CSHTML\FlowForm.tt" />
+    <Content Include="Menu.json" />
+    <Content Include="Views\Page\Index.cshtml" />
+    <Content Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Docs\" />
+    <Folder Include="Content\Media\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Urdms.Dmp.Integration\Urdms.Dmp.Integration.csproj">
+      <Project>{CEE35ADC-0233-4A15-9F07-0AF817470F9F}</Project>
+      <Name>Urdms.Dmp.Integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Urdms.Dmp.Web\Urdms.Dmp.Web.csproj">
+      <Project>{900D2A4C-728F-469F-B7B3-3D6FFB057843}</Project>
+      <Name>Urdms.Dmp.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Target Name="Deploy">
+    <PropertyGroup>
+      <DeployDir Condition="'$(DeployDir)'==''">..\PublishedWebsite\$(ProjectName)-$(Env)</DeployDir>
+      <TempFile>$([System.IO.Path]::GetTempFileName())</TempFile>
+    </PropertyGroup>
+    <CreateItem Include="**\*.*">
+      <Output TaskParameter="Include" ItemName="FilesToCopy" />
+    </CreateItem>
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFiles="@(FilesToCopy->'$(DeployDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(DeployDir)\web.config" DestinationFiles="$(TempFile)" />
+    <TransformXml Source="$(TempFile)" Transform="$(DeployDir)\web.$(Env).config" Destination="$(DeployDir)\web.config" />
+  </Target>
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <Target Name="CleanPackage" DependsOnTargets="PreTransformWebConfig">
+    <Delete Files="$(_WebConfigTransformOutput)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

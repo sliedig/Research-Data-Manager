@@ -1,0 +1,30 @@
+﻿@model Urdms.Dmp.Web.Controllers.LogOnViewModel
+
+@{
+    PageSettings.Title = "Log In";
+    AddScript("jquery.validate.min");
+    AddScript("jquery.validate.unobtrusive.min");
+    AddStylesheet("Login.css");
+}
+
+<h1>User Login</h1>
+
+@Html.ValidationSummary(false, "Login was unsuccessful. Please correct the errors and try again.")
+
+<p>You need to log in to access this area. Please supply your Curtin network credentials.</p>
+
+@using (Html.BeginForm())
+{
+    <ol>
+        <li>@Html.LabelFor(m => m.UserName) @Html.TextBoxFor(m => m.UserName) @Html.ValidationMessageFor(m => m.UserName)</li>
+        <li>@Html.LabelFor(m => m.Password) @Html.PasswordFor(m => m.Password) @Html.ValidationMessageFor(m => m.Password)</li>
+    </ol>
+    <input type="submit" class="submitButton" value="Login" />
+    <script type="text/javascript">
+    <!--
+        if (document.getElementById && (u=document.getElementById("UserName"))) {
+            u.focus();
+        }
+    -->
+    </script>
+}

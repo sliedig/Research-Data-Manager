@@ -1,0 +1,245 @@
+﻿@using System.Web.Mvc
+@using Curtin.Framework.Common.Classes
+@using Urdms.Dmp.Web.FlowForms
+
+@helper Header(string heading, IHtmlString instructions = null, string logo = null, string logoAlt = null, IHtmlString legislation = null, IHtmlString copyright = null) {
+    <div class="header">
+    @if (logo != null) {
+        <div class="logo"><img src="@logo" alt="@logoAlt" /></div>
+    }
+    <h1>@heading</h1>
+    @if (legislation != null) {
+        <p class="legislation">@legislation</p>
+    }
+    @if (instructions != null) {
+        <div class="instructions">@instructions</div>
+    }
+    @if (copyright != null) {
+        <p class="copyright">@copyright</p>
+    }
+    </div>
+}
+
+@helper Steps(IList<Step> steps, int current, int maxComplete, bool showLinks, bool stopLinksAtMaxComplete) {
+    <ol class="progress">
+    @for (int i = 1; i <= steps.Count; i++) {
+        var step = steps[i-1];
+        var theClass = "";
+        if (i < current) {
+            theClass = "complete";
+        }
+        if (i == current) {
+            theClass = "current";
+        }
+        if (i > current) {
+            theClass = (i <= maxComplete) ? "incomplete visited" : "incomplete";
+        }
+        if (!string.IsNullOrWhiteSpace(step.Class)) {
+            theClass = string.Format("{0} {1}", theClass, step.Class);
+        }
+        <li class="@theClass">
+            @if (showLinks && !string.IsNullOrEmpty(step.Url) && (!stopLinksAtMaxComplete || i <= maxComplete)) {
+                <a href="@step.Url">@step.Name</a>
+            } else {
+                @step.Name
+            }
+        </li>
+    }
+    </ol>
+}
+
+@helper BeginSection(bool nested, string heading, string id = null, IHtmlString hint = null, string hintClass = null, bool optional = false, IHtmlString instructions = null, bool omitDl = false, bool hasParent = false) {
+    var cssClass = omitDl ? "section noDl" : "section";
+    if (!nested) {
+        @:<fieldset
+        if (id != null) {
+            @:id="@id"
+        }
+        @:class="@cssClass">
+        <legend>@heading</legend>
+        if (instructions != null) {
+            <div class="instructions">@instructions</div>
+        }
+    } else if (!hasParent) {
+        <dt>@heading@if (optional) {<text> <em>(Optional)</em></text>}</dt>
+        @:<dd @if (id != null) {<text>id="@id"</text>}>
+        if (hint != null){
+            <p class="hint @hintClass">@hint</p>
+        }
+    }
+    if (!omitDl)
+    {
+        @:<dl @if (hasParent && id != null) {<text>id="@id"</text>}>
+    }
+}
+
+@helper EndSection(bool omitDl, bool nested, bool hasParent) {
+    if (!omitDl) {
+        @:</dl>
+    }
+    if (!nested) {
+        @:</fieldset>
+    } else if (!hasParent) {
+        @:</dd>
+    }
+}
+
+@helper BeginField(bool containsSection, HtmlString labelHtml, HtmlString elementHtml, HtmlString errorHtml, bool isValid = true, IHtmlString hint = null, string tip = null, bool hideTip = true, string hintClass = null, string parentClass = null) {
+    var classBuilder = new ClassBuilder();
+    if (!isValid) {
+        classBuilder.Add("invalid");
+    }
+    if (parentClass != null) {
+        classBuilder.Add(parentClass);
+    }
+    var cssClass = new HtmlString(string.IsNullOrEmpty(classBuilder.ToString()) ? "" : "class=\"" + classBuilder.ToString() + "\"");
+    var tipClass = hideTip ? "" : "plain";
+    if (labelHtml != null)
+    {
+        <dt @cssClass>@labelHtml</dt>
+    }
+    @:<dd @cssClass>
+    if (hint != null) {
+        <p class="hint @hintClass">@hint</p>
+    }
+    @errorHtml@elementHtml
+    if (tip != null) {
+        <span class="tip @tipClass">@tip</span>
+    }
+    if (!containsSection) {
+        @:</dd>
+    }
+}
+
+@helper EndField() {
+    @:</dd>
+}
+
+@helper ErrorHtml(string errors) {
+    <p class="error_text">@errors</p>
+}
+
+@helper Footer(string area = null, string id = null, string date = null) {
+    <ul class="footer">
+    @if (area != null) {
+        <li class="segment owner_area">@area</li>
+    }
+    @if (id != null) {
+        <li class="segment id">@id</li>
+    }
+    @if (date != null) {
+        <li class="segment date">@date</li>
+    }
+    </ul>
+}
+
+@helper BeginNavigation() {
+    @:<div class="navigation">
+}
+
+@helper EndNavigation() {
+    @:</div>
+}
+
+@helper Submit(string value, string id = null, string classes = null, string name = null, bool reset = false) {
+    var type = reset ? "reset" : "submit";
+    name = String.IsNullOrEmpty(name) ? id : name;
+    @:<input type="@type"@if (classes != null) {<text> class="@classes"</text>}@if (name != null) {<text> name="@name"</text>}@if (id != null) {<text> id="@id"</text>} value="@value" />
+}
+
+@helper BeginMessage(string messageType, string heading) {
+    var messageClass = messageType + "_message";
+    @:<div class="@messageClass">
+        <h2>@heading</h2>
+        @:<div class="message">
+}
+
+@helper EndMessage() {
+        @:</div>
+    @:</div>
+}
+
+@helper BeginInputList(string type) {
+        @:<ul class="@type">
+}
+
+@helper EndInputList() {
+        @:</ul>
+}
+
+@helper InputListItem(string type, string name, string value, string label, bool selected = false) {
+            <li>
+                @{var id = name.Replace(".", "_") + value;}
+                <input type="@type" name="@name" id="@id" value="@(value)" @(new HtmlString(selected ? "checked=\"checked\"" : "")) />
+                <label for="@id">@label</label>
+            </li>
+}
+
+@helper BooleanRadio(string id, bool value, string falseLabel, string trueLabel) 
+{
+    <ul class="radio">
+        <li><input type="radio" id="@(id)Yes" name="@id" value="true"@(new HtmlString(value ? " checked=\"checked\"" : "")) /> <label for="@(id)Yes">@trueLabel</label></li>
+        <li><input type="radio" id="@(id)No" name="@id" value="false"@(new HtmlString(!value ? " checked=\"checked\"" : "")) /> <label for="@(id)No">@falseLabel</label></li>
+    </ul>
+}
+
+@helper BooleanRadioNullable(string id, bool? value, string falseLabel, string trueLabel) 
+{
+    <ul class="radio">
+        <li><input type="radio" id="@(id)Yes" name="@id" value="true"@(new HtmlString(value == true ? " checked=\"checked\"" : "")) /> <label for="@(id)Yes">@trueLabel</label></li>
+        <li><input type="radio" id="@(id)No" name="@id" value="false"@(new HtmlString(value == false ? " checked=\"checked\"" : "")) /> <label for="@(id)No">@falseLabel</label></li>
+    </ul>
+}
+
+@* Grids *@
+
+@helper Grid(string id, SelectList choices, SelectList prompts, Grid<string> values, string label, string summary, bool readOnly = false) {
+    var cellClass = readOnly ? "readonlyTd" : "textTd";
+    <table summary="@summary" id="@id">
+        <tr>
+            <td>&nbsp;</td>
+            @foreach(var choice in choices) {
+                <th scope="col">@choice.Text</th>
+            }
+        </tr>
+        @foreach(var prompt in prompts) {
+            var printRow = !readOnly
+                || !string.IsNullOrWhiteSpace(prompt.Text)
+                || choices.Any(choice => !string.IsNullOrWhiteSpace(values.Cell(prompt.Value, choice.Value)));
+            if (printRow) {
+                <tr>
+                    <th scope="row">@prompt.Text</th>
+                    @foreach(var choice in choices) {
+                        var cellId = string.Format("{0}.{1}.{2}", id, prompt.Value, choice.Value);
+                        <td class="@cellClass">@(new MvcHtmlString(readOnly ? "" : "<label>"))<span class="reader">@(label.Replace("%prompt%", prompt.Text).Replace("%choice%", choice.Text))</span>
+                        @if (readOnly)
+                        {
+                            @values.Cell(prompt.Value, choice.Value)
+                        }
+                        else
+                        {
+                            <input type="text" id="@(cellId.Replace(".", "_"))" name="@cellId" value="@values.Cell(prompt.Value, choice.Value)" />
+                        }
+                        @(new MvcHtmlString(readOnly ? "" : "</label>"))</td>
+                    }
+                </tr>
+            }
+        }
+    </table>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

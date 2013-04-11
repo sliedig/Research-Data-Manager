@@ -1,0 +1,57 @@
+﻿@using Curtin.Framework.Common.Extensions
+@if (ViewBag.Html5 != null)
+{
+    <!DOCTYPE html>
+}
+else
+{
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+}
+<html @if (ViewBag.Html5 == null) {<text>xmlns="http://www.w3.org/1999/xhtml"</text>} else {<text>lang="en"</text>}>
+<head>
+    <title>@PageSettings.Title</title>@if (ViewBag.Html5 != null) {
+    <meta charset="utf-8" />}
+    <meta name="DC.Title" content="@PageSettings.Title" />
+    <meta name="Description" content="@PageSettings.Description" />
+    <meta name="DC.Description" content="@PageSettings.Description" />
+    <meta name="Keywords" content="@PageSettings.Keywords" />
+    <meta name="DC.Subject" content="@PageSettings.Keywords" />
+    @foreach (var classification in PageSettings.Classifications) {
+    <meta name="Urdms.Classification" content="@classification.ToDescription()" />
+    }
+    <meta name="revisit_after" content="45" />
+    <meta name="DC.Creator" content="@PageSettings.Creator" />
+    <meta name="DC.Identifier" content="@Request.Url" />
+    @if (PageSettings.DateCreated != null) {
+    <meta name="DC.Date" content="@PageSettings.DateCreated.Value.ToString("yyyy-MM-dd")" />
+    }
+    @if (PageSettings.DateModified != null) {
+    <meta name="DC.Date.Modified" content="@PageSettings.DateModified.Value.ToString("yyyy-MM-dd")" />
+    }
+    <meta name="DC.Rights" content="" />
+    <meta name="DC.Format" content="text/html" />
+    <meta name="DC.Language" content="en" />
+    <script type="text/javascript">
+    <!--
+        var Urdms = {Web: {basePath: "@Url.Content("~/")"}};
+    -->
+    </script>
+
+    @RenderSection("head", required: false)
+    @if (ViewBag.Scripts != null) {
+        foreach (var script in ViewBag.Scripts)
+        {
+    <script src="@Url.Content(script)" type="text/javascript"></script>
+        }
+    }
+    @if (ViewBag.Stylesheets != null) {
+        foreach (var css in ViewBag.Stylesheets)
+        {
+    <link href="@Url.Content(css)" type="text/css" rel="stylesheet" />
+        }
+    }
+</head>
+<body @if (ViewBag.BodyClass != null) {<text>class="@ViewBag.BodyClass"</text>}>
+    @RenderBody()
+</body>
+</html>

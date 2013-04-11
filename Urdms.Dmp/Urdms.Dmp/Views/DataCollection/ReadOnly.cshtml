@@ -1,0 +1,140 @@
+﻿@using Urdms.Dmp.Database.Entities
+@using Urdms.Dmp.Models.DataCollectionModels
+@using Urdms.Dmp.Utils
+@using Urdms.Dmp.Models.Enums
+@model Urdms.Dmp.Models.DataCollectionModels.DataCollectionReadOnlyViewModel
+
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("jquery-ui.min");
+}
+
+@functions {
+    string GetBoolText(bool field)
+    {
+        return field == false ? "No" : "Yes";
+    }
+
+    string GetDateText(DateTime? field)
+    {
+        return field != null ? field.Value.ToShortDateString() : "N/A";
+    }
+
+    string GetText(string field)
+    {
+        return !string.IsNullOrWhiteSpace(field) ? field : "N/A";
+    }
+}
+
+@{
+    var forGrid = Html.Grid(Model.FieldsOfResearch.Select(c => (DataCollectionFieldOfResearch)c))
+    .Columns(column =>
+    {
+        column.For(o => o.FieldOfResearch.Id).Named("Code");
+        column.For(o => o.FieldOfResearch.Name).Named("Description");
+    }
+    ).Empty("No Field of Research codes for this Data Collection");
+
+    var seoGrid = Html.Grid(Model.SocioEconomicObjectives.Select(c => (DataCollectionSocioEconomicObjective)c))
+        .Columns(column =>
+        {
+            column.For(o => o.SocioEconomicObjective.Id).Named("Code");
+            column.For(o => o.SocioEconomicObjective.Name).Named("Description");
+        }
+        ).Empty("No Socio Economic Objective codes for this Data Collection");
+}
+
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @f.Header(DataCollectionViewModelTitles.Headers.Step1)
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Description, "data-collection-description"))
+    {                                                             
+        <dt>@Html.LabelFor(m => m.ProjectTitle)</dt>
+        <dd>@GetText(Model.ProjectTitle)</dd>
+        
+        <dt>@Html.LabelFor(m => m.Title)</dt>
+        <dd>@GetText(Model.Title)</dd>
+    
+        @s.FieldFor(m => m.Type, new FieldConfiguration { ReadOnly = true })
+    
+        <dt>@Html.LabelFor(m => m.ResearchDataDescription)</dt>
+        <dd>@GetText(Model.ResearchDataDescription)</dd>
+
+        <dt>@Html.LabelFor(m => m.StartDate)</dt>
+        <dd>@GetDateText(Model.StartDate)</dd>
+
+        <dt>@Html.LabelFor(m => m.EndDate)</dt>
+        <dd>@GetDateText(Model.EndDate)</dd>
+       
+    }
+
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.DataAccess, "data-collection-access"))
+    {
+        @s.FieldFor(m => m.DataLicensingRights, new FieldConfiguration { ReadOnly = true })
+        @s.FieldFor(m => m.ShareAccess, new FieldConfiguration { ReadOnly = true })
+
+        <dt>@Html.LabelFor(m => m.ShareAccessDescription)</dt>
+        <dd>@GetText(Model.ShareAccessDescription)</dd>
+    }
+
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.DataStoreLocation, "data-store-location"))
+    {
+        <dt>@Html.LabelFor(m => m.DataStoreLocationName)</dt>
+        <dd>@GetText(Model.DataStoreLocationName)</dd>
+    
+        <dt>@Html.LabelFor(m => m.DataStoreLocationUrl)</dt>
+        <dd>@GetText(Model.DataStoreLocationUrl)</dd>
+    
+        <dt>@Html.LabelFor(m => m.DataStoreAdditionalDetails)</dt>
+        <dd>@GetText(Model.DataStoreAdditionalDetails)</dd>
+    }
+
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Identifiers, "data-collection-identifiers"))
+    {
+        @s.FieldFor(m => m.DataCollectionIdentifier, new FieldConfiguration { ReadOnly = true })
+
+        <dt>@Html.LabelFor(m => m.DataCollectionIdentifierValue)</dt>
+        <dd>@GetText(Model.DataCollectionIdentifierValue)</dd>
+    
+    }
+    
+    @f.Header(DataCollectionViewModelTitles.Headers.Step2)
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Subjects, "data-collection-subjects"))
+    {
+        <dt>@Html.LabelFor(m => m.Keywords)</dt>
+        <dd>@GetText(Model.Keywords)</dd>
+    
+        @forGrid
+        <br />
+        @seoGrid
+    }
+
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Relationships, "data-collection-relationships"))
+    {
+        <dt>Managed by:</dt>
+        <dd>@Model.Manager.FullName</dd>
+    
+        var urdmsUsersList = Html.Grid(Model.UrdmsUsers)
+            .Columns(column =>
+            {
+                column.For(o => o.UserId).Named("ID");
+                column.For(o => o.FullName).Named("Name");
+                column.For(o => ((DataCollectionRelationshipType)o.Relationship).GetDescription()).Named("Relationship");
+            });
+       @urdmsUsersList
+       <br />
+
+        var nonUrdmsUsersList = Html.Grid(Model.NonUrdmsUsers).Columns(column =>
+        {
+            column.For(o => o.FullName).Named("Name");
+            column.For(o => ((DataCollectionRelationshipType)o.Relationship).GetDescription()).Named("Relationship");
+        });
+       @nonUrdmsUsersList
+
+    }
+}
+
+<p>
+    @Html.ActionLink("Back to data collections for this project", "Index", new { id = Model.ProjectId }, new { @class = "action_button" })
+</p>

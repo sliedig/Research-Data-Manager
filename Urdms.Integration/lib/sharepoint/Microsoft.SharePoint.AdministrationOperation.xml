@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.AdministrationOperation</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.HttpErrorsExistingResponseOptions"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.HttpErrorsExistingResponseOptions.Auto"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.HttpErrorsExistingResponseOptions.Replace"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.HttpErrorsExistingResponseOptions.PassThrough"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.IdentityType"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.IdentityType.LocalSystem"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.IdentityType.LocalService"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.IdentityType.NetworkService"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.IdentityType.SpecificUser"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPAuthenticationProvider"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPAuthenticationProvider.Description"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPAuthenticationProvider.Name"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPFormsAuthenticationProvider"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPFormsAuthenticationProvider.MembershipProvider"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPFormsAuthenticationProvider.RoleManager"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.#ctor(System.Int32)"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.HttpErrorsExistingResponse"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.InstanceId"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.Provision"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.ServerBindings"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.ServerComment"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.ServerState"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState.Starting"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState.Started"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState.Stopping"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState.Stopped"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState.Pausing"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState.Paused"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPIisWebSite.SPIisServerState.Continuing"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.#ctor(Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject,System.String)"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.CurrentDirectoryEntry"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.Dispose"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.Exists"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.InvokeMethod(System.String)"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.ParentIsDisposable"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.Provision"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.RelativePath"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.SchemaClassName"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.Unprovision"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPMetabaseObject.Update"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPPersonalCardAuthenticationProvider"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPSecureBinding"></member>
+    <member name="M:Microsoft.SharePoint.AdministrationOperation.SPSecureBinding.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPSecureBinding.HostHeader"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPSecureBinding.Port"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPTrustedAuthenticationProvider"></member>
+    <member name="F:Microsoft.SharePoint.AdministrationOperation.SPTrustedAuthenticationProvider.ProviderName"></member>
+    <member name="T:Microsoft.SharePoint.AdministrationOperation.SPWindowsAuthenticationProvider"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPWindowsAuthenticationProvider.UseBasicAuthentication"></member>
+    <member name="P:Microsoft.SharePoint.AdministrationOperation.SPWindowsAuthenticationProvider.UseWindowsIntegratedAuthentication"></member>
+  </members>
+</doc>

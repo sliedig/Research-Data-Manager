@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C50217FF-E7E0-4413-83E8-59C577AA8D77}</ProjectGuid>
+    <Env Condition="'$(Env)' == ''">Prod</Env>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Urdms.DocumentBuilderService</RootNamespace>
+    <AssemblyName>Urdms.DocumentBuilderService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client">
+      <HintPath>..\lib\sharepoint\Microsoft.SharePoint.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime">
+      <HintPath>..\lib\sharepoint\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Host, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>..\packages\NServiceBus.Host.3.0.1\lib\net40\NServiceBus.Host.exe</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=2.1.4039.23635, Culture=neutral, PublicKeyToken=1f722ed313f51831, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.2.1\lib\.NetFramework 4.0\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\RazorEngine.2.1\lib\.NetFramework 4.0\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Database\Entities\PdfModel.cs" />
+    <Compile Include="Database\Entities\DataManagementPlan.cs" />
+    <Compile Include="Database\Entities\Project.cs" />
+    <Compile Include="Database\Repositories\DataManagementPlanRepository.cs" />
+    <Compile Include="Database\Repositories\ProjectRepository.cs" />
+    <Compile Include="DmpGenerator.cs" />
+    <Compile Include="Extensions\DataManagementPlanExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="GenerateDmpCommandHandler.cs" />
+    <Compile Include="Helpers\GeneratorHelper.cs" />
+    <Compile Include="Helpers\SqlReaderHelper.cs" />
+    <Compile Include="EndpointConfig.cs" />
+    <Compile Include="Extensions\PdfExtensions.cs" />
+    <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="IGenerator.cs" />
+    <Compile Include="Models\DataManagementViewModelTitles.cs" />
+    <Compile Include="Helpers\PdfHelper.cs" />
+    <Compile Include="Helpers\SharePointHelper.cs" />
+    <Compile Include="Models\Enums\AccessRole.cs" />
+    <Compile Include="Models\Enums\BackupLocations.cs" />
+    <Compile Include="Models\Enums\InstitutionalStorageTypes.cs" />
+    <Compile Include="Models\Enums\DataActionFrequency.cs" />
+    <Compile Include="Models\Enums\DataLicensingType.cs" />
+    <Compile Include="Models\Enums\DataOwners.cs" />
+    <Compile Include="Models\Enums\DataRelationship.cs" />
+    <Compile Include="Models\Enums\DataResponsibilities.cs" />
+    <Compile Include="Models\Enums\DataRetentionLocations.cs" />
+    <Compile Include="Models\Enums\DataRetentionPeriod.cs" />
+    <Compile Include="Models\Enums\DataSharingAvailability.cs" />
+    <Compile Include="Models\Enums\DmpStatus.cs" />
+    <Compile Include="Models\Enums\ExistingDataAccessTypes.cs" />
+    <Compile Include="Models\Enums\ExternalStorageTypes.cs" />
+    <Compile Include="Models\Enums\Funder.cs" />
+    <Compile Include="Models\Enums\MaxDataSize.cs" />
+    <Compile Include="Models\Enums\PersonalStorageTypes.cs" />
+    <Compile Include="Models\Enums\ProjectRelationship.cs" />
+    <Compile Include="Models\Enums\ProjectStatus.cs" />
+    <Compile Include="Models\Enums\ShareAccess.cs" />
+    <Compile Include="Models\Enums\SourceProjectType.cs" />
+    <Compile Include="Models\Enums\VersionControl.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\InstallService.bat">
+      <Link>InstallService.bat</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App.CI.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\UninstallService.bat">
+      <Link>UninstallService.bat</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App.Prod.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.Test.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.UAT.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="PdfTemplates\DmpPdfTemplate.cshtml">
+      <LastGenOutput>DmpPdfTemplate.generated.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentBuilderService.Commands\DocumentBuilderService.Commands.csproj">
+      <Project>{8BDCDC41-FB9F-423F-BB0D-4B9EE4D57FF1}</Project>
+      <Name>DocumentBuilderService.Commands</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
+    <StartArguments>NServiceBus.Integration</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
+    <StartArguments>NServiceBus.Production</StartArguments>
+  </PropertyGroup>
+  <Target Name="TransformAppConfig" AfterTargets="AfterBuild">
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.CI.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'CI'" />
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.Prod.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'Prod'" />
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.Test.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'Test'" />
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.UAT.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'UAT'" />
+  </Target>
+</Project>

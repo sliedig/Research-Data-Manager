@@ -1,0 +1,37 @@
+﻿@model Urdms.Dmp.Models.ConfirmDataManagementPlanViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+@helper ConfirmationInstructions()
+    {
+    <span style="font-style: normal;">I acknowledge that by submitting the Data Management
+        Plan I will gain access to the Project Storage Space for <em>"@Model.ProjectTitle"</em>.
+        Researchers or project members identified in sub-section Access, of
+        @Html.ActionLink("section 4", "Edit", "Dmp", new { id = Model.DataManagementPlanId, step = 5 }, new { })
+        will also be given access to the Project Storage Space as per their respective roles.</span>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.DataManagementPlanId)
+    @Html.HiddenFor(m => m.ProjectTitle)
+    @f.Steps(ViewBag.Steps, 6, 6, true, true)
+    @f.Header("Data Management Review")
+    <h2>Data Management Plan for: <strong>@Model.ProjectTitle</strong></h2>
+    using (var s = f.BeginSection("Confirm", "confirm"))
+    {
+    <dt></dt>
+    <dd @if (ViewContext.ViewData.ModelState.Keys.Contains("HasConfirmed") && ViewContext.ViewData.ModelState["HasConfirmed"].Errors.Count > 0)
+        { <text>class="invalid"</text> } >@Html.ValidationMessageFor(x => x.HasConfirmed, null, new { @class = "invalid-message" })
+        <label>@Html.CheckBoxFor(x => x.HasConfirmed) @ConfirmationInstructions()</label></dd>
+    }
+
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Previous", name: "Previous", id: "Previous", classes: "float-left")
+            @n.Submit("Submit", name: "Submit", id: "Submit", classes: "float-right")
+        }
+    </div>
+
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+}

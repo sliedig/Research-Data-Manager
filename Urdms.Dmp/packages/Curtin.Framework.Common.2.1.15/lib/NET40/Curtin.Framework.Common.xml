@@ -1,0 +1,936 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Curtin.Framework.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Curtin.Framework.Common.Auth.IMembershipService">
+            <summary>
+             Membership service to validate a username / password combination
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Auth.IMembershipService.ValidateUser(System.String,System.String)">
+            <summary>
+            Validates whether the given username and password correspond to a valid user.
+            </summary>
+            <param name="userName">The username to verify</param>
+            <param name="password">The password to verify</param>
+            <returns>The result of the user validation</returns>
+        </member>
+        <member name="T:Curtin.Framework.Common.Auth.IRoleProvider">
+            <summary>
+             Provides roles for users
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Auth.IRoleProvider.RolesFor(System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Provides roles for the given user
+            </summary>
+            <param name="userName">Username of the user to provide roles for</param>
+            <returns>A list of the roles for the user</returns>
+        </member>
+        <member name="T:Curtin.Framework.Common.Auth.MembershipValidationResult">
+            <summary>
+             The result of an attempt to validate a user.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Auth.MembershipValidationResult.#ctor">
+            <summary>
+             Constructor.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Auth.MembershipValidationResult.Success">
+            <summary>
+             Whether or not the user was valid
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Auth.MembershipValidationResult.Roles">
+            <summary>
+             A list of any roles the user has
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Auth.MembershipValidationResult.Memberships">
+            <summary>
+            List of memberships that the user has
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Auth.MembershipValidationResult.Error">
+            <summary>
+             If the user wasn't valid then this contains an error message explaining why
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Auth.MembershipValidationResult.UserName">
+            <summary>
+             The username to use for the user
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.Classes.ClassBuilder">
+            <summary>
+             Builds a space delimited list of classes.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.ClassBuilder.#ctor">
+            <summary>
+             Initialise with empty list of classes.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.ClassBuilder.#ctor(System.String)">
+            <summary>
+             Initialise with initial list of classes.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.ClassBuilder.Add(System.String)">
+            <summary>
+             Add a class.
+            </summary>
+            <param name="className">The class to add</param>
+        </member>
+        <member name="T:Curtin.Framework.Common.Classes.EncryptedString">
+            <summary>
+             Encrypts and decrypts strings.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.EncryptedString.Encrypted">
+            <summary>
+             Set or retrieve the encrypted version of the string
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.EncryptedString.Plain">
+            <summary>
+            Set or retrieve the plain version of the string
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.EncryptedString.Key">
+            <summary>
+             Encryption key
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.EncryptedString.Iv">
+            <summary>
+            IV key
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.Extensions.ParsingExtensions">
+            <summary>
+             Extension methods for parsing objects to types.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ParsingExtensions.SafeParse``1(System.Object,``0)">
+            <summary>
+             Will safely parse an object to a type without throwing an exception using the built-in .NET TryParse methods and if it fails it sets the given default value instead.
+            </summary>
+            <param name="value">The value to parse</param>
+            <param name="defaultValue">The value to use if parsing fails</param>
+            <typeparam name="T">The type to try and parse to</typeparam>
+            <returns>The parsed value or null if the parse failed</returns>
+            <exception cref="T:System.NotSupportedException">If there is no Try Parse method on the type trying to be parsed then this exception will be thrown</exception>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ParsingExtensions.Parse``1(System.Object)">
+            <summary>
+             Will safely parse a string to a type without throwing an exception using the built-in .NET TryParse methods.
+            </summary>
+            <param name="value">The string value to parse</param>
+            <typeparam name="T">The type to try and parse to</typeparam>
+            <returns>The parsed value or null if the parse failed</returns>
+            <exception cref="T:System.NotSupportedException">If there is no Try Parse method on the type trying to be parsed then this exception will be thrown</exception>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ParsingExtensions.ParseDateParts(System.Object,System.Object,System.Object)">
+            <summary>
+            Parses dynamics that should be strings representing the parts of a date into a DateTime object.
+            </summary>
+            <param name="year">Dynamic representing a year</param>
+            <param name="month">Dynamic representing a month</param>
+            <param name="day">Dynamic representing a day</param>
+            <returns>The DateTime representation or null if an invalid date</returns>
+        </member>
+        <member name="T:Curtin.Framework.Common.Extensions.ReflectionExtensions">
+            <summary>
+             Extension methods for reflection.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ReflectionExtensions.GetValueOrDefault``1(System.Object,System.String)">
+            <summary>
+             Returns the value in the property with the given name.
+            </summary>
+            <param name="instance">The object to get the property from</param>
+            <param name="propertyName">The name of the property to get</param>
+            <typeparam name="TPropertyType">The expected type of the property</typeparam>
+            <returns>The value or null if invalid property name</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ReflectionExtensions.GetValue(System.Object,System.String)">
+            <summary>
+             Returns the value in the property with the given name or throws an exception if invalid property name.
+            </summary>
+            <param name="instance">The object to get the property from</param>
+            <param name="propertyName">The name of the property to get</param>
+            <returns>The value if valid property name</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ReflectionExtensions.SetProperty(System.Object,System.String,System.Object)">
+            <summary>
+             Sets the value in the property with the given name with the given value.
+            </summary>
+            <param name="instance">The object to set the property to</param>
+            <param name="propertyName">The name of the property to set</param>
+            <param name="newValue">The value to set</param>
+        </member>
+        <member name="T:Curtin.Framework.Common.Container.WebRequestModule">
+            <summary>
+             Autofac module to set up the web request wrapper objects.
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.Extensions.EnumerableExtensions">
+            <summary>
+             Extension methods for <see cref="T:System.Collections.IEnumerable"/>
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.SafeCast``1(System.Collections.IEnumerable)">
+            <summary>
+             Will safely cast an IEnumerable into an IEnumerable of another type.
+             Will only grab members within the IEnumerable that are the other type.
+             Uses yield return so safe to run on big lists.
+            </summary>
+            <param name="enumerable">The IEnumerable to cast</param>
+            <typeparam name="TTo">The type to cast to</typeparam>
+            <returns>The IEnumerable&lt;TTo&gt;</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``1(System.Collections.IEnumerable,System.Action{``0})">
+            <summary>
+             Will perform an action across each element of type T in an IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item as a parameter</param>
+            <typeparam name="T">The type of element to perform the action on</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``1(System.Collections.IEnumerable,System.Action{``0})">
+            <summary>
+             Will perform an action across each element of type T in an IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item as a parameter</param>
+            <typeparam name="T">The type of element to perform the action on</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``1(System.Collections.IEnumerable,System.Action{System.Int32,``0})">
+            <summary>
+             Will perform an action across each element of type T in an IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item's index and the item as a parameter</param>
+            <typeparam name="T">The type of element to perform the action on</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``1(System.Collections.IEnumerable,System.Action{System.Int32,``0})">
+            <summary>
+             Will perform an action across each element of type T in an IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item's index and the item as a parameter</param>
+            <typeparam name="T">The type of element to perform the action on</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+             Will perform an action across each element in a typed IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item as a parameter</param>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+             Will perform an action across each element in a typed IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item as a parameter</param>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``1(System.Collections.Generic.IEnumerable{``0},System.Action{System.Int32,``0})">
+            <summary>
+             Will perform an action across each element in a typed IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item's index and the item as a parameter</param>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{System.Int32,``0})">
+            <summary>
+             Will perform an action across each element in a typed IEnumerable.
+            </summary>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The action to perform; takes the item's index and the item as a parameter</param>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``1(System.Collections.IEnumerable,System.Func{System.Object,``0})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``1(System.Collections.IEnumerable,System.Func{System.Object,``0})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``1(System.Collections.IEnumerable,System.Func{System.Int32,System.Object,``0})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item's index and the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``1(System.Collections.IEnumerable,System.Func{System.Int32,System.Object,``0})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item's index and the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Do``2(System.Collections.Generic.IEnumerable{``0},System.Func{System.Int32,``0,``1})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item's index and the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.ForEach``2(System.Collections.Generic.IEnumerable{``0},System.Func{System.Int32,``0,``1})">
+            <summary>
+            Performs the given function over every item within the IEnumerable, disregarding the result of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+            <param name="enumerable">The list to enumerate</param>
+            <param name="action">The function to execute; takes the item's index and the item as a parameter</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.HasItems(System.Collections.IEnumerable)">
+            <summary>
+             Returns whether the given IEnumerable has any items in it.
+            </summary>
+            <param name="enumerable">The IEnumerable to check</param>
+            <returns>Whether or not the IEnumerable has items</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.IsEmpty(System.Collections.IEnumerable)">
+            <summary>
+             Returns whether the given IEnumerable is empty.
+            </summary>
+            <param name="enumerable">The IEnumerable to check</param>
+            <returns>Whether or not the IEnumerable is empty</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.IsNotEmpty(System.Collections.IEnumerable)">
+            <summary>
+             Returns whether the given IEnumerable is not empty.
+            </summary>
+            <param name="enumerable">The IEnumerable to check</param>
+            <returns>Whether or not the IEnumerable is not empty</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Contains``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns whether the given IEnumerable contains any items that fulfil the given predicate.
+            </summary>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+            <param name="enumerable">The IEnumerable</param>
+            <param name="predicate">The predicate to check for</param>
+            <returns>Whether or not the predicate was satisfied</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.NotContains``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Returns whether the given IEnumerable doesn't contain any items that fulfil the given predicate.
+            </summary>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+            <param name="enumerable">The IEnumerable</param>
+            <param name="predicate">The predicate to check for</param>
+            <returns>Whether or not the predicate wasn't satisfied for any items</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.GetIndexOf(System.Collections.Generic.IEnumerable{System.Int32},System.Int32)">
+            <summary>
+            Returns the 1-based index of the first occurrence of the given integer value in the given IEnumerable of int.
+            </summary>
+            <param name="enumerable">The IEnumerable to check</param>
+            <param name="value">The value to check for</param>
+            <returns>The 1-based index of the value or null if not found</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.GetValueAt(System.Collections.Generic.IEnumerable{System.Int32},System.Int32)">
+            <summary>
+             Returns the item at the given index in the given IEnumerable of int.
+            </summary>
+            <param name="enumerable">The IEnumerable</param>
+            <param name="index">The index</param>
+            <returns>The item at that index or null if an invalid IEnumerable or index</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.Section``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Breaks up the given IEnumerable into a set of IEnumerables each of length no greater than the given length.
+            </summary>
+            <typeparam name="T">Type of the IEnumerable</typeparam>
+            <param name="source">The source list</param>
+            <param name="length">The max length to split the IEnumerable up into</param>
+            <returns>An IEnumerable of the IEnumerables, each of length not greater than 'length'</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.AsReadOnly``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns the given IEnumerable as a readonly IEnumerable by using the yield keyword
+            </summary>
+            <typeparam name="T">The type of IEnumerable</typeparam>
+            <param name="source">The source IEnumerable</param>
+            <returns>The read-only version of 'source'</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumerableExtensions.PairWith``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Pairs this IEnumerable with a second IEnumerable
+            </summary>
+            <typeparam name="T1">Type of the first IEnumerable</typeparam>
+            <typeparam name="T2">Type of the second IEnumerable</typeparam>
+            <param name="left">The first IEnumerable</param>
+            <param name="right">The second IEnumerable; will be paired with the first one</param>
+            <returns>The paired IEnumerables</returns>
+        </member>
+        <member name="T:Curtin.Framework.Common.Extensions.PairedIEnumerable`2">
+            <summary>
+            Pairs two IEnumerables together, allows looping actions to be performed on both IEnumerables at the same time.
+            </summary>
+            <typeparam name="T1">Type of the first IEnumerable</typeparam>
+            <typeparam name="T2">Type of the second IEnumerable</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="left">First IEnumerable</param>
+            <param name="right">Second IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.Do(System.Action{`0,`1})">
+            <summary>
+            Performs an action on each item of both IEnumerables.
+            </summary>
+            <param name="action">The action to perform; takes an item from each IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.ForEach(System.Action{`0,`1})">
+            <summary>
+            Performs an action on each item of both IEnumerables.
+            </summary>
+            <param name="action">The action to perform; takes an item from each IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.Do(System.Action{System.Int32,`0,`1})">
+            <summary>
+            Performs an action on each item of both IEnumerables.
+            </summary>
+            <param name="action">The action to perform; takes the index and an item from each IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.ForEach(System.Action{System.Int32,`0,`1})">
+            <summary>
+            Performs an action on each item of both IEnumerables.
+            </summary>
+            <param name="action">The action to perform; takes the index and an item from each IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.Do``1(System.Func{`0,`1,``0})">
+            <summary>
+            Performs a function on each item of both IEnumerables, ignoring the return value of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="action">The action to perform; takes an item from each IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.ForEach``1(System.Func{`0,`1,``0})">
+            <summary>
+            Performs a function on each item of both IEnumerables, ignoring the return value of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="action">The action to perform; takes an item from each IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.Do``1(System.Func{System.Int32,`0,`1,``0})">
+            <summary>
+            Performs a function on each item of both IEnumerables, ignoring the return value of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="action">The action to perform; takes the index and an item from each IEnumerable</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.PairedIEnumerable`2.ForEach``1(System.Func{System.Int32,`0,`1,``0})">
+            <summary>
+            Performs a function on each item of both IEnumerables, ignoring the return value of the function.
+            </summary>
+            <typeparam name="TResult">The return type of the function; ignored</typeparam>
+            <param name="action">The action to perform; takes the index and an item from each IEnumerable</param>
+        </member>
+        <member name="T:Curtin.Framework.Common.Extensions.EnumExtensions">
+            <summary>
+             Extension methods for the Enum class.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumExtensions.ToDescription(System.Enum)">
+            <summary>
+             Turns an enum value into a string based on the DescriptionAttrvute value against that enumeration value.
+            </summary>
+            <param name="value">Enum value to return a string for</param>
+            <returns>The string representation of the enum value</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.EnumExtensions.ToList``1">
+            <summary>
+            Returns a list of all the enum values for the given type.
+            </summary>
+            <typeparam name="T">The enum type to return the list of values for</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Curtin.Framework.Common.Extensions.ExpressionExtensions">
+            <summary>
+             Extension methods for Expressions
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ExpressionExtensions.GetParent``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Returns a Func to access the parent of a property on a multi-level MemberExpression like m=>m.Customer.BillingAddress.Street1
+            </summary>
+            <typeparam name="TRoot">Root refers to the parameter in the example above is m</typeparam>
+            <typeparam name="TProperty">The property that we're accessing, in the example above Street1</typeparam>
+            <param name="expression">A multi-level MemberExpression like m=>m.Customer.BillingAddress.Street1</param>
+            <returns>An accessor to the immediate parent of the MemberExpression. In the Example above m=>m.Customer.BillingAddress</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ExpressionExtensions.GetFieldName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+             Returns the fieldname for a property expression.
+            </summary>
+            <param name="expression">The expression</param>
+            <typeparam name="TRoot">The root class</typeparam>
+            <typeparam name="TProperty">The property class</typeparam>
+            <returns>The name of the field being accessed in the expression</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.ExpressionExtensions.GetFieldName(System.Linq.Expressions.MemberExpression)">
+            <summary>
+             Returns the fieldname for a MemberExpression.
+            </summary>
+            <param name="expression">The expression</param>
+            <returns>The name of the field being accessed in the expression</returns>
+        </member>
+        <member name="T:Curtin.Framework.Common.Extensions.RegistrationExtensions">
+            <summary>
+             Extension methods for Autofac registration.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.RegistrationExtensions.AsDefaultInterface``2(Autofac.Builder.IRegistrationBuilder{``0,``1,Autofac.Builder.DynamicRegistrationStyle})">
+            <summary>
+            Specifies that a type from a scanned assembly is registered using the default interface.
+            Following the convention of Type, IType. The default interface for ProductRepository will be 
+            IProductRepository
+            </summary>
+            <typeparam name="TLimit">Registration limit type.</typeparam>
+            <typeparam name="TScanningActivatorData">Activator data type.</typeparam>
+            <param name="registration">Registration to set service mapping on.</param>
+            <returns>Registration builder allowing the registration to be configured.</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Extensions.RegistrationExtensions.IsDefaultInterfaceFor(System.Type,System.Type)">
+            <summary>
+             Returns whether the given interface type is the default interface for the given type (prefixed with I).
+             e.g. if given IMyType and MyType then it will return true, but if given IMyType and
+                 IMyOtherType if will return false.
+            </summary>
+            <param name="interfaceType">The type for the interface</param>
+            <param name="type">The type for the type</param>
+            <returns>Whether or not the interface is the default interface for the type</returns>
+        </member>
+        <member name="T:Curtin.Framework.Common.Attributes.NoCoverageAttribute">
+            <summary>
+            Attribute [NoCoverage] to designate classes that don't need code coverage
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.Classes.StringEnum">
+            <summary>
+            Helper class for working with 'extended' enums using <see cref="T:System.ComponentModel.DescriptionAttribute"/> attributes.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.#ctor(System.Type)">
+            <summary>
+            Creates a new <see cref="T:Curtin.Framework.Common.Classes.StringEnum"/> instance.
+            </summary>
+            <param name="enumType">Enum type.</param>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.GetStringValue(System.String)">
+            <summary>
+            Gets the string value associated with the given enum value.
+            </summary>
+            <param name="valueName">Name of the enum value.</param>
+            <returns>String Value</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.GetStringValues">
+            <summary>
+            Gets the string values associated with the enum.
+            </summary>
+            <returns>String value array</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.GetListValues">
+            <summary>
+            Gets the values as a 'bindable' list datasource.
+            </summary>
+            <returns>IList for data binding</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.IsStringDefined(System.String)">
+            <summary>
+            Return the existence of the given string value within the enum.
+            </summary>
+            <param name="stringValue">String value.</param>
+            <returns>Existence of the string value</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.IsStringDefined(System.String,System.Boolean)">
+            <summary>
+            Return the existence of the given string value within the enum.
+            </summary>
+            <param name="stringValue">String value.</param>
+            <param name="ignoreCase">Denotes whether to conduct a case-insensitive match on the supplied string value</param>
+            <returns>Existence of the string value</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.GetStringValue(System.Enum)">
+            <summary>
+            Gets a string value for a particular enum value.
+            </summary>
+            <param name="value">Value.</param>
+            <returns>String Value associated via a <see cref="T:System.ComponentModel.DescriptionAttribute"/> attribute, or null if not found.</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.Parse(System.Type,System.String)">
+            <summary>
+            Parses the supplied enum and string value to find an associated enum value (case sensitive).
+            </summary>
+            <param name="type">Type.</param>
+            <param name="stringValue">String value.</param>
+            <returns>Enum value associated with the string value, or null if not found.</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.Parse(System.Type,System.String,System.Boolean)">
+            <summary>
+            Parses the supplied enum and string value to find an associated enum value.
+            </summary>
+            <param name="type">Type.</param>
+            <param name="stringValue">String value.</param>
+            <param name="ignoreCase">Denotes whether to conduct a case-insensitive match on the supplied string value</param>
+            <returns>Enum value associated with the string value, or null if not found.</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.IsStringDefined(System.Type,System.String)">
+            <summary>
+            Return the existence of the given string value within the enum.
+            </summary>
+            <param name="stringValue">String value.</param>
+            <param name="enumType">Type of enum</param>
+            <returns>Existence of the string value</returns>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringEnum.IsStringDefined(System.Type,System.String,System.Boolean)">
+            <summary>
+            Return the existence of the given string value within the enum.
+            </summary>
+            <param name="stringValue">String value.</param>
+            <param name="enumType">Type of enum</param>
+            <param name="ignoreCase">Denotes whether to conduct a case-insensitive match on the supplied string value</param>
+            <returns>Existence of the string value</returns>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.StringEnum.EnumType">
+            <summary>
+            Gets the underlying enum type for this instance.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:Curtin.Framework.Common.Classes.StringValueAttribute">
+            <summary>
+            Simple attribute class for storing String Values
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.StringValueAttribute.#ctor(System.String)">
+            <summary>
+            Creates a new <see cref="T:Curtin.Framework.Common.Classes.StringValueAttribute"/> instance.
+            </summary>
+            <param name="value">Value.</param>
+        </member>
+        <member name="T:Curtin.Framework.Common.UserService.ICurtinPerson">
+            <summary>
+            Container object to act as a DTO for staff and student information.
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.UserService.ICurtinUser">
+            <summary>
+            Object to store basic information about Curtin staff and students.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.FullName">
+            <summary>
+            The user's full name
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.CurtinId">
+            <summary>
+            The user's id
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.FirstName">
+            <summary>
+            The user's first name
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.PreferredName">
+            <summary>
+            The user's preferred name
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.LastName">
+            <summary>
+            The user's last name
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.EmailAddress">
+            <summary>
+            The user's email address
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.ContactLink">
+            <summary>
+            The user's email address contact link
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.UserType">
+            <summary>
+            The user's type; e.g. staff or student
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.Phone">
+            <summary>
+            The user's phone number
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.ICurtinUser.Exists">
+            <summary>
+            Whether or not the user exists
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.UserService.ICurtinUserService">
+            <summary>
+            Performs details lookups for Curtin staff and students.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Common.UserService.ICurtinUserService.GetStaff(System.String)">
+            <summary>
+            Returns detailed information about a staff member.
+            </summary>
+            <param name="id">The staff id to look up</param>
+            <returns>The details for the staff member</returns>
+            <exception cref="T:System.ArgumentException">Thrown if an empty staff id is given</exception>
+        </member>
+        <member name="M:Curtin.Framework.Common.UserService.ICurtinUserService.GetStudent(System.String,System.Boolean)">
+            <summary>
+            Returns detailed information about a student.
+            </summary>
+            <param name="id">The student id to look up</param>
+            <param name="fetchCwa">Whether or not to retrieve the Course Weighted average of the student</param>
+            <returns>The details for the student</returns>
+            <exception cref="T:System.ArgumentException">Thrown if an empty student id is given</exception>
+        </member>
+        <member name="M:Curtin.Framework.Common.UserService.ICurtinUserService.GetUser(System.String)">
+            <summary>
+            Returns basic information about a Curtin staff or student.
+            </summary>
+            <param name="id">The staff or student id</param>
+            <returns>The details of the staff or student</returns>
+            <exception cref="T:System.ArgumentException">Thrown if an empty id is given</exception>
+        </member>
+        <member name="T:Curtin.Framework.Common.UserService.IStaff">
+            <summary>
+            Object to represent detailed staff information
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Title">
+            <summary>
+            The staff member's title; e.g. Mr, Mrs, etc.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Position">
+            <summary>
+            The staff member's position; e.g. Senior Developer
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Room">
+            <summary>
+            The staff member's room number; e.g. 101
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Fax">
+            <summary>
+            The staff member's fax number; e.g. +618 9266 1030
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Area">
+            <summary>
+            The staff member's area or school
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Division">
+            <summary>
+            The staff member's division or faculty
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Campus">
+            <summary>
+            The staff member's campus
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Section">
+            <summary>
+            The staff member's section (work level underneath area)
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Department">
+            <summary>
+            The staff member's department
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Mobile">
+            <summary>
+            The staff member's mobile phone number
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Building">
+            <summary>
+            The staff member's building; e.g. 309
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStaff.Location">
+            <summary>
+            The staff member's location; e.g. 309.101
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.UserService.IStudent">
+            <summary>
+            Object to represent detailed student information
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.Title">
+            <summary>
+            The student's title; e.g. Mr, Mrs, etc.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.DateOfBirth">
+            <summary>
+            The student's date of birth; todo ???????? format
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.Suburb">
+            <summary>
+            The student's suburb
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.State">
+            <summary>
+            The student's state
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.Postcode">
+            <summary>
+            The student's postcode
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.PrimaryCourseNumber">
+            <summary>
+            The student's primary course code
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.AddressLine1">
+            <summary>
+            The student's address (line 1)
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.AddressLine2">
+            <summary>
+            The student's address (line 2)
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.AddressLine3">
+            <summary>
+            The student's address (line 3)
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.PrimaryCourseTitle">
+            <summary>
+            The student's primary course title
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.Country">
+            <summary>
+            The student's country
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.MobilePhone">
+            <summary>
+            The student's mobile phone number
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.MajorTitle">
+            <summary>
+            The student's major
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.MiddleName">
+            <summary>
+            The student's middle name
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.Gender">
+            <summary>
+            The student's gender; todo ??? format
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.PrimaryCourseDivision">
+            <summary>
+            The student's primary course division code
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.UserService.IStudent.CourseWeightedAverage">
+            <summary>
+            The student's course weighted average
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Common.Classes.JsonResponse`1">
+            <summary>
+             Class to cast from a JSON response with structure: {"Errors":["error1", "error2"],"Success":"true","Data":data}.
+             "data" can be any any format and this class allows you to try and convert that data to a C# type.
+            </summary>
+            <typeparam name="T">The type expected in the Data field</typeparam>
+        </member>
+        <member name="M:Curtin.Framework.Common.Classes.JsonResponse`1.CreateFromJson(System.String)">
+            <summary>
+             Create a parsed JsonResponse object from a JSON string.
+            </summary>
+            <param name="jsonString">The json to parse</param>
+            <returns>The parsed object</returns>
+            <exception cref="T:System.ApplicationException">Will be thrown if there is no success key in the JsonResponse after it is parsed</exception>
+            <exception cref="T:System.InvalidCastException">Will be thrown if the JSON given cannot be parsed as a JsonResponse of type T</exception>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.JsonResponse`1.Errors">
+            <summary>
+             Array of string errors
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.JsonResponse`1.Success">
+            <summary>
+             Whether or not the operation was successful, usually "true" or "false"
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Common.Classes.JsonResponse`1.Data">
+            <summary>
+             The data payload
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,86 @@
+﻿@using Urdms.Dmp.Models.Enums
+@model Urdms.Dmp.Models.ProjectDetailsViewModel
+
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("jquery-ui.min");
+    AddScript("project-details");
+    AddScript("ajax-codes");
+}
+
+@helper ProjectFundingInstructions()
+    {
+        <p>You can use this section to highlight possible future funding for your research project.</p>
+}
+
+@helper ProjectSubjectsInstructions()
+{
+    <ul>
+        <li>Please use commas to separate the keywords</li>
+        <li>The Field of Research (FoR) and Socio Economic Objective (SEO) codes have an auto-complete feature that displays the top 10 codes as a result of your entry. To view the complete list of codes, click on the respective links below.</li>
+    </ul>
+}
+
+@{
+    const string forInformation = "<p><em><a href='http://www.abs.gov.au/AUSSTATS/abs@.nsf/Latestproducts/17DC1A688895C0C1CA257418000538FC?opendocument' target='_blank'>View full list of FoR codes (opens in a new window)</a></em></p>";
+    const string seoInformation = "<p><em><a href='http://www.abs.gov.au/AUSSTATS/abs@.nsf/Latestproducts/25AA55D93A67F9E5CA257418000539C7?opendocument' target='_blank'>View full list of SEO codes (opens in a new window)</a></em></p>";
+}
+
+@using (var f = Html.BeginFlowForm(action: "Step1"))
+{
+    @f.Header("Project Details")
+    using (var s = f.BeginSection("Details"))
+    {
+
+        @Html.HiddenFor(model => model.Id)
+        @s.FieldFor(m => m.Title, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+        @s.FieldFor(m => m.Description, new FieldConfiguration { HtmlAttributes = new { @class = "largeHeight" } })
+        if (Model.SourceProjectType != SourceProjectType.DEPOSIT)
+        {
+            @s.FieldFor(m => m.Status, new FieldConfiguration { Exclude = new Enum[] { ProjectStatus.PendingApproval, ProjectStatus.Approved } })
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.Status)
+            @s.FieldFor(m => m.Status, new FieldConfiguration{ReadOnly = true})
+        }
+        @s.FieldFor(m => m.StartDate, new FieldConfiguration { HtmlAttributes = new { @class = "date" } })
+        @s.FieldFor(m => m.EndDate, new FieldConfiguration { HtmlAttributes = new { @class = "date" } })
+    }
+    using (var s = f.BeginSection("Subjects", instructions: ProjectSubjectsInstructions()))
+    {
+        @s.FieldFor(m => m.Keywords, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+
+        @s.FieldFor(m => m.FieldOfResearchCode, new FieldConfiguration { After = "<input type='submit' id='AddForCode' name='AddForCode' value='Add' />", Before = forInformation, Hint = new MvcHtmlString("Please enter a code in this field and then click on 'Add'") })
+        <div id="fieldsOfResearch">
+            @Html.Partial("_FieldsOfResearch", Model.FieldsOfResearch)
+            <input type="submit" class="refresh" name="DeleteForCodes" id="DeleteForCodes" value="Remove items" />
+        </div>
+    
+        @s.FieldFor(m => m.SocioEconomicObjectiveCode, new FieldConfiguration { After = "<input type='submit' id='AddSeoCode' name='AddSeoCode' value='Add' />", Before = seoInformation, Hint = new MvcHtmlString("Please enter a code in this field and then click on 'Add'") })
+        <div id="socioEconomicObjectives">
+            @Html.Partial("_SocioEconomicObjectives", Model.SocioEconomicObjectives)
+            <input type="submit" class="refresh" name="DeleteSeoCodes" id="DeleteSeoCodes" value="Remove items" />
+        </div>
+    }
+    @*if(Model.SourceProjectType != SourceProjectType.DEPOSIT)
+    {
+        using (var s = f.BeginSection("Potential for project funding", instructions: ProjectFundingInstructions()))
+         {
+             @s.RadioFor(m => m.ArcFunder.IsFunded)
+             @s.FieldFor(m => m.ArcFunder.GrantNumber)
+             @s.RadioFor(m => m.NmhrcFunder.IsFunded)
+             @s.FieldFor(m => m.NmhrcFunder.GrantNumber)
+         }
+    }*@
+    
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Save and Next", "SaveAndNext", "float-right", "SaveAndNext")
+        }
+    </div>
+    
+    @f.Footer(area: "AREA HERE", id: "FORM ID HERE", date: "DATE HERE")
+}
+

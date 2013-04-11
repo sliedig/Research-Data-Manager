@@ -1,0 +1,11 @@
+﻿@model Urdms.Dmp.Models.UrdmsUserViewModel
+
+<tr>
+    <td>@Model.UserId</td>
+    <td>@Model.FullName</td>
+    <td>@Html.DropDownList(string.Format("UrdmsUserRelationship{0}", Model.Id == 0 ? Model.FullName.GetHashCode() : Model.Id),
+        ((Dictionary<int,string>)ViewBag.Relationships).Select(x => 
+            new SelectListItem { Selected = Model.Relationship == x.Key, Text = x.Value, Value = x.Key.ToString() }))</td>
+    <td>@Html.CheckBox(string.Format("RemoveUrdmsUser{0}", Model.Id == 0 ? Model.FullName.GetHashCode() : Model.Id))</td>
+    <td>@Html.Hidden("urdms.users.row", Model.Id.ToString() + "," + Model.FullName.GetHashCode().ToString() + "," + Model.FullName + "," + Model.UserId + "," + Model.Relationship.ToString())</td>
+</tr>

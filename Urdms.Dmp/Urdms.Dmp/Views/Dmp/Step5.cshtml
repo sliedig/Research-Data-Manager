@@ -1,0 +1,240 @@
+﻿@using Urdms.Dmp.Models.Enums
+@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataManagementPlanViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("research-data");
+    AddScript("jquery.prettyPhoto");
+    AddStylesheet("prettyPhoto");
+    AddScript("retention-and-sharing");
+
+    var retentionPeriodHints = new[]
+                                   {
+                                       new FaqItem { Text = "What is data retention and disposal?", Url = "#faq1" }
+                                   };
+
+    var locationHints = new[]
+                                   {
+                                       new FaqItem { Text = "What are repositories?", Url = "#faq2" }
+                                   };
+
+    var availabilityHints = new[]
+                                      {
+                                          new FaqItem { Text = "What are the benefits of data sharing?", Url = "#faq3" }
+                                      };
+    var shareAccessHints = new[]
+                                     {
+                                         new FaqItem { Text = "What are the restrictions on sharing data?", Url = "#faq4" }
+                                     };
+    var dataLicensingHints = new[]
+                                       {
+                                           new FaqItem { Text = "What is data licensing?", Url = "#faq5" }, 
+                                           new FaqItem { Text = "What is the Creative Commons?", Url = "#faq6" }, 
+                                           new FaqItem { Text = "What is the Restrictive License?", Url = "#faq7" }
+                                       };
+    var reuseByOrganisationHints = new[]
+                                              {
+                                                  new FaqItem { Text = "What is data citation?", Url = "#faq8" }
+                                              };
+                                
+}
+@helper DataRententionInstructions()
+    {
+    <p>The retention and preservation of the research data may have legal, contractual or
+        ethical considerations that may be determined by law, a funding agency or a publisher.
+        Retaining data will help you to defend the outcomes of the research should they
+        be challenged in the future, and opens the possibility of the data being reused
+        for further research.</p>
+}
+@helper DataSharingInstructions()
+    {
+    <p>Data generated and collected for a specific project may well have potential value
+        beyond its original intent. Making your data available to others may be useful to
+        other scholars for further research and may lead to new research outcomes and findings.
+        The decision to share your research data with others will be influenced by a number
+        of factors.</p>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ProjectId)
+    @Html.HiddenFor(m => m.Step)
+    @Html.HiddenFor(m => m.Start)
+    @f.Steps(ViewBag.Steps, 5, ViewBag.MaxStep, true, true)
+	
+    @f.Header("Deposit and Long-Term Preservation")
+    <h2>Data Management Plan for: @Model.ProjectTitle</h2>
+    using (var s = f.BeginSection("Data Retention", "data-retention", DataRententionInstructions()))
+    {
+    @s.FieldFor(m => m.DataRetention.DataRetentionPeriod, new FieldConfiguration { As = ElementType.RadioButtons, Before = retentionPeriodHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.DataRetention.DataRetentionResponsibilities, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { DataResponsibilities.None } })
+    @s.FieldFor(m => m.DataRetention.DataRetentionResponsibilitiesDescription)
+    @s.RadioFor(m => m.DataRetention.DepositToRepository)
+    @s.FieldFor(m => m.DataRetention.DataRetentionLocations, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { DataRetentionLocations.None }, Before = locationHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.DataRetention.DataRetentionLocationsDescription, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+    }
+
+    using (var s = f.BeginSection("Data Sharing", "data-sharing", DataSharingInstructions()))
+    {
+    @s.FieldFor(m => m.DataSharing.DataSharingAvailability, new FieldConfiguration { As = ElementType.RadioButtons, Before = availabilityHints.GenerateFaqPlaceHolder() })
+    <dt>@Html.LabelFor(m => m.DataSharing.DataSharingAvailabilityDate)</dt>
+    <dd>@Html.TextBox("DataSharing.DataSharingDataSharingAvailabilityDate", Model.DataSharing.DataSharingAvailabilityDate != null ? Model.DataSharing.DataSharingAvailabilityDate.Value.ToShortDateString() : string.Empty, new { @class = "date", id = "DataSharing_DataSharingDataSharingAvailabilityDate" })</dd>
+    @s.FieldFor(m => m.DataSharing.ShareAccess, new FieldConfiguration { As = ElementType.RadioButtons, Before = shareAccessHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.DataSharing.ShareAccessDescription, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+    @s.FieldFor(m => m.DataSharing.DataLicensingType, new FieldConfiguration { As = ElementType.RadioButtons, Before = dataLicensingHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.DataSharing.ReuseByOrganisations, new FieldConfiguration { Before = reuseByOrganisationHints.GenerateFaqPlaceHolder() })
+    }
+
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit(ViewBag.NavigationButton.Previous, name: "stepAction", id: "PreviousButton")
+            @n.Submit("Save and Next", name: "Confirm", classes: "float-right")
+        }
+    </div>
+    
+    <div id="faq1" class="hide">
+        <h2>What is data retention and disposal?</h2>
+        <p>In the context of data management, retention outlines the archiving rules as defined
+            by the research funding body or the university. You should identify the likely retention
+            period for your data as early as possible and ensure that you can meet retention
+            and disposal requirements.</p>
+        <p>Consider also what data you should retain, because although keeping everything may
+            seem to be the easiest solution, there are costs associated with storage, as well
+            as staff effort and time, and, it may be difficult to locate what is effectively
+            useful information. The university or funding body may have requirements to adhere
+            to in terms of what must kept, but you may also wish to determine what data is essential
+            to the research project, and what data must be kept in order to be able to understand
+            and explain the research and its outcomes.</p>
+    </div>
+    
+    <div id="faq2" class="hide">
+        <h2>What are repositories?</h2>
+        <p><b>Repositories</b>are online storage archives that provide a means of managing and
+            providing access to digital content. Placing items in a repository enables them
+            to be <b>managed</b> and <b>preserved</b>, making sure they remain in an accessible,
+            readable format in the long term, or for as long as the repository exists. Research
+            data, journal articles, theses and other e-learning objects can all be housed in
+            a repository.</p>
+        <p>In addition to keeping your data safe, depositing data in a repository also <b>raises
+            the impact</b> of your research as it will be more easily accessible to others which
+            in turn help <b>raise your research profile</b>.</p>
+        <p><u><a href="http://services.ands.org.au/home/orca/rda/" target="_blank">Research
+            Data Australia</a></u>(RDA) is an example of a data discovery service, and the<u><a
+                href="http://www.ada.edu.au/" target="_blank">Australian Data Archive</a></u>(ADA)
+            is anexample of a national digital repository. Many discipline-specific research
+            data repositories also exist, see for instance<u><a href="http://libguides.princeton.edu/content.php?pid=211802&amp;sid=1763058"
+                target="_blank">Princeton University Library's</a></u>list of selected repositories
+            by subject, or search <u><a href="http://www.opendoar.org/index.html" target="_blank">
+                OpenDOAR</a></u> (Directory of Open Access Repositories) for academic open access
+            research repositories.</p>
+    </div>
+    
+    <div id="faq3" class="hide">
+        <h2>What are the benefits of data sharing?</h2>
+        <p>Research data generated for a specific project may have potential value beyond its
+            original intent. Making your data available may be useful to other scholars for
+            further research.</p>
+        <p>You may choose to share a part or all of your data collection or just make the metadata
+            available. Access should always be proportionate to the level of confidentiality
+            attached to your data. Your funding body may also put contractual restrictions in
+            place that will determine the accessibility.</p>
+        <p>Research data generated and collected for a specific project may have potential valuebeyond
+            its original intent, andsharingit provides many benefits.</p>
+    </div>
+    
+    <div id="faq4" class="hide">
+        <h2>What are the restrictions on sharing data?</h2>
+        <p>There may be instances when you may be unable to share your data due to the type
+            of information you are generating or collecting, including:</p>
+        <ul>
+            <li>Medical research records that disclose highly sensitive personal information
+            </li>
+            <li>Information of cultural and ethnic sensitivity </li>
+            <li>Commercial, political or legal reasons </li>
+            <li>Non-disclosure agreements, contractual or institutional policies attached to your
+                data </li>
+        </ul>
+        <p>In these instances you may be able to share your metadata only. Alternatively, you
+            may consider creating a public use version of your dataset, which may involve <b>anonymising</b>
+            data to prevent disclosing individuals’ or organisations’ identities, using pseudonyms
+            or generalising the meaning of detailed text. These techniques may allow you to
+            share your data. You may also consider providing a mix of access levels to your
+            data, making the confidential information closed access while allowing restricted
+            or open access to the non-confidential information.</p>
+    </div>
+    
+    
+    <div id="faq5" class="hide">
+        <h2>What is data licensing?</h2>
+        <p>To make your data shareable and re-usable, you need to specify the permissions and
+            conditions of usage that apply to the data, asresearchers wishing to use your data
+            need to be aware of what exactly they are permitted to do with it. These conditions
+            need to be explicitly stated, and this can be achievedby attaching alicenceto your
+            data.</p>
+        <p>ANDS supports the use of the <u><a href="http://www.ausgoal.gov.au/" target="_blank">
+            AusGOAL</a> </u>framework of <u><a href="http://creativecommons.org.au/learn-more/licences"
+                target="_blank">Creative Commons licences</a></u>, which provide the appropriate
+            attribution requirements of the data creator or originator. To determine the most
+            suitable licence to attach to your data, you can use the <u><a href="http://www.ausgoal.gov.au/licence-chooser"
+                target="_blank">Licence Chooser</a></u> available from the AusGOAL website.
+            Also read the ANDS <a href="http://ands.org.au/guides/ausgoal-awareness.pdf" target="_blank">
+                AusGOAL Awareness</a> guide.</p>
+    </div>    
+    
+    <div id="faq6" class="hide">
+        <h2>What is the Creative Commons?</h2>
+        <p><u><a href="http://creativecommons.org.au/" target="_blank">Creative Commons (CC)</a></u>
+            is an international non-profit organisation that provides free licences and tools
+            that copyright owners can use to allow others to share, reuse and remix their material,
+            legally. <a href="http://creativecommons.org.au/learn-more/licences" target="_blank">
+                CC licences</a> are standardized copyright licences which grant permission to
+            use copyright works, in accordance with the particular standard set of conditions
+            selected by the copyright owner (“licensor”). The copyright owner retains ownership
+            of their work and licenses others to use the work on liberal terms. You can use
+            a <u><a href="http://creativecommons.org/choose/" target="_blank">free tool</a></u>
+            developed by the CC to assess a CC license that might be applicable to your data.</p>
+    </div>    
+    
+    <div id="faq7" class="hide">
+        <h2>What is a Restrictive Licence?</h2>
+        <p>The Restrictive Licence is part of the <u><a href="http://www.ausgoal.gov.au/"
+            target="_blank">AusGOAL</a> </u>suite of licences. AusGOAL is the Australian Governments
+            Open Access and Licensing Framework which within its licensing suite includes the
+            Creative Commons licenses and the Restrictive Licence. The Restrictive Licence was
+            developed specifically for material that contains personal or other confidential
+            information. It may also be used for other reasons, including material that is to
+            be licensed under some form of limiting or restrictive condition (such as a time
+            limit on use, or payment arrangements other than an initial once-only fee).</p>
+    </div>
+        
+    <div id="faq8" class="hide">
+        <h2>What is data citation?</h2>
+        <p>Data citationrefers to the practice of <b>referencing data</b>. This is donein much
+            the same way as more traditional resources like books and journal articles, which
+            are referenced by providing their bibliographic details to acknowledge their original
+            source.</p>
+        <p>Citing data is important because it:</p>
+        <ul>
+            <li><b>Acknowledges</b> and <b>provides credit</b> to the originator of the data
+            </li>
+            <li>Allows <b>verification</b> of data and results, facilitating their re-use in further
+                research </li>
+            <li>Enables <b>data citation metrics</b> (the impact of data) to be tracked </li>
+        </ul>
+        <p>Data citation has also several benefits for researchers, such as making data publications
+            more acceptable for CVs and journals and it also facilitates discovery of grey literature
+            as DOIs (persistent identifiers) attached to citations are searchable in search
+            engines.</p>
+    </div>
+    
+    
+    
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ default_width: 600 });
+        });
+    </script>
+}

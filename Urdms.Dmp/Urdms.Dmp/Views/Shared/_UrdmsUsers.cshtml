@@ -1,0 +1,23 @@
+﻿@model Urdms.Dmp.Models.UrdmsUsersBaseViewModel
+           
+@{
+    ViewBag.Relationships = Model.Relationships;
+}
+
+<table id="urdmsUsersGrid">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>@Model.RelationshipDescription</th>
+            <th>Remove</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+            @Html.Partial("_UrdmsUser", item)
+        }
+    </tbody>
+</table>

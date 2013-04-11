@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{06CE90E4-D937-4880-B293-BF1F04DA0C60}</ProjectGuid>
+    <Env Condition="'$(Env)' == ''">Prod</Env>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Urdms.Approvals.ApprovalService</RootNamespace>
+    <AssemblyName>Urdms.Approvals.ApprovalService</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.2.0.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Host, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <ExecutableExtension>.exe</ExecutableExtension>
+      <HintPath>..\packages\NServiceBus.Host.3.0.1\lib\net40\NServiceBus.Host.exe</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.NHibernate, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.NHibernate.3.0.1\lib\net40\NServiceBus.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="ApprovalsSaga.cs" />
+    <Compile Include="ApprovalsSagaData.cs" />
+    <Compile Include="EndpointConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\InstallService.bat">
+      <Link>InstallService.bat</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\UninstallService.bat">
+      <Link>UninstallService.bat</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App.CI.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.Prod.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.Test.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Approvals.ApprovalService.Commands\Approvals.ApprovalService.Commands.csproj">
+      <Project>{5998A388-CCC0-4424-813F-F39B04D5879E}</Project>
+      <Name>Approvals.ApprovalService.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.ApprovalService.Events\Approvals.ApprovalService.Events.csproj">
+      <Project>{5600F1A7-096F-4633-BE92-6DCFE63D1496}</Project>
+      <Name>Approvals.ApprovalService.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.ApprovalService.Messages\Approvals.ApprovalService.Messages.csproj">
+      <Project>{E95A7084-FD84-4C98-BB4B-B23A5B1B0D87}</Project>
+      <Name>Approvals.ApprovalService.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.VivoPublisher.Messages\Approvals.VivoPublisher.Messages.csproj">
+      <Project>{8CB58B1F-6D72-4598-AD50-E08B7E029217}</Project>
+      <Name>Approvals.VivoPublisher.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NotificationService.Messages\NotificationService.Messages.csproj">
+      <Project>{54EE9EAE-E01E-4F62-B963-9CD97C984264}</Project>
+      <Name>NotificationService.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
+    <StartArguments>NServiceBus.Integration</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
+    <StartArguments>NServiceBus.Production</StartArguments>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Target Name="TransformAppConfig" AfterTargets="AfterBuild">
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.CI.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'CI'" />
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.Prod.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'Prod'" />
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.Test.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'UAT'" />
+    <TransformXml Source="$(ProjectDir)App.config" Transform="$(ProjectDir)\App.Test.config" Destination="$(TargetPath).config" Condition="'$(Configuration)' == 'Release' AND '$(Env)' == 'Test'" />
+  </Target>
+</Project>

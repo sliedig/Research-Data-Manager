@@ -1,0 +1,310 @@
+/* Very basic styles */
+#content h1 {
+	font-size: 24px;
+	line-height: 1.5em;
+}
+.fullwidth {
+	width: 729px;
+}
+#content table td, #content table th {
+	padding: 5px;
+}
+#content tbody tr {
+	border-top: 1px solid #999;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+	color: #ff0000;
+}
+
+.field-validation-valid
+{
+	display: none;
+}
+
+.input-validation-error
+{
+	border: 1px solid #ff0000;
+	background-color: #ffeeee;
+}
+
+form.flow .input-validation-error 
+{
+	background-color: #FFF;
+}
+
+.validation-summary-errors span
+{
+	font-weight: bold;
+	color: #ff0000;
+}
+
+.validation-summary-valid
+{
+	display: none;
+}
+
+.invalid-message {
+    margin: 5px 0 15px 40px; 
+    color: #AA3311; 
+    display: block; 
+    font-style: italic; 
+    font-weight: bold;
+}
+
+#content #loaderImage {
+    margin: 0;
+}
+
+#content .flow td {
+    text-align: left;
+}
+
+/*** --- START additional styles for DMP form --- ***/
+#menu_navigation {
+    float: right;
+}
+
+#content h2 {
+    color: #555;
+    margin: 10px 0 10px 15px;
+    font-size: 1.2em;
+}
+#content #instructionsPage h2 {
+    font-size: 1.5em;
+}
+#content form.flow .instructions p
+{
+    margin: 0 !important;
+}
+#content form.flow .instructions ul
+{
+    margin-top: 5px;
+}
+#content form.flow dd p
+{
+    font-style: italic;
+    margin: 0 0 0.3em 0;
+}
+#content form.flow #policy-guidelines dd p, #content form.flow #project-information dd p
+{
+    font-style: normal;
+    margin-top: 0.5em;
+}
+#content form.flow fieldset dt
+{
+    margin-top: 1.5em !important;
+}
+#content form.flow fieldset dd dd {
+    width: auto;
+}
+#content form.flow dd textarea.largeHeight
+{
+    width: 720px;
+    height: 160px;
+}
+#content form.flow dd textarea
+{
+    width: 720px;
+    height: 70px;
+}
+#content .inlineField {
+    display: inline;
+}
+.flow .grid td  {
+    text-align: left;
+    padding-right: 10px;
+}
+.flow .grid td:last-child {
+    text-align: center;
+}
+.longer {
+    width: 90%;
+}
+
+.middlinglength {
+    width: 460px;
+}
+#content form.flow fieldset.section .disclaimer {
+    border: 1px solid #FF6600;
+    background: #FFCC33;
+}
+.alert_exclaimation {
+    font-weight: bold;
+    font-size: 1.6em;
+    margin-right: 0.5em;
+}
+.action_button {
+    clear: both;
+    margin-bottom: 10px;   
+}
+#content form.flow fieldset.section span.error_message {
+    background-image: none;
+}
+#content form.flow .normal {
+     font-style: normal;
+}
+#content .info {
+    padding: 12px;
+    width: 216px;
+    margin: -20px -272px 20px 30px;
+}
+#content .info li {
+    font-size: 1.2em;
+    font-weight: normal;
+    list-style: disc;
+}
+#content dl dl .info {
+    margin-right: -311px;
+}
+#content form.flow dl dd, #content form.flow dl dt {
+    clear: both;
+}
+#content #dmpTableOfContents td {
+    line-height: 1em;
+    padding: 0.5em;   
+}
+
+li {
+    font-size: 1em;
+    line-height: 1.333em;
+    list-style: square inside none;
+    margin: 0.4285em 0 0 26px;
+}
+
+
+/*** --- END additional styles for DMP form --- ***/
+
+/*** --- START additional styles for Data Collection form --- ***/
+#content form.flow #dataCollectionSubmissionMessage th, #content form.flow #dataCollectionSubmissionMessage td {
+    text-align: left;
+}
+/*** --- END additional styles for Data Collection form --- ***/
+
+/*
+ * jQuery UI Autocomplete 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Autocomplete#theming
+ */
+.ui-autocomplete { position: absolute; cursor: default; }	
+
+/* workarounds */
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+/*
+ * jQuery UI CSS Framework 1.8.16
+ *
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Theming/API
+ */
+
+
+/* Component containers
+----------------------------------*/
+.ui-widget { font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em; }
+.ui-widget .ui-widget { font-size: 1em; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1em; }
+.ui-widget-content { border: 1px solid #dddddd; background: #eeeeee 50% top repeat-x; color: #333333; }
+.ui-widget-content a { color: #333333; }
+.ui-widget-header { border: 1px solid #e78f08; background: #f6a828 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
+.ui-widget-header a { color: #ffffff; }
+
+
+/*
+ * jQuery UI Menu 1.8.16
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Menu#theming
+ */
+.ui-menu {
+	list-style:none;
+	padding: 2px;
+	margin: 0;
+	display:block;
+	float: left;
+}
+.ui-menu .ui-menu {
+	margin-top: -3px;
+}
+.ui-menu .ui-menu-item {
+	margin:0;
+	padding: 0;
+	zoom: 1;
+	float: left;
+	clear: left;
+	width: 100%;
+}
+.ui-menu .ui-menu-item a {
+	text-decoration:none;
+	display:block;
+	padding:.2em .4em;
+	line-height:1.5;
+	zoom:1;
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: -1px;
+}
+li.ui-menu-item {
+    list-style:none;
+}
+#ui-active-menuitem {
+    background: #6495ED;
+}
+
+/* Misc visuals
+----------------------------------*/
+
+/* Corner radius */
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; -khtml-border-top-left-radius: 4px; border-top-left-radius: 4px; }
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; -khtml-border-top-right-radius: 4px; border-top-right-radius: 4px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; -khtml-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; -khtml-border-bottom-right-radius: 4px; border-bottom-right-radius: 4px; }
+
+
+.grey {
+	color: #CCC;
+}
+
+.float-left {
+    float: left;
+    height: 26px;
+}
+.float-right {
+    float: right;
+    height: 26px;
+}
+
+.container {
+    overflow: hidden; /* Clearfix! */
+    zoom: 1;  /* Triggering "hasLayout" in IE */
+    display: block; /* Element must be a block to wrap around contents. Unnecessary if only using block-level elements. */
+}
+
+.showfaq{
+ z-index:100; zoom:1;
+}
+.hide{display:none;}
+
+.pp_inline h2 {
+    margin: 0;
+    padding-bottom: 12px;
+}
+
+.pp_inline ul {
+    margin-bottom: 12px;
+}

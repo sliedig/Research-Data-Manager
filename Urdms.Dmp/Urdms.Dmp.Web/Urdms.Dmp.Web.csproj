@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{900D2A4C-728F-469F-B7B3-3D6FFB057843}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Urdms.Dmp.Web</RootNamespace>
+    <AssemblyName>Urdms.Dmp.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc3.2.5.2.830\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Commons.Web.Mvc.PrecompiledViews">
+      <HintPath>..\..\..\..\..\AppData\Local\Microsoft\VisualStudio\10.0\Extensions\Chris van de Steeg\Razor Single File Generator for MVC\1.0.5\Commons.Web.Mvc.PrecompiledViews.dll</HintPath>
+    </Reference>
+    <Reference Include="Curtin.Framework.Common">
+      <HintPath>..\packages\Curtin.Framework.Common.2.1.15\lib\NET40\Curtin.Framework.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="DynamicJson">
+      <HintPath>..\packages\DynamicJson.1.2.0.1\lib\NET40\DynamicJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.WorkflowServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auth\AuthenticationService.cs" />
+    <Compile Include="Container\AuthModule.cs" />
+    <Compile Include="Controllers\ActionResults\RewriteResult.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\Filters\AuthenticationAttributes.cs" />
+    <Compile Include="FlowForms\CustomValidatableObjectAdapter.cs" />
+    <Compile Include="FlowForms\FieldConfiguration.cs" />
+    <Compile Include="FlowForms\FlowForm.cs" />
+    <Compile Include="FlowForms\FlowFormEnvironment.cs" />
+    <Compile Include="FlowForms\FlowFormField.cs" />
+    <Compile Include="FlowForms\FlowFormFormat.cs" />
+    <Compile Include="FlowForms\FlowFormMessage.cs" />
+    <Compile Include="FlowForms\FlowFormNavigation.cs" />
+    <Compile Include="FlowForms\FlowFormSection.cs" />
+    <Compile Include="FlowForms\FormEncType.cs" />
+    <Compile Include="FlowForms\Grid.cs" />
+    <Compile Include="FlowForms\Helpers\Helper.cs" />
+    <Compile Include="FlowForms\Helpers\HelperDefinitions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelperDefinitions.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="FlowForms\MetadataProvider.cs" />
+    <Compile Include="Menu\MenuHelper.cs" />
+    <Compile Include="Menu\MenuItem.cs" />
+    <Compile Include="Menu\Menus.cs" />
+    <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\Classification.cs" />
+    <Compile Include="Pages\PageSettings.cs" />
+    <Compile Include="UrdmsApplication.cs" />
+    <Compile Include="FlowForms\ValidationAttributes\ExistsInAttribute.cs" />
+    <Compile Include="FlowForms\ValidationAttributes\NotRequiredAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Auth\Denied.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Denied.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\LogOff.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogOff.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\LogOn.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogOn.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auth\SessionExpired.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SessionExpired.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Error\NotFound.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotFound.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Error\Unknown.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unknown.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\_GlobalNav.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_GlobalNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\_MenuNav.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_MenuNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu\_TopNav.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_TopNav.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_UrdmsBranding.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_UrdmsBranding.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_UrdmsFooter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_UrdmsFooter.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_UrdmsTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_UrdmsTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_Layout.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_Layout.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\_UrdmsBase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_UrdmsBase.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\_ViewStart.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ViewStart.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FlowForms\Helpers\HelperDefinitions.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HelperDefinitions.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\NotFound.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>NotFound.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Error\Unknown.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>Unknown.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Auth\Denied.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>Denied.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Auth\LogOff.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>LogOff.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Auth\LogOn.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>LogOn.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Auth\SessionExpired.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>SessionExpired.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Menu\_GlobalNav.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_GlobalNav.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Menu\_MenuNav.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_MenuNav.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Menu\_TopNav.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_TopNav.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_UrdmsBase.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_UrdmsBase.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_UrdmsBranding.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_UrdmsBranding.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_UrdmsFooter.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_UrdmsFooter.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_UrdmsTemplate.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_UrdmsTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_Layout.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml">
+      <Generator>MvcRazorClassGenerator</Generator>
+      <LastGenOutput>_ViewStart.cs</LastGenOutput>
+    </Content>
+    <None Include="Web.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

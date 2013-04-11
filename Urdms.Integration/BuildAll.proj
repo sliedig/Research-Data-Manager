@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="BuildAll" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\\ExtensionPack\\4.0\\MSBuild.ExtensionPack.tasks"/>
+  <PropertyGroup>
+    <DestFolder>_Deploy</DestFolder>
+    <Configuration>Release</Configuration>
+    <Env Condition="'$(Env)'==''">CI</Env>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectsToBuild Include="Approvals.ApprovalService" />
+    <ProjectsToBuild Include="Approvals.ViewModelUpdater" />
+    <ProjectsToBuild Include="Approvals.VivoPublisher" />
+    <ProjectsToBuild Include="DocumentBuilderService" />
+    <ProjectsToBuild Include="NotificationService" />
+    <ProjectsToBuild Include="ProvisioningService" />
+    <ProjectsToBuild Include="ProvisioningService.SharePoint" />
+    <ProjectsToBuild Include="ProvisioningService.ViewModelUpdater" />
+  </ItemGroup>
+
+  <Target Name="BuildAll">
+    <RemoveDir Directories="$(DestFolder)\$(Env)" />
+    <MSBuild Projects="$(MSBuildProjectFullPath)" Properties="ProjectName=%(ProjectsToBuild.Identity);Env=$(Env);Configuration=$(Configuration)" Targets="BuildAndCopy;CopyDeployBat"/>
+  </Target>
+
+  <Target Name="BuildAndCopy">
+    <MSBuild Projects="$(ProjectName)\\$(ProjectName).csproj" Properties="Configuration=$(Configuration)" />
+    <MSBuild.ExtensionPack.FileSystem.RoboCopy Source="$(ProjectName)\\bin\\$(Configuration)" Destination="$(DestFolder)\$(Env)\$(ProjectName)" Files="*.*" Options="/S">
+      <Output TaskParameter="ExitCode" PropertyName="Exit" />
+      <Output TaskParameter="ReturnCode" PropertyName="Return" />
+    </MSBuild.ExtensionPack.FileSystem.RoboCopy>
+  </Target>
+
+  <Target Name="CopyDeployBat">
+    <Copy DestinationFolder="$(DestFolder)\$(Env)" SourceFiles="Deploy.bat" />
+    <Copy DestinationFolder="$(DestFolder)\$(Env)" SourceFiles="UninstallAll.bat" />
+    <Copy DestinationFolder="$(DestFolder)\$(Env)" SourceFiles="CreateIntegrationServicesDbs.sql" />
+ </Target>
+
+  <!--<Target Name="CopyLicenseForProductionRelease" Condition="'$(Env)' == 'Prod'" AfterTargets="CopyDeployBat">
+    <MSBuild.ExtensionPack.FileSystem.RoboCopy Source="lib\nservicebus\" Destination="$(DestFolder)\$(Env)\$(ProjectName)\License\" Files="License.xml" />
+  </Target>-->
+
+</Project>

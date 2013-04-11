@@ -1,0 +1,381 @@
+﻿@import url(datepicker.css);
+#content.no_small form.flow {
+	margin-right: -294px;
+}
+#content form.flow dl {
+	margin-bottom: 0;	
+}
+#content form.flow .instructions, #content form.flow .header .copyright, #content form.flow .confirmation_message, #content form.flow .error_message, #content form.flow .progress, #content form.flow .footer {
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;	
+}
+#content form.flow.erroneous dd.invalid, #content form.flow .confirmation_message .message, #content form.flow .error_message .message, #content form.flow .tip, #content form.flow fieldset .hint, #content form.flow fieldset dl dl, #content form.flow fieldset legend, #content form.flow fieldset .instructions, .flow table {
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+}
+#content form.flow .instructions {
+	border: 1px solid #965f00;
+}
+#content form.flow fieldset .instructions, #content form.flow .tip, #content form.flow fieldset .hint {
+	background: #FFFFE6;
+	color: black;
+	border: 1px solid #E5D6AB;
+}
+#content form.flow {
+	font-size:85.7%;
+}
+#content form.flow h1 {
+	font-size:2.324em;
+	margin-bottom:0em;
+	margin-right:0;
+}
+#content form.flow .progress {
+	border: 1px solid #dedede;
+	margin: 16px 0;
+	padding: 1px;
+}
+#content form.flow .progress li {
+	list-style-type: none;
+	padding: 8px 1.0em;
+	margin: 0;
+	display: inline;
+	color: #cccccc;
+	line-height: 32px;
+	white-space: nowrap;
+}
+*:first-child+html #content form.flow .progress li {
+	white-space: normal;
+}
+* html #content form.flow .progress li {
+	white-space: normal;
+}
+#content form.flow .progress li.visited {
+	color: #555;	
+}
+#content form.flow .progress li a {
+	text-decoration: none;
+	border: 0;
+	border-bottom: 1px dotted #555;
+	color: #555;
+}
+#content form.flow .progress li.complete {
+	color: #555;
+}
+#content form.flow .progress li a:hover {
+	border-style: solid;
+}
+#content form.flow .progress li.current {
+	color: #000;
+	font-weight: bold;
+}
+#content form.flow .header .copyright {
+	border-width: 2px;
+	border-style: solid;
+	margin: 1em 0 1em 0;
+	padding: 16px;
+	line-height: 1.0em;
+	color: black;
+	border-color: #429f23;
+	background-color: #dfffd6;
+}
+#content form.flow .header .copyright input {
+	margin: 0 1em 0 0;
+	padding: 0;
+	vertical-align: bottom;
+}
+#content form.flow .header .logo {
+	line-height: 1px;
+}
+#content form.flow .header .logo img {
+	float: right;
+	border: 1px solid black;
+	margin-left: 1em;
+	margin-bottom: 2em;
+}
+#content form.flow .header .legislation {
+	font-weight: bold;
+	font-size: 0.9em;
+}
+#content form.flow .instructions {
+	position: relative;
+	margin: 1.2em 0 1em 0;
+	padding: 8px 16px;
+	color: black;
+	background: #ffffcc;
+	clear: right;
+}
+#content form.flow .instructions h2 {
+	margin-top: 8px;
+	color: #000;
+}
+#content form.flow .instructions h2:after {
+	content: ":";
+}
+#content form.flow .instructions :last-child {
+	margin-bottom: 8px;	
+}
+#content form.flow input:focus, #content form.flow select:focus, #content form.flow textarea:focus {
+	border-color: #7c9ab6;
+	border-style: solid;
+	outline: none;
+}
+#content form.flow input[type=radio]:focus, #content form.flow input[type=checkbox]:focus {
+	border-style: none;
+}
+#content form.flow.erroneous dd.invalid {
+	background-color:#FFE6E6;
+	background-position: 16px 16px;
+	background-repeat:no-repeat;
+	border:1px solid red;
+	padding: 16px;
+}
+#content form.flow.erroneous dd.invalid p.error_text {
+	color: #A31;
+	font-weight: bold;
+	margin: 8px 0 16px 48px;
+	line-height: 16px;
+}
+#content form.flow .confirmation_message, #content form.flow .error_message {
+	border: 1px solid #429f23;
+	margin: 1em 0 1em 0;
+	padding: 16px;
+	color: black;
+}
+#content form.flow .confirmation_message h2, #content form.flow .error_message h2 {
+	margin: 0 0 0 48px;
+	line-height: 32px;
+	color: black;
+}
+#content form.flow .confirmation_message .message, #content form.flow .error_message .message {
+	background: white;
+	padding: 16px;
+	margin-top: 16px;
+	border: 1px solid #CCC;
+}
+#content form.flow .confirmation_message .message :first-child, #content form.flow .error_message .message :first-child {
+	margin-top: 0;	
+}
+#content form.flow .confirmation_message .message p, #content form.flow .error_message .message p {
+	margin-bottom: 0;	
+}
+#content form.flow .error_message {
+	border-color: red;
+	background-color: #ffe6e6;
+}
+#content form.flow .tip {
+	padding: 3px;
+}
+#content form.flow.completed table td, #content form.flow.completed table th {
+	padding: 0.5em;
+	background: white;
+	color: black;
+}
+#content form.flow.completed table th {
+	font-weight: normal;
+	width: 30%;
+	text-align: right!important;
+}
+#content form.flow.completed table th:after {
+	content: ":";
+}
+#content form.flow.completed table td {
+	font-weight: bold;
+	width: 70%;
+	text-align: left;
+}
+#content form.flow.completed table {
+	width: 100%!important;
+}
+#content form.flow fieldset {
+	border: 1px solid #CCC;
+	margin: 16px 0;
+	padding: 0 16px 10px 16px;
+	clear: right;
+}
+#content form.flow fieldset legend {
+	border: 1px solid #CCC;
+	background: white;
+	padding:8px 16px;
+	font-size:1.4em;
+	font-weight:bold;
+	margin-left:0;
+}
+#content form.flow fieldset.noDl legend {
+	margin-bottom: 16px;
+}
+#content form.flow fieldset.noDl {
+	padding-bottom: 16px;
+}
+#content form.condensed fieldset dl dt {
+	width:160px;
+	float:left;
+	clear:left;
+	margin:0 0 0.5em;
+}
+#content form.condensed fieldset dl dd {
+	margin:0 0 0.5em 170px;
+}
+#content form.flow fieldset dt {
+	font-weight: bold;
+	font-size:1.0em;
+	margin: .9375em 0 .3125em 0;
+	line-height: 1.25em;
+}
+#content form.flow fieldset dd {
+	font-size: 100%;
+	margin: 0 0 0.5em 0;
+	line-height: 1.333em;
+}
+#content form.flow fieldset dd input {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:1.0em;
+	line-height:1.25em;
+	color:#666;
+	margin-bottom:.3625em;
+}
+#content form.flow fieldset dd li dt {
+	font-size: 100%;
+}
+#content form.flow fieldset dt, #content form.flow fieldset dd {
+	padding: 0;
+}
+#content form.flow fieldset dl dl {
+	background: #f4f4f4;
+	border:1px solid #CCC;
+	margin: 0.5em 0;
+	padding: 0px 16px 16px;
+}
+#content form.flow fieldset dt ul.checkbox, #content form.flow fieldset dt ul.radio, #content form.flow fieldset dd ul.checkbox, #content form.flow fieldset dd ul.radio {
+	margin: 0;
+	padding: 0;
+}
+#content form.flow fieldset dt ul.checkbox li, #content form.flow fieldset dt ul.radio li, #content form.flow fieldset dd ul.checkbox li, #content form.flow fieldset dd ul.radio li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	list-style-image: none;
+	line-height: 1em;
+}
+#content form.flow fieldset .hint {
+	padding: 16px;
+	clear: right;
+	width: 300px;
+	margin: 8px 0;
+}
+#content form.flow fieldset .invalid .hint {
+	float: right;
+	margin-left: 16px;
+	margin-bottom: 16px;
+}
+#content form.flow .footer {
+	padding: 8px;
+	margin: 16px 0;
+	text-align: center;
+	background: #F4F4F4;
+	border:1px solid #CCCCCC;
+}
+#content form.flow .footer li {
+	display: inline;
+	padding: 0 1.0em;
+	margin: 0;
+	white-space: nowrap;
+}
+#content form.flow .footer .owner_area {
+	font-weight: bold;
+}
+#content form.flow .footer .owner_area, #content form.flow .footer .id {
+	border-right: 1px solid #000;
+}
+.flow th {
+	text-align: right;
+	background: transparent;
+	color: #555555;
+	font-weight: normal;
+	font-weight:bold;
+	text-transform:none;
+	padding: 0 0.2em 0.4em 0.2em;
+	border: none!important;
+}
+#content form.flow tr:first-child th {
+	text-align: center;	
+}
+.flow td {
+	text-align: center;
+	padding: 0 0.2em 0.4em 0.2em;
+}
+#content form.flow tr.odd td {
+	background: #EEE;
+}
+.flow table {
+	background: #F4F4F4;
+	border:1px solid #CCCCCC;
+	border-collapse:separate;
+	border-spacing:2px;
+	clear:right;
+	margin:0;
+	padding: 16px;
+	width: auto!important;
+	font-size: 1.0em!important;
+}
+#content form.flow table.fullwidth {
+	width: 100% !important;
+}
+#content form.flow td.radioTd, #content form.flow td.checkboxTd, #content form.flow td.textTd {
+	border-bottom:1px solid #CCCCCC;
+	padding: 0;
+}
+#content form.flow td.radioTd label, #content form.flow td.checkboxTd label, #content form.flow td.textTd label {
+	background: #EEE;
+	display: block;
+}
+#content form.flow td.radioTd label, #content form.flow td.checkboxTd label {
+	padding: 0.5em;
+}
+#content form.flow td.textTd input {
+	margin:10px;
+}
+#content form.flow td.radioTd label:hover, #content form.flow td.checkboxTd label:hover, #content form.flow td.textTd label:hover {
+	background: #DDD;
+}
+#content form.flow td.invalid label {
+	border:1px solid red;
+	padding-left: 26px;
+}
+#content form.flow td.invalid label:hover {
+}
+#content form.flow table .reader {
+	text-indent: 0;
+}
+label, input[type=submit], input[type=button], input[type=reset], select {
+	cursor: pointer;
+	color:#333;
+	font-family:Arial, Helvetica, sans-serif;
+}
+input[type=submit][disabled], input[type=button][disabled], input[type=reset][disabled], select[disabled] {
+	cursor: default!important;
+}
+label em {
+	font-weight: normal;
+}
+#content form.flow dt {
+	color:#333;
+	font-weight: normal;
+}
+#content form.flow input.error, #content form.flow select.error, #content form.flow textarea.error {
+	font-weight: normal;
+	border: 2px solid red;
+	color: inherit;
+}
+.mceEditor table {
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	border-radius:0;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.mceEditor>table {
+	width: 100%!important;	
+}body {
+}

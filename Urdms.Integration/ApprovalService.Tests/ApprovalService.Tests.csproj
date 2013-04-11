@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8CE27516-F0BD-440F-A0E0-129CC2F830F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ApprovalService.Tests</RootNamespace>
+    <AssemblyName>ApprovalService.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.3.0.1\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Testing, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.Testing.3.0.1\lib\net40\NServiceBus.Testing.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApprovalServiceTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelUpdaterTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Approvals.ApprovalService.Commands\Approvals.ApprovalService.Commands.csproj">
+      <Project>{5998A388-CCC0-4424-813F-F39B04D5879E}</Project>
+      <Name>Approvals.ApprovalService.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.ApprovalService.Events\Approvals.ApprovalService.Events.csproj">
+      <Project>{5600F1A7-096F-4633-BE92-6DCFE63D1496}</Project>
+      <Name>Approvals.ApprovalService.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.ApprovalService.Messages\Approvals.ApprovalService.Messages.csproj">
+      <Project>{E95A7084-FD84-4C98-BB4B-B23A5B1B0D87}</Project>
+      <Name>Approvals.ApprovalService.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.ApprovalService\Approvals.ApprovalService.csproj">
+      <Project>{06CE90E4-D937-4880-B293-BF1F04DA0C60}</Project>
+      <Name>Approvals.ApprovalService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.ViewModelUpdater\Approvals.ViewModelUpdater.csproj">
+      <Project>{0BD279CE-77AE-4897-9CE5-994329E8043B}</Project>
+      <Name>Approvals.ViewModelUpdater</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Approvals.VivoPublisher.Messages\Approvals.VivoPublisher.Messages.csproj">
+      <Project>{8CB58B1F-6D72-4598-AD50-E08B7E029217}</Project>
+      <Name>Approvals.VivoPublisher.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NotificationService.Messages\NotificationService.Messages.csproj">
+      <Project>{54EE9EAE-E01E-4F62-B963-9CD97C984264}</Project>
+      <Name>NotificationService.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Curtin.Framework.Database</name>
+    </assembly>
+    <members>
+        <member name="F:Curtin.Framework.Database.Migrations.FluentRunner.ConnectionString">
+            <summary>
+            Note: This is a static property and thus if you want to use multiple FluentRunners on different databases then
+            you will need to lock on a static object and then before each instantiation of Fluent Runner set this property
+            to the connection string of the next database.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,70 @@
+@using Urdms.Dmp.Models.Enums
+@using Urdms.Dmp.Utils
+@model IList<Urdms.Dmp.Models.ProjectListViewModel>
+
+<h1>My Research Projects</h1>
+
+<table class="fullwidth">
+    <thead>
+        <tr>
+            <th scope="col">Project Title</th>
+            <th scope="col">Project Source</th>
+            <th scope="col">Project Status</th>            
+            <th scope="col">Project Storage Space</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model) {
+            <tr>
+                <td>@project.TitleUrl(Html)</td>
+                @if (project.ProjectType == SourceProjectType.DEPOSIT)
+                {
+                    <td>@SourceProjectType.DMP.GetDescription()</td>
+                }
+                else
+                {
+                    <td>@project.ProjectType.GetDescription()</td>
+                }                                            
+                <td>@project.ProjectStatus</td>                
+                <td>@project.ProvisioningStatusHtml(Html)</td>
+                <td style="white-space: nowrap;">
+                     @if (project.ProjectType == SourceProjectType.DMP || project.DmpId > 0)
+                     {
+                         if (project.DmpId > 0)
+                         {
+                             @Html.RouteLink("Edit DMP", "DmpEdit", new {id = project.DmpId, step = 1})
+                         }
+                         else
+                         {
+                             <span class="grey" title="Action not available">Edit DMP</span>
+                         }
+                         <br />
+                     }
+                    @if (project.ProjectType == SourceProjectType.DEPOSIT)
+                    {
+                        if (project.DataDepositId > 0 && project.ProvisioningStatus == ProvisioningStatus.NotStarted)
+                        {
+                            @Html.RouteLink("Edit Data Deposit", "DataDepositEdit", new { id = project.DataDepositId })
+                        }
+                        else
+                        {
+                            <span class="grey" title="Action not available">Edit Data Deposit</span>
+                        }
+                        <br />
+                    }
+                                   
+                    @if ((project.DmpId > 0 || project.DataDepositId > 0) && project.HasFirstCollection)
+                    {
+                        @Html.RouteLink("Manage Data Descriptions", "ListDataCollections", new { id = project.ProjectId })
+                    }
+                    else
+                    {
+                        <span class="grey" title="Action not available">Manage Data Descriptions</span>
+                    }
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

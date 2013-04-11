@@ -1,0 +1,32 @@
+﻿@model Urdms.Dmp.Models.SubmittedDataCollectionsViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    ViewBag.Title = "Thank you";
+}
+
+@{
+    var plural = Model.PublishedDataCollectionItems.Count() == 1 ? "description" : "descriptions";
+    var collectionDescriptionGrid = Html.Grid(Model.PublishedDataCollectionItems)
+        .Columns(column =>
+                     {
+                         column.For(o => o.Title).Named("Data collection title");
+                         column.For(o => o.SubmisionDate).Named("Creation date");
+                     }
+        )
+        .Empty("No Collections for the selected project. <br/>Please complete your Data Management Plan first.")
+        .Attributes(@class => "fullwidth", id => "dataCollectionSubmissionMessage");
+}
+
+@using (var f = Html.BeginFlowForm())
+{
+    <div class="confirmation_message">        
+        <h2>Thank you</h2>
+        @collectionDescriptionGrid
+		<div class="message">
+			@* TODO: Update email address *@            
+			<p>Thank you for submitting the listed data collection @plural for approval. QA will perform a quality check on the @plural before forwarding to the secondary approver for contract and confidentiality approval before the final release to Research Data Australia (RDA). You can view the status of the approval in the data collection view.
+				Please contact QA at <a href="mailto:qa.approver@email.edu.au">qa.approver@email.edu.au</a> If you require any changes to the data collection @plural.</p>
+			<p>Return to @Html.ActionLink("your data collections", "Index") for this project</p>
+		</div>
+    </div>
+}

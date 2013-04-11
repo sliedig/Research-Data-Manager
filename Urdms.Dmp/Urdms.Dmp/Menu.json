@@ -1,0 +1,8 @@
+﻿[
+	{"title": "Home", "paths": ["/"]},
+	{"title": "Get Started", "paths": ["/Projects/New", "/Project/Select", "/Project/Step1", "/Project/Step2/"]},
+	{"title": "My Research Projects", "paths": ["/Projects/", "/Project/*"]},
+	{"title": "Approvals", "paths": ["/Approvals", "/Approvals/Index"], "roles": ["QA-Approver", "Secondary-Approver"]},
+	{"title": "Instructions", "paths": ["/Instructions"]},
+	{"title": "Administration", "paths": ["/Admin"], "roles": ["QA-Approver"]},
+]

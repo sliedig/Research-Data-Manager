@@ -1,0 +1,57 @@
+﻿@model Urdms.Dmp.Models.CsvDumpViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+@{
+    ViewBag.Title = "Administration Utilities";
+}
+@helper IntroductionProvisioningManagement()
+    {
+    <p>Resolve provisoning errors for projects.</p>
+}
+
+
+<h1>Administration Utilities</h1>
+<h2>Please note: all CSV documents use "|" as a delimiter.</h2>
+@using (var f = Html.BeginFlowForm(htmlAttributes: new { @style = "width:764px" }))
+{
+    using (var s = f.BeginSection("CSV for Data Management Plan", "project-list"))
+    {
+       <dt>@Html.LabelFor(m => m.Projects)</dt>
+        if (Model.Projects != null && Model.Projects.Count > 0)
+        {
+            @Html.DropDownList("ProjectList", Model.Projects.Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }))
+            <input type="submit" class="refresh" name="DataManagementPlanCsv" id="DataManagementPlanCsv" value="Get Data Management Plan to CSV" />
+            <br/>       
+            <input type="submit" class="refresh" name="AllDataManagementPlansCsv" id="AllDataManagementPlansCsv" value="Get All Data Management Plans to CSV" />
+        }
+        else
+        {
+           <p>No Projects Found</p>
+        }
+    }
+
+    using (var s = f.BeginSection("CSV for Data Collection", "datacollection-list"))
+    {
+       <dt>@Html.LabelFor(m => m.DataCollections)</dt>
+        if (Model.DataCollections != null && Model.DataCollections.Count > 0)
+        {
+           @Html.DropDownList("DataCollectionList", Model.DataCollections.Select(x => new SelectListItem { Text = x.Title, Value = x.Id.ToString() }))
+           <input type="submit" class="refresh" name="DataCollectionCsv" id="DataCollectionCsv" value="Get Data Collection to CSV" />
+           <br/>       
+           <input type="submit" class="refresh" name="AllDataCollectionsCsv" id="AllDataCollectionsCsv" value="Get All Data Collections to CSV" />
+        }
+        else
+        {
+           <p>No Data Collections Found</p>
+        }
+    }
+
+
+    using (var s = f.BeginSection("Provisioning Error Resolution Management", "provisioning-management", IntroductionProvisioningManagement()))
+    {
+        @Html.ActionLink("Resolve Errors", "Provisioning", "Admin", new { }, new { @class = "action_button" })
+    }
+
+
+}

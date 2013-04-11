@@ -1,0 +1,27 @@
+﻿form ol, form li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+form li {
+	clear: left;
+	margin-bottom: 10px;
+}
+form input.submitButton {
+	cursor: pointer;
+	background: #DDDDDD;
+	margin-left: 110px;
+	clear: left;
+}
+form label {
+	position: relative;
+	display: block;
+	float: left;
+	line-height: 1.6em;
+	margin-right: 10px;
+	text-align: right;
+	width: 100px;
+}
+form label:after {
+	content: ':';
+}

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.Dsp.OleDb</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.Dsp.DspAdapter">
+      <summary>Implements the IDspAdapter interface for use by the OleDbAdapter class in performing queries against OLE DB data sources.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DspAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DspAdapter" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Authentication">
+      <summary>Gets or sets the authentication mode that is used to connect to the back-end server. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Authentication" /> object that specifies the authentication mode. When query execution finishes, this property contains the actual authentication method used to access the back-end server by the adapter.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Connection">
+      <summary>Gets or sets the connection to the data retrieval service adapter. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Connection" /> object that represents the connection.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DataRoot">
+      <summary>Gets or sets the root of a particular data source. </summary>
+      <returns>A Microsoft.SharePoint.Dsp.DataRoot object that represents the root of the data source. The root format can be one of the following three forms: a server name, a UNC share, or a URL. When query execution finishes, the adapter resets this property to null.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DefaultWebUrl">
+      <summary>Gets or sets the default server URL. </summary>
+      <returns>A string that contains the default server URL.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.LocalClient">
+      <summary>Gets or sets a Boolean value that specifies whether the client is a server component that loads the adapter through the object model interface of the adapter. </summary>
+      <returns>true if the client is a server component that loads the adapter through the object model interface. The default value is false, indicating that the request arrives through SOAP.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Request">
+      <summary>Gets or sets the operation type and the document type of the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.RequestHeader" /> object that specifies the operation type and the document type of the query. The only supported operation type is query. The document type can be either content or system.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Unknown">
+      <summary>Gets or sets an arbitrary string array for use by the client in making the query.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Versions">
+      <summary>Gets or sets the version of the data retrieval service targeted by a particular client request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Versions" /> object that specifies the version of the data retrieval service. When query execution finishes, this property will contain the actual version(s) supported by a particular adapter.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.DspAdapter">
+      <summary>Implements the IDspAdapter interface for use by the OleDbAdapter class in performing queries against OLE DB data sources.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DspAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DspAdapter" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Authentication">
+      <summary>Gets or sets the authentication mode that is used to connect to the back-end server. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Authentication" /> object that specifies the authentication mode. When query execution finishes, this property contains the actual authentication method used to access the back-end server by the adapter.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Connection">
+      <summary>Gets or sets the connection to the data retrieval service adapter. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Connection" /> object that represents the connection.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DataRoot">
+      <summary>Gets or sets the root of a particular data source. </summary>
+      <returns>A Microsoft.SharePoint.Dsp.DataRoot object that represents the root of the data source. The root format can be one of the following three forms: a server name, a UNC share, or a URL. When query execution finishes, the adapter resets this property to null.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DefaultWebUrl">
+      <summary>Gets or sets the default server URL. </summary>
+      <returns>A string that contains the default server URL.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.LocalClient">
+      <summary>Gets or sets a Boolean value that specifies whether the client is a server component that loads the adapter through the object model interface of the adapter. </summary>
+      <returns>true if the client is a server component that loads the adapter through the object model interface. The default value is false, indicating that the request arrives through SOAP.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Request">
+      <summary>Gets or sets the operation type and the document type of the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.RequestHeader" /> object that specifies the operation type and the document type of the query. The only supported operation type is query. The document type can be either content or system.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Unknown">
+      <summary>Gets or sets an arbitrary string array for use by the client in making the query.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Versions">
+      <summary>Gets or sets the version of the data retrieval service targeted by a particular client request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Versions" /> object that specifies the version of the data retrieval service. When query execution finishes, this property will contain the actual version(s) supported by a particular adapter.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.DspAdapter">
+      <summary>Implements the IDspAdapter interface for use by the OleDbAdapter class in performing queries against OLE DB data sources.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DspAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DspAdapter" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Authentication">
+      <summary>Gets or sets the authentication mode that is used to connect to the back-end server. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Authentication" /> object that specifies the authentication mode. When query execution finishes, this property contains the actual authentication method used to access the back-end server by the adapter.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Connection">
+      <summary>Gets or sets the connection to the data retrieval service adapter. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Connection" /> object that represents the connection.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DataRoot">
+      <summary>Gets or sets the root of a particular data source. </summary>
+      <returns>A Microsoft.SharePoint.Dsp.DataRoot object that represents the root of the data source. The root format can be one of the following three forms: a server name, a UNC share, or a URL. When query execution finishes, the adapter resets this property to null.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DefaultWebUrl">
+      <summary>Gets or sets the default server URL. </summary>
+      <returns>A string that contains the default server URL.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.LocalClient">
+      <summary>Gets or sets a Boolean value that specifies whether the client is a server component that loads the adapter through the object model interface of the adapter. </summary>
+      <returns>true if the client is a server component that loads the adapter through the object model interface. The default value is false, indicating that the request arrives through SOAP.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Request">
+      <summary>Gets or sets the operation type and the document type of the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.RequestHeader" /> object that specifies the operation type and the document type of the query. The only supported operation type is query. The document type can be either content or system.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Unknown">
+      <summary>Gets or sets an arbitrary string array for use by the client in making the query.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Versions">
+      <summary>Gets or sets the version of the data retrieval service targeted by a particular client request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Versions" /> object that specifies the version of the data retrieval service. When query execution finishes, this property will contain the actual version(s) supported by a particular adapter.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.DspAdapter">
+      <summary>Implements the IDspAdapter interface for use by the OleDbAdapter class in performing queries against OLE DB data sources.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DspAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DspAdapter" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Authentication">
+      <summary>Gets or sets the authentication mode that is used to connect to the back-end server. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Authentication" /> object that specifies the authentication mode. When query execution finishes, this property contains the actual authentication method used to access the back-end server by the adapter.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Connection">
+      <summary>Gets or sets the connection to the data retrieval service adapter. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Connection" /> object that represents the connection.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DataRoot">
+      <summary>Gets or sets the root of a particular data source. </summary>
+      <returns>A Microsoft.SharePoint.Dsp.DataRoot object that represents the root of the data source. The root format can be one of the following three forms: a server name, a UNC share, or a URL. When query execution finishes, the adapter resets this property to null.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.DefaultWebUrl">
+      <summary>Gets or sets the default server URL. </summary>
+      <returns>A string that contains the default server URL.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.LocalClient">
+      <summary>Gets or sets a Boolean value that specifies whether the client is a server component that loads the adapter through the object model interface of the adapter. </summary>
+      <returns>true if the client is a server component that loads the adapter through the object model interface. The default value is false, indicating that the request arrives through SOAP.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Request">
+      <summary>Gets or sets the operation type and the document type of the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.RequestHeader" /> object that specifies the operation type and the document type of the query. The only supported operation type is query. The document type can be either content or system.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Unknown">
+      <summary>Gets or sets an arbitrary string array for use by the client in making the query.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspAdapter.Versions">
+      <summary>Gets or sets the version of the data retrieval service targeted by a particular client request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Versions" /> object that specifies the version of the data retrieval service. When query execution finishes, this property will contain the actual version(s) supported by a particular adapter.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.OleDb.OleDbAdapter">
+      <summary>Represents the adapter service used to perform queries against OLE DB data sources. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.OleDb.OleDbAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.OleDb.OleDbAdapter" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.OleDb.OleDbAdapter.Query(Microsoft.SharePoint.Dsp.QueryRequest)">
+      <summary>Executes a query expressed as a predefined request object. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.QueryResponse" /> object that contains the data in response to the request query.</returns>
+      <param name="request">A <see cref="T:Microsoft.SharePoint.Dsp.QueryRequest" /> object that expresses a query in DSPQ (data retrieval service query) or Pass-Through format.</param>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn">
+      <summary>This type or member supports Microsoft Windows SharePoint Services and is not intended to be used directly from your code.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn.Direction"></member>
+    <member name="M:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn.Equals(System.Object)">
+      <param name="obj"></param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn.FirstValue"></member>
+    <member name="M:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn.GetHashCode"></member>
+    <member name="P:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn.LastValue"></member>
+    <member name="P:Microsoft.SharePoint.Dsp.OleDb.OleDbColumn.Name"></member>
+    <member name="T:Microsoft.SharePoint.Dsp.OleDb.PageDirection">
+      <summary>This type or member supports Microsoft Windows SharePoint Services and is not intended to be used directly from your code.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.OleDb.PageDirection.Next"></member>
+    <member name="F:Microsoft.SharePoint.Dsp.OleDb.PageDirection.Previous"></member>
+    <member name="T:Microsoft.SharePoint.Dsp.OleDb.PagingInfo">
+      <summary>This type or member supports Microsoft Windows SharePoint Services and is not intended to be used directly from your code.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.OleDb.PagingInfo.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.Dsp.OleDb.PagingInfo.Direction"></member>
+    <member name="P:Microsoft.SharePoint.Dsp.OleDb.PagingInfo.KeyColumns"></member>
+    <member name="P:Microsoft.SharePoint.Dsp.OleDb.PagingInfo.OrderColumns"></member>
+  </members>
+</doc>

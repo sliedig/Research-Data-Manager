@@ -1,0 +1,7 @@
+﻿@{
+    PageSettings.Title = "Your session has expired";
+}
+
+<h1>Your session has expired</h1>
+
+<p>You will need to  @Html.ActionLink("Log in again", "LogOn", null, new { onclick = "window.location=this.href; return false;" }).</p>

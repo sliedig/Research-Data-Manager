@@ -1,0 +1,15 @@
+﻿@{
+    Helper.FlowFormCssAndJs(this);
+    ViewBag.Title = "Thank you";
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @f.Steps(ViewBag.Steps, 6, 6, true, true)
+    <div class="confirmation_message">
+        <h2>Thank you</h2>
+        <div class="message">
+            <p>Thank you for updating your Data Management Plan. A new PDF copy of your Data Management
+                Plan will be deposited in the in the admin section of the Project Storage Space.</p>
+        </div>
+    </div>
+}

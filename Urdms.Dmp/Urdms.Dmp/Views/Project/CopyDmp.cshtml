@@ -1,0 +1,30 @@
+﻿@model Urdms.Dmp.Models.CopyDataManagementPlanProjectViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+@helper Introduction()
+{
+	<p>You can select a previously created Data Management Plan as a template for this project. All but the access roles section of the Data Management Plan will be 
+		filled with responses from the selected project. You can then update the responses of the Data Management Plan before submitting it to obtain access 
+        to the research project space.</p>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    using (var s = f.BeginSection("Data Management Plan Template", "project-list", Introduction()))
+    {
+            @Html.HiddenFor(p => p.DestinationProjectId)
+            @Html.ValidationMessageFor(x => x.CopyFromExistingDmp, String.Empty, new{@class = "error_message"})
+            @s.RadioFor(x => x.CopyFromExistingDmp)
+            @Html.DropDownList("ProjectList", Model.AvailableProjects.Select(x => new SelectListItem { Text = x.ProjectTitle, Value = x.ProjectId.ToString() }))
+    }
+    
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+                @n.Submit("Save and Previous", name: "saveAndPrevious", classes: "float-left")
+                @n.Submit("Save and Proceed to DMP", name: "saveAndProceed", classes: "float-right")
+        }
+    </div>
+    
+    @f.Footer(area: "AREA HERE", id: "FORM ID HERE", date: "DATE HERE")
+}

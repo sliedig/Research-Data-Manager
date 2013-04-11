@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.Dsp.XmlUrl</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter">
+      <summary>Represents the adapter service used to perform pass-through queries against arbitrary XML data sources. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter" /> class.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter.c_szMyNamespace">
+      <summary>Specifies the namespace of the adapter. </summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter.c_szVersionEncodingEnd">
+      <summary>Specifies the end of a processing instruction. </summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter.c_szVersionEncodingScheme">
+      <summary>Specifies a complete processing instruction that includes utf-8 encoding. </summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter.c_szVersionEncodingStart">
+      <summary>Specifies the start of a processing instruction. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.XmlUrl.XMLUrlDataAdapter.Query(Microsoft.SharePoint.Dsp.QueryRequest)">
+      <summary>Executes a query expressed as a predefined request object. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.QueryResponse" /> object that contains the data in response to the request query.</returns>
+      <param name="Request">A <see cref="T:Microsoft.SharePoint.Dsp.QueryRequest" /> object that expresses a query in DSPQ (data retrieval service query) or Pass-Through format.</param>
+    </member>
+  </members>
+</doc>

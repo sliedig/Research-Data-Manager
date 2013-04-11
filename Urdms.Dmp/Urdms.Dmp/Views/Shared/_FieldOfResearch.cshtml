@@ -1,0 +1,8 @@
+﻿@model Urdms.Dmp.Database.Entities.ClassificationBase
+
+<tr>
+    <td>@Model.Code.Id</td>
+    <td>@Model.Code.Name</td>
+    <td>@Html.Hidden("ForCodeRows", string.Format("{0}:{1}:{2}", Model.Id, Model.Code.Id, Model.Code.Name))</td>
+    <td>@Html.CheckBox(string.Format("RemoveForCode_{0}", Model.Code.Id))</td>
+</tr>

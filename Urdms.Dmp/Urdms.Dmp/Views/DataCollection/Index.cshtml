@@ -1,0 +1,54 @@
+﻿@using Urdms.Dmp.Models.Enums
+@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataCollectionModels.DataCollectionListViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+@{
+    ViewBag.Title = "My Data Descriptions";
+}
+@helper DataCollectionInstructions()
+{
+        <p>Select and submit for approval the data descriptions that you wish to make discoverable through the Australian Research Data Commons (ARDC).</p>
+}
+@{
+    var collectionDescriptionGrid = Html.Grid(Model.DataCollectionItems)
+        .Columns(column =>
+        {
+            column.For(o => o.Status == DataCollectionStatus.Draft ?
+                Html.ActionLink(o.Title, "Step1", new { projectId = Model.ProjectId, id = o.Id }) :
+                Html.ActionLink(o.Title, "ViewReadOnlyDataCollection", new { projectId = Model.ProjectId, id = o.Id }))
+                   .Named("Collection title");
+            column.For(o => o.RecordCreationDate).Named("Creation date");
+            column.For(o => o.Status.GetDescription()).Named("Status");
+            column.For(o => o.Status == DataCollectionStatus.Draft ?
+                Html.CheckBox(string.Format("IsUserSubmitted-{0}", o.Id)) :
+                MvcHtmlString.Create("")).Named("Select for submission").Attributes(style => "text-align:center");
+        }
+        )
+        .Empty("No Data Descriptions for the selected project.")
+        .Attributes(@class => "fullwidth");
+}
+
+<h1>My Data Descriptions</h1>
+
+@using (var f = Html.BeginFlowForm(htmlAttributes: new { @style = "width:764px" }))
+{
+    using (var s = f.BeginSection("Project Title: " + @Model.ProjectTitle, instructions: DataCollectionInstructions()))
+    {
+        @collectionDescriptionGrid
+        @Html.HiddenFor(m => m.ProjectId)
+        @Html.HiddenFor(m => m.ProjectTitle)
+        @Html.ActionLink("Create New Description", "New", new {projectId = Model.ProjectId}, new {@class = "action_button"})
+        if (Model.DataCollectionItems.Count() > 0)
+        {
+            if (Model.DataCollectionItems.Any(dc => dc.Status == DataCollectionStatus.Draft))
+            {
+                using (var n = f.BeginNavigation())
+                {
+                    @n.Submit("Submit for Approval", name: "SubmitForApproval", id: "SubmitForApproval", classes: "float-right")
+                }
+            }
+        }
+    }
+}

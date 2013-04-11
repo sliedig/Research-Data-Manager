@@ -1,0 +1,86 @@
+﻿@using Urdms.Dmp.Models.Enums
+@model Urdms.Dmp.Models.ApprovalModels.DataCollectionApprovalListViewModel
+
+@{
+    var submittedDataCollections = Model.DataCollectionItems.Where(x => x.Status == DataCollectionStatus.Submitted).ToList();
+    var submittedCollectionDescriptionGrid = Html.Grid(submittedDataCollections)
+        .Columns(column =>
+                     {
+                         column.For(o => Html.ActionLink(o.Title, "Detail", new {id = o.Id})).Named("Data Collection Title").Attributes(style => "width: 250px");
+                         column.For(o => o.DateSubmitted.ToString("dd/MM/yyyy HH:mm")).Named("Modified On");
+                         column.For(o => o.SubmittedBy);
+                     }
+        );
+}
+
+@{
+    var ordApprovedDataCollections = Model.DataCollectionItems.Where(x => x.Status == DataCollectionStatus.SecondaryApproved).ToList();
+    var ordApprovedCollectionDescriptionGrid = Html.Grid(ordApprovedDataCollections)
+        .Columns(column =>
+                     {
+                         column.For(o => Html.ActionLink(o.Title, "Detail", new { id = o.Id })).Named("Data Collection Title").Attributes(style => "width: 250px");
+                         column.For(o => o.DateSubmitted.ToString("dd/MM/yyyy HH:mm")).Named("Modified On");
+                         column.For(o => o.SubmittedBy);
+                     }
+        );
+}
+
+@{
+    var qaApprovedDataCollections = Model.DataCollectionItems.Where(x => x.Status == DataCollectionStatus.QaApproved).ToList();
+    var qaApprovedCollectionDescriptionGrid = Html.Grid(qaApprovedDataCollections)
+        .Columns(column =>
+                     {
+                         column.For(o => Html.ActionLink(o.Title, "Detail", new { id = o.Id })).Named("Data Collection Title").Attributes(style => "width: 250px");
+                         column.For(o => o.DateSubmitted.ToString("dd/MM/yyyy HH:mm")).Named("Modified On");
+                         column.For(o => o.SubmittedBy);
+                     }
+        );
+}
+
+@{
+    var recordAmendedDataCollections = Model.DataCollectionItems.Where(x => x.Status == DataCollectionStatus.RecordAmended).ToList();
+    var recordAmmendedCollectionDescriptionGrid = Html.Grid(recordAmendedDataCollections)
+        .Columns(column =>
+                     {
+                         column.For(o => Html.ActionLink(o.Title, "Detail", new { id = o.Id })).Named("Data Collection Title").Attributes(style => "width: 250px");
+                         column.For(o => o.DateSubmitted.ToString("dd/MM/yyyy HH:mm")).Named("Submission date");
+                         column.For(o => o.SubmittedBy);
+                     }
+        );
+}
+
+<h1>Approvals</h1>
+
+@using (var f = Html.BeginFlowForm(htmlAttributes: new {@class = "fullwidth"}))
+{
+    if (submittedDataCollections.Count() > 0 || ordApprovedDataCollections.Count() > 0)
+    {
+        using (f.BeginSection("Pending QA Approval"))
+        {
+            @submittedCollectionDescriptionGrid
+        }
+
+        using (f.BeginSection("Pending Public Release"))
+        {
+            @ordApprovedCollectionDescriptionGrid
+        }
+    }
+
+    if (qaApprovedDataCollections.Count() > 0 || recordAmendedDataCollections.Count() > 0)
+    {
+        using (f.BeginSection("Pending Secondary Approval"))
+        {
+            @qaApprovedCollectionDescriptionGrid
+        }
+
+        using (f.BeginSection("Pending Secondary Reapproval"))
+        {
+            @recordAmmendedCollectionDescriptionGrid
+        }
+    }
+    
+    if (Model.DataCollectionItems.Count() == 0)
+    {
+        <p>@ViewBag.EmptyListMessage</p>
+    }
+}

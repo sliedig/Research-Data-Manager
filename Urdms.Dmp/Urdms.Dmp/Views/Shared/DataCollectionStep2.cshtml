@@ -1,0 +1,134 @@
+﻿@using Urdms.Dmp.Models
+@using Urdms.Dmp.Models.DataCollectionModels
+@using Urdms.Dmp.Models.Enums
+@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataCollectionModels.DataCollectionViewModelStep2
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("jquery-ui.min");
+    AddScript("ajax-codes");
+    AddScript("ajax-users");
+    AddScript("datacollection-details");
+    AddScript("jquery.prettyPhoto");
+    AddStylesheet("prettyPhoto");
+
+    var relationshipHints = new[]
+    {
+        new FaqItem {Text = "What are the possible relationships between researchers and collections or datasets?	", Url = "#faq1"}
+    };
+    
+}
+@helper SubjectInstructions()
+    {
+    <p>Please use commas to seperate the keywords.</p>
+    <p>The Field of Research (FoR) and Socio Economic Objective (SEO) codes have an auto
+        complete feature that displays the top 10 codes as a result of your entry. To view
+        the complete list of codes click on the respective links below.</p>
+}
+@helper RelationshipInstructions()
+    {
+    <p>Record the relationship between people and this dataset or collection. The currently
+        identified relationships are:
+        <li>Collector: person involved in the collection or generation of the data</li>
+        <li>Associate Researcher: unspecified relationship to the data</li>
+    </p>
+}
+@helper OrdContractualAgreementInstructions()
+    {
+    <span style="font-weight: normal; font-style: normal">This data collection does not
+        violate the project's contractual agreements.</span>
+}
+@helper OrdConfidentialityAndEthicsInstructions()
+    {
+    <span style="font-weight: normal; font-style: normal">This data collection does not
+        violate confidentiality anbd ethics requirements.</span>
+}
+@{
+    const string forInformation = "<p><em><a href='http://www.abs.gov.au/AUSSTATS/abs@.nsf/Latestproducts/17DC1A688895C0C1CA257418000538FC?opendocument' target='_blank'>View full list of FoR codes (opens in a new window)</a></em></p>";
+    const string seoInformation = "<p><em><a href='http://www.abs.gov.au/AUSSTATS/abs@.nsf/Latestproducts/25AA55D93A67F9E5CA257418000539C7?opendocument' target='_blank'>View full list of SEO codes (opens in a new window)</a></em></p>";
+}
+@using (var f = Html.BeginFlowForm(encType: FormEncType.Multipart))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.IsForApproval)
+    @f.Steps(ViewBag.Steps, 2, ViewBag.MaxStep, true, true)
+    @f.Header(DataCollectionViewModelTitles.Headers.Step2)
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Subjects, "data-collection-subjects", SubjectInstructions()))
+    {
+    @s.FieldFor(m => m.Keywords, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+
+    @s.FieldFor(m => m.FieldOfResearchCode, new FieldConfiguration { After = "<input type='submit' id='AddForCode' name='AddForCode' value='Add' />", Before = forInformation, Hint = new MvcHtmlString("Please enter a code in this field and then click on 'Add'") })
+    <div id="fieldsOfResearch">
+        @Html.Partial("_FieldsOfResearch", Model.FieldsOfResearch)
+        <input type="submit" class="refresh" name="DeleteForCodes" id="DeleteForCodes" value="Remove items" />
+    </div>
+    
+    @s.FieldFor(m => m.SocioEconomicObjectiveCode, new FieldConfiguration { After = "<input type='submit' id='AddSeoCode' name='AddSeoCode' value='Add' />", Before = seoInformation, Hint = new MvcHtmlString("Please enter a code in this field and then click on 'Add'") })
+    <div id="socioEconomicObjectives">
+        @Html.Partial("_SocioEconomicObjectives", Model.SocioEconomicObjectives)
+        <input type="submit" class="refresh" name="DeleteSeoCodes" id="DeleteSeoCodes" value="Remove items" />
+    </div>
+    }
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Relationships, "data-collection-relationships", RelationshipInstructions()))
+    {
+    <dt>Managed by:</dt><dd>@Model.Manager.FullName</dd>
+    
+    @Html.NonPersistentFieldFor(m => m.FindUserId, null, "inlineField")
+     @MvcHtmlString.Create(relationshipHints.GenerateFaqPlaceHolder())
+    <input type="submit" name="AddUrdmsUser" id="AddUrdmsUser" value="Add User" class="data-collection" /> @*Do not remove class*@
+    <div id="urdmsUsers">
+        @Html.Partial("_UrdmsUsers", new DataCollectionUrdmsUsersViewModel(Model.UrdmsUsers))
+        <input type="submit" class="refresh" name="DeleteUrdmsUser" id="DeleteUrdmsUser"
+            value="Remove users" />
+    </div>
+        
+    @Html.NonPersistentFieldFor(m => m.NonUrdmsNewUserName, null, "inlineField")
+    <input type="submit" name="AddNonUrdmsUser" id="AddNonUrdmsUser" value="Add User"
+        class="data-collection" /> @*Do not remove class*@
+    <div id="nonUrdmsUsers">
+        @Html.Partial("_NonUrdmsUsers", new DataCollectionNonUrdmsUsersViewModel(Model.NonUrdmsUsers))
+        <input type="submit" class="refresh" name="DeleteNonUrdmsUser" id="DeleteNonUrdmsUser"
+            value="Remove users" />
+    </div>
+        
+       
+    }
+    
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Save and Previous", name: "saveAndPrevious")
+            if (User.IsInRole(ApplicationRole.QaApprover.GetDescription()) || User.IsInRole(ApplicationRole.SecondaryApprover.GetDescription()))
+            {
+            @n.Submit("Save and Confirm", name: "saveAndConfirm", classes: "float-right")
+            }
+            else
+            {
+            @n.Submit("Save and Close", name: "saveAndClose", classes: "float-right")   
+            }
+        }
+    </div>
+    
+    <div id="faq1" class="hide">
+        <h2>What are the possible relationships between researchers and collections or datasets?
+        </h2>
+        <p>The relationships between researchers and collections or datasets are:</p>
+        <ul>
+            <li><strong>Managed by:</strong> This means that the collection or dataset is maintained and made accessible
+                by the identified party. This includes the custodian role. The Principal Investigator
+                is automatically set as the manager for the dataset or collection. </li>
+            <li><strong>Collector:</strong> This means that the collection or dataset has been aggregated by the
+                identified parties.</li>
+            <li><strong>Associated Researcher:</strong> This means that the collection or dataset has an unspecified
+                relationship with the identified parties.</li>
+        </ul>
+    </div>
+
+    @f.Footer(area: "AREA HERE", id: "FORM ID HERE", date: "DATE HERE")
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ default_width: 600 });
+        });
+    </script>
+}

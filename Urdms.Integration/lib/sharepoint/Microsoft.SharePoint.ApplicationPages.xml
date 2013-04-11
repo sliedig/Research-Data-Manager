@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.ApplicationPages</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.CalltrackMarkPage"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.CalltrackMarkPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.CalltrackMarkPage.OnInit(System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.CirculationConfirmPage"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.CirculationConfirmPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.CirculationConfirmPage.OnInit(System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.GroupBoardRedirectPage"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.GroupBoardRedirectPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.GroupBoardRedirectPage.OnInit(System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.ITimeBound"></member>
+    <member name="P:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.ITimeBound.Enabled"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.ITimeBound.SetBound(System.DateTime,System.DateTime)"></member>
+    <member name="T:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.SetWhereaboutsPage"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.SetWhereaboutsPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.SetWhereaboutsPage.OnInit(System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimeBound"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimeBound.#ctor(Microsoft.SharePoint.WebControls.TimeControl,Microsoft.SharePoint.WebControls.TimeControl)"></member>
+    <member name="P:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimeBound.Enabled"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimeBound.SetBound(System.DateTime,System.DateTime)"></member>
+    <member name="T:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.AfternoonBound"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.CalcDetailsNo"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.CalcDetailsYes"></member>
+    <member name="P:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.CoreBound"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DdlEndOfMonth"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DdlNonWorkDaysView"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DdlRestTimeUnit"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DdlTimeUnit"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcAfternoonEnd"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcAfternoonStart"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcCoreTimeEnd"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcCoreTimeStart"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcMidnightEnd"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcMidnightStart"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcMorningEnd"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcMorningStart"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcOfficeEnd"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcOfficeStart"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.DtcStartTimeOfADay"></member>
+    <member name="P:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.MidnightBound"></member>
+    <member name="P:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.MorningBound"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.NavigationSection"></member>
+    <member name="P:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.OfficeBound"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.OnInit(System.EventArgs)"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.RadDisplayOnLeftNo"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.RadDisplayOnLeftYes"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.RadFlex"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.RadNotFlex"></member>
+    <member name="M:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.SaveButtonClick(System.Object,System.EventArgs)"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.TxtListDescription"></member>
+    <member name="F:Microsoft.SharePoint.Applications.GroupBoard.ApplicationPages.TimecardSettingsPage.TxtListTitle"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.BdcFinderConfigurator"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.#ctor"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.DdlMethodPicker"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.MethodPicker_OnSelectionChanged(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.OnFilterValueChanged(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.OnLoad(System.EventArgs)"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.RptrFilterList"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.ShowMethodPicker"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.BdcFinderConfigurator.TxtboxMethodXml"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.FeatureActivator"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FeatureActivator.#ctor"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureActivator.lblEmptyFeaturesText"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureActivator.lblPageDescription"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureActivator.ltrlNameHeading"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureActivator.ltrlStatusHeading"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FeatureActivator.OnLoad(System.EventArgs)"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureActivator.rptrFeatureList"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivator.Scope"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivator.WebApplication"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.FeatureActivatorItem"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FeatureActivatorItem.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.AlternatingItem"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureActivatorItem.btnActivate"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FeatureActivatorItem.BtnActivateFeature_Click(System.Object,System.EventArgs)"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.ButtonText"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.CssClass"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.DataItem"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureActivatorItem.divFeatureStatus"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.FeatureId"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.FeatureStatus"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.FeatureStatusUI"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.ImageAlt"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.ImageSrc"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.ItemDesc"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FeatureActivatorItem.ItemTitle"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FeatureActivatorItem.OnLoad(System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.FeatureDependees"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FeatureDependees.#ctor"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureDependees.lblFeatureAlreadyActivated"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FeatureDependees.OnLoad(System.EventArgs)"></member>
+    <member name="F:Microsoft.SharePoint.WebControls.FeatureDependees.rptrFeatureDependeeList"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.FocusManager"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FocusManager.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.FocusManager.BoundControlID"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.FocusManager.Render(System.Web.UI.HtmlTextWriter)"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.ItemReorderer"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.ItemReorderer.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.ItemReorderer.Group"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.ItemReorderer.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.ItemReorderer.OnPreRender(System.EventArgs)"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.ItemReorderer.Order"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.ItemReorderer.RaisePostDataChangedEvent"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.ItemReorderer.Render(System.Web.UI.HtmlTextWriter)"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.ItemReorderer.ToolTip"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.LayoutsPageHeadTags"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.LayoutsPageHeadTags.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.LayoutsPageHeadTags.HtmlAttributeEncode(System.String,System.String,System.IO.TextWriter)"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.LayoutsPageHeadTags.Microsoft#SharePoint#WebControls#IDesignTimeHtmlProvider#GetDesignTimeHtml"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.LayoutsPageHeadTags.OldExpires"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.LayoutsPageHeadTags.RefreshInterval"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.TA_PageHeadTags"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.TA_PageHeadTags.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.TA_PageHeadTags.HtmlAttributeEncode(System.String,System.String,System.IO.TextWriter)"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.TA_PageHeadTags.Microsoft#SharePoint#WebControls#IDesignTimeHtmlProvider#GetDesignTimeHtml"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.TA_PageHeadTags.OldExpires"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.TA_PageHeadTags.RefreshInterval"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.TimeControl"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.TimeControl.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.WebControls.TimeControl.CreateChildControls"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.TimeControl.Hour"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.TimeControl.HoursList"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.TimeControl.Minute"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.TimeControl.MinutesList"></member>
+    <member name="P:Microsoft.SharePoint.WebControls.TimeControl.SelectedDate"></member>
+    <member name="T:Microsoft.SharePoint.WebControls.WebPartPageContents">
+      <summary>Inserts a list of Web Parts contained within a Web Part Page into a page for managing the Web Parts. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebControls.WebPartPageContents.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.WebControls.WebPartPageContents" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebControls.WebPartPageContents.CreateChildControls">
+      <summary>Notifies the server control to create any child controls it contains in preparation for posting back or rendering. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebControls.WebPartPageContents.OnInit(System.EventArgs)">
+      <summary>Raises an event when the server control is initialized. </summary>
+      <param name="e">A System.EventArgs object that contains the event data.</param>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebControls.WebPartPageContents.OnPreRender(System.EventArgs)">
+      <summary>Raises an event when the server control is about to be rendered on its containing page. </summary>
+      <param name="e">A System.EventArgs object that contains the event data.</param>
+    </member>
+    <member name="T:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage"></member>
+    <member name="M:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.GetDisplayTitle(System.Web.UI.WebControls.WebParts.WebPart)">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+      <param name="webPart"></param>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.GetMobileIsClosedProperty(Microsoft.SharePoint.WebPartPages.SPLimitedWebPartManager,System.Web.UI.WebControls.WebParts.WebPart)">
+      <returns>Returns <see cref="T:Microsoft.SharePoint.WebPartPages.SPAttachedProperty" />.</returns>
+      <param name="manager"></param>
+      <param name="webPart"></param>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.GetMobileZoneIndexProperty(Microsoft.SharePoint.WebPartPages.SPLimitedWebPartManager,System.Web.UI.WebControls.WebParts.WebPart)">
+      <returns>Returns <see cref="T:Microsoft.SharePoint.WebPartPages.SPAttachedProperty" />.</returns>
+      <param name="manager"></param>
+      <param name="webPart"></param>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.OnLoad(System.EventArgs)">
+      <param name="e"></param>
+    </member>
+    <member name="P:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.RightsRequired">
+      <returns>Returns <see cref="T:Microsoft.SharePoint.SPBasePermissions" />.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.TargetWebPartManager">
+      <returns>Returns <see cref="T:Microsoft.SharePoint.WebPartPages.SPLimitedWebPartManager" />.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.TargetWebPartPageTitle">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.TargetWebPartPageUrl">
+      <returns>Returns <see cref="T:System.String" />.</returns>
+    </member>
+    <member name="M:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.UpdateMobileProperties"></member>
+    <member name="P:Microsoft.SharePoint.WebPartPages.WebPartMobileSettingPage.WebParts">
+      <returns>Returns <see cref="T:System.Collections.Generic.IList`1" />.</returns>
+    </member>
+  </members>
+</doc>

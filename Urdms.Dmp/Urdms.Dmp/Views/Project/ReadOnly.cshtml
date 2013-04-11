@@ -1,0 +1,74 @@
+﻿@model Urdms.Dmp.Models.ProjectReadOnlyDetailsViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("jquery-ui.min");
+}
+@functions 
+{
+    string GetDateText(DateTime? field, string defaultValue = "N/A")
+    {
+        return field != null ? field.Value.ToShortDateString() : defaultValue;
+    }
+
+    string GetTextValue(string field, string defaultValue = "N/A")
+    {
+        return !string.IsNullOrWhiteSpace(field) ? field : defaultValue;
+    }
+    
+
+}
+
+@{
+    var forGrid = Html.Grid(Model.FieldsOfResearch.Select(c => c))
+    .Columns(column =>
+    {
+        column.For(o => o.FieldOfResearch.Id).Named("Code");
+        column.For(o => o.FieldOfResearch.Name).Named("Description");
+    }
+    ).Empty("No Field of Research codes for this Data Collection");
+
+    var seoGrid = Html.Grid(Model.SocioEconomicObjectives.Select(c => c))
+        .Columns(column =>
+        {
+            column.For(o => o.SocioEconomicObjective.Id).Named("Code");
+            column.For(o => o.SocioEconomicObjective.Name).Named("Description");
+        }
+        ).Empty("No Socio Economic Objective codes for this Data Collection");
+}
+
+@using(var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @f.Header("Project Details")
+    using (var s = f.BeginSection("Details","details"))
+    {
+        <dt>@Html.LabelFor(m => m.Title)</dt>
+        <dd>@GetTextValue(Model.Title)</dd>
+    
+        <dt>@Html.LabelFor(m => m.Description)</dt>
+        <dd>@GetTextValue(Model.Description)</dd>
+    
+        @s.FieldFor(m => m.Status, new FieldConfiguration{ReadOnly = true})
+
+        <dt>@Html.LabelFor(m => m.StartDate)</dt>
+        <dd>@GetDateText(Model.StartDate)</dd>
+    
+        <dt>@Html.LabelFor(m => m.EndDate)</dt>
+        <dd>@GetDateText(Model.EndDate)</dd>
+    }
+    
+    using (f.BeginSection("Subjects","subjects"))
+    {
+        <dt>@Html.LabelFor(m => m.Keywords)</dt>
+        <dd>@GetTextValue(Model.Keywords)</dd>
+        <dt>@Html.LabelFor(m => m.FieldsOfResearch)</dt>
+        @forGrid
+        <dt>@Html.LabelFor(m => m.SocioEconomicObjectives)</dt>
+        @seoGrid
+    }
+    
+}
+
+<p>
+    @Html.ActionLink("Back to my projects", "Index", new { }, new { @class = "action_button" })
+</p>

@@ -1,0 +1,22 @@
+﻿@model Urdms.Dmp.Models.NonUrdmsUsersBaseViewModel
+
+@{
+    ViewBag.Relationships = Model.Relationships;
+}
+
+<table id="nonUrdmsUsersGrid">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>@Model.RelationshipDescription</th>
+            <th>Remove</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Users)
+        {
+            @Html.Partial("_NonUrdmsUser", item)
+        }
+    </tbody>
+</table>

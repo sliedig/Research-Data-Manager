@@ -1,0 +1,11 @@
+﻿@{
+    PageSettings.Title = "Logged out";
+}
+
+<h1>@(ViewBag.LogoutHeader ?? "You have successfully logged out")</h1>
+
+@if (!string.IsNullOrEmpty(ViewBag.LogoutMessage)) {
+    <p>@ViewBag.LogoutMessage</p>
+}
+
+<p>Thank you for using this application. @Html.ActionLink("Log in again.", "LogOn", null, new { onclick = "window.location=this.href; return false;" })</p>

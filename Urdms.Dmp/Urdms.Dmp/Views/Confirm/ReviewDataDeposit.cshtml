@@ -1,0 +1,32 @@
+﻿@model Urdms.Dmp.Models.ConfirmDataDepositViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+@helper ConfirmationInstructions()
+    {
+    <span style="font-style: normal;">I acknowledge that by submitting the Data Management
+        Plan I will gain access to the Project Storage Space for <em>"@Model.ProjectTitle"</em>.
+        Researchers or project members identified in Data Deposit form will also
+        be given access to the Project Storage Space as per their respective roles.</span>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.ProjectId)
+    @Html.HiddenFor(m => m.ProjectTitle)
+    @f.Header("Data Deposit Form Review")
+    <h2>Data Management Plan for: <strong>@Model.ProjectTitle</strong></h2>
+    using (var s = f.BeginSection("Confirm", "confirm"))
+    {
+    <dt></dt>
+    <dd @if (ViewContext.ViewData.ModelState.Keys.Contains("HasConfirmed") && ViewContext.ViewData.ModelState["HasConfirmed"].Errors.Count > 0)
+        { <text>class="invalid"</text> } >@Html.ValidationMessageFor(x => x.HasConfirmed, null, new { @class = "invalid-message" })
+        <label>@Html.CheckBoxFor(x => x.HasConfirmed) @ConfirmationInstructions()</label></dd>
+    }
+
+    using (var n = f.BeginNavigation())
+    {
+    @n.Submit("Submit", name: "Submit", id: "Submit")
+    }
+
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+}

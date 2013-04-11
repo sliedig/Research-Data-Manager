@@ -1,0 +1,21 @@
+﻿@using Urdms.Dmp.Web.Menu
+@model IList<Urdms.Dmp.Web.Menu.MenuItem>
+
+@PrintMenu(Model)
+
+@helper PrintMenu(IList<MenuItem> menu)
+    {
+    if (Model.Any()) {
+    <ul>
+        @foreach (var item in menu) {
+            var cssClass = item.Selected ? "selected" : item.Children.Any() ? "has_sub_menu" : "";
+            <li class="@cssClass"><a href="@Url.Content("~"+item.Path)">@item.Title</a>
+            @if (item.Selected && item.Children.Any())
+	        {
+                @PrintMenu(item.Children)
+	        }
+            </li>
+        }
+    </ul>
+    }
+}

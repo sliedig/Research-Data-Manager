@@ -1,0 +1,520 @@
+﻿@using Urdms.DocumentBuilderService.Database.Entities
+@using Urdms.DocumentBuilderService.Extensions
+@using Urdms.DocumentBuilderService.Models
+@using Urdms.DocumentBuilderService.Models.Enums
+@using Urdms.DocumentBuilderService.Extensions
+@using Urdms.DocumentBuilderService.Models
+@using Urdms.DocumentBuilderService.Models.Enums
+@inherits RazorEngine.Templating.TemplateBase<Urdms.DocumentBuilderService.Database.Entities.DataManagementPlan>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Untitled Document</title>
+    <style type="text/css">
+       body, p, h1, h2, h3, h4, h5, td, th {
+	font-family:"Sansa", Arial, Helvetica, sans-serif;
+	font-size:10pt;
+	margin: 0;
+	padding: 10px 0px;
+	border: 0; 
+}
+
+body {
+	margin-top: 10px;
+	margin-right: 60px;
+	margin-bottom: 10px;
+	margin-left: 40px;
+}
+
+table {
+	border-collapse: collapse; 	
+	border-spacing: 0;
+	border-style: none none solid;	
+	border-color: white;
+	width: 100%;		
+	padding: 0 10px 10px;
+	page-break-inside:avoid
+}
+
+hr {
+	border: 0;
+	color: #999999;
+	background-color: #999999;
+	height: 7pt;
+}
+
+th {
+	text-align: left;
+	padding: 10px 10px;
+}
+
+td {
+	text-align: left;
+/*	border-style: none none solid; 
+	border-style: solid; */
+	border-width: 1px;
+	border-color: black;
+	padding: 10px;
+}
+
+h1 {
+	background-image: url('/local/resources/email-signature/email_logo.png');
+	background-repeat: no-repeat;
+	background-position: right top;
+	font-size:14px;
+	font-weight: bold;
+	padding: 28px 0 14px;
+	border-style: none none solid;
+	border-width: 1px;
+}
+
+h2 {
+	font-weight: bold;
+	background-color: #bbbbbb;
+	padding: 10px 18px;
+}
+
+h3, h4, h5 {
+	font-weight: normal;
+	background-color: #e0e0e0;
+	padding: 10px 18px;
+}
+</style>
+</head>
+<body>
+    <div id="header">
+        <h1>@Model.ProjectTitle</h1>
+        <p>This is a data management plan for @Model.ProjectTitle. Data management encompasses the gamut of activities undertaken with data including planning, creating, storing, accessing, sharing, describing, archiving and curating.</p>
+    </div>
+    <hr />
+    <div id="creationInformation">
+        <p>Author: @Model.PricipalInvestigator</p>
+        <p>Creation date: @Model.CreationDate.ToShortDateString()</p>
+        <p>Modified date: @Model.DateModified.ToShortDateString()</p>
+    </div>
+    <hr />
+    <div id="dataManagementPlanInformation">        
+        <table>
+            <tr>
+                <th scope="col"><h2>Basic Project Information</h2></th>
+            </tr>
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.Project.Title</th>
+            </tr>
+            <tr>
+                <td>@Model.ProjectTitle</td>
+            </tr>
+            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.Project.Description</th>
+            </tr>
+            <tr>
+                <td>@Model.ProjectDescription</td>
+            </tr>
+        </table>       
+        <table>
+            <tr>
+                <th scope="col"><h2>Pre-existing research data</h2></th>
+            </tr>            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.ExistingDataDetail.UseExistingData</th>
+            </tr>
+            <tr>
+                <td>@Model.UseExistingData.ToBooleanString()</td>
+            </tr>
+            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.ExistingDataDetail.ExistingDataOwner</th>
+            </tr>
+            <tr>
+                <td>@Model.ExistingDataOwner</td>
+            </tr>
+            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.ExistingDataDetail.ExistingDataAccessTypes</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.ExistingDataAccessTypes.GetDescriptions(ExistingDataAccessTypes.None))</td>
+            </tr>
+            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.ExistingDataDetail.AccessTypesDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.AccessTypesDescription</td>
+            </tr>
+        </table>     
+        <table>
+            <tr>
+                <th scope="col"><h2>New research data</h2></th>
+            </tr>
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.NewDataDetail.ResearchDataDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.ResearchDataDescription</td>
+            </tr>  
+            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.NewDataDetail.DataOwners</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>",Model.DataOwners.GetDescriptions(DataOwners.None))</td>
+            </tr>
+            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.NewDataDetail.DataOwnersDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.DataOwnersDescription</td>
+            </tr>
+
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.NewDataDetail.DataActionFrequency</th>
+            </tr>
+            <tr>
+                <td>@Model.DataActionFrequency.GetDescription()</td>
+            </tr>
+
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.NewDataDetail.IsVersioned</th>
+            </tr>
+            <tr>
+                <td>@Model.IsVersioned.ToBooleanString()</td>
+            </tr>
+        </table>                
+        <table>
+            <tr>
+                <th scope="col"><h2>Relationship Between New and Pre-existing Data</h2></th>
+            </tr>
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.DataRelationshipDetail.RelationshipBetweenExistingAndNewData</th>
+            </tr>
+            <tr>
+                <td>@Model.RelationshipBetweenExistingAndNewData.GetDescription()</td>
+            </tr>
+        </table>        
+        <table>
+            <tr>
+                <th scope="col"><h2>@DataManagementViewModelTitles.Sections.DataDocumentationSection.DataDocumentionSubSection</h2></th>
+            </tr>
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.DataDocumentation.MetadataStandards</th>
+            </tr>
+            <tr>
+                <td>@Model.MetadataStandards</td>
+            </tr>
+
+            <tr>
+                <th scope="col"><h2>@DataManagementViewModelTitles.Sections.DataDocumentationSection.DataOrganisationSubSection</h2></th>
+            </tr>
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.DataOrganisation.DirectoryStructure</th>
+            </tr>
+            <tr>
+                <td>@Model.DirectoryStructure</td>
+            </tr>            
+        </table>       
+        <table>
+            <tr>
+                <th scope="col"><h2>Ethical requirements</h2></th>
+            </tr>
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.Ethic.RequiresClearance</th>
+            </tr>
+            <tr>
+                <td>@Model.EthicRequiresClearance.ToBooleanString()</td>
+            </tr>
+            
+            <tr>
+                <th scope="col">@DataManagementViewModelTitles.Ethic.Comments</th>
+            </tr>
+            <tr>
+                <td>@Model.EthicComments</td>
+            </tr>
+        </table>       
+        <table>
+            <tr>
+                <th><h2>Confidentiality and privacy requirements</h2></th>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.Confidentiality.IsSensitive</th>
+            </tr>
+            <tr>
+                <td>@Model.IsSensitive.ToBooleanString()</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.Confidentiality.Comments</th>
+            </tr>
+            <tr>
+                <td>@Model.ConfidentialityComments</td>
+            </tr>
+        </table>       
+        <table>
+            <tr>
+                <td colspan="2"><h2>Data storage</h2></td></tr>            
+            <tr>
+            <tr>
+                <td colspan="2"><h3>Where will you store the research data?</h3></td></tr>            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataStorage.InstitutionalStorageTypes</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>",Model.InstitutionalStorageTypes.GetDescriptions())</td>
+            </tr>
+            
+            <tr>	@* conditional *@
+                <th>Details for @InstitutionalStorageTypes.Other.GetDescription()</th>
+            </tr>
+            <tr>
+                <td>@Model.InstitutionalOtherTypeDescription</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataStorage.ExternalStorageTypes</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.ExternalStorageTypes.GetDescriptions(ExternalStorageTypes.None))</td>
+            </tr>
+            
+            <tr>	@* conditional *@
+                <th>Details for @ExternalStorageTypes.Other.GetDescription()</th>
+            </tr>
+            <tr>
+                <td>@Model.ExternalOtherTypeDescription</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataStorage.PersonalStorageTypes</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.PersonalStorageTypes.GetDescriptions(PersonalStorageTypes.None))</td>
+            </tr>
+            
+            <tr>	@* conditional *@
+                <th>Details for @PersonalStorageTypes.Other.GetDescription()</th>
+            </tr>
+            <tr>
+                <td>@Model.PersonalOtherTypeDescription</td>
+            </tr>
+
+            <tr>
+                <th>@DataManagementViewModelTitles.DataStorage.MaxDataSize</th>
+            </tr>
+            <tr>
+                <td>@Model.MaxDataSize.GetDescription()</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataStorage.FileFormats</th>
+            </tr>
+            <tr>
+                <td>@Model.FileFormats</td>
+            </tr>
+
+
+            <tr>
+                <th>@DataManagementViewModelTitles.DataStorage.VersionControl</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.VersionControl.GetDescriptions(VersionControl.None))</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataStorage.VersionControlDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.VersionControlDescription</td>
+            </tr>
+        </table>        
+        <table>		
+            <tr>
+                <th><h2>Access</h2></th>
+            </tr>	
+            <tr>
+                <th>Principal Investigator</th>
+            </tr>
+            <tr>
+                <td>@Model.PricipalInvestigator</td>
+            </tr>
+            
+            <tr>
+                <td colspan="2"><h3>Urdms members</h3></td>
+            </tr>
+            <tr>
+                <td>
+                    @if (Model.UrdmsUsers == null || Model.UrdmsUsers.Count == 0)
+                    {
+                        <i>None listed</i>
+                    }
+                    else
+                    {
+                        <table>
+                            <tr>
+                                <th>ID</th><th>Name</th><th>Role</th>
+                            </tr>
+                            @foreach (var user in Model.UrdmsUsers)
+                            {
+                                <tr>
+                                    <td>@user.Id</td><td>@user.Name</td><td>@Enum.GetName(typeof (AccessRole), user.Role)</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2"><h3>Non-Urdms members</h3></td>
+            </tr>
+            <tr>
+                <td>
+                    @if (Model.NonUrdmsUsers == null || Model.NonUrdmsUsers.Count == 0)
+                    {
+                        <i>None listed</i>
+                    }
+                    else
+                    {
+                        <table>
+                            <tr>
+                                <th>Name</th><th>Role</th>
+                            </tr>
+                            @foreach (var user in Model.NonUrdmsUsers)
+                            {
+                                <tr>
+                                    <td>@user.Name</td><td>@Enum.GetName(typeof (AccessRole), user.Role)</td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
+            </tr>
+        </table>       
+        <table>
+            <tr>
+                <th><h2>Backup</h2></th>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.BackupPolicy.BackupLocations</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.BackupLocations.GetDescriptions())</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.BackupPolicy.BackupPolicyLocationsDescription</th>	
+            </tr>
+            <tr>
+                <td>@Model.BackupPolicyLocationsDescription</td>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.BackupPolicy.BackupPolicyResponsibilities</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.BackupPolicyResponsibilities.GetDescriptions(DataResponsibilities.None))</td>
+            </tr>
+            
+            <tr>	@* conditional *@
+                <th>@DataManagementViewModelTitles.BackupPolicy.BackupPolicyResponsibilitiesDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.BackupPolicyResponsibilitiesDescription</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th><h2>Data retention</h2></th>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.DataRetention.DataRetentionPeriod</th>
+            </tr>
+            <tr>
+                <td>@Model.DataRetentionPeriod.GetDescription()</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataRetention.DataRetentionResponsibilities</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.DataRetentionResponsibilities.GetDescriptions(DataResponsibilities.None))</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataRetention.DataRetentionResponsibilitiesDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.DataRetentionResponsibilitiesDescription</td>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.DataRetention.DepositToRepository</th>
+            </tr>
+            <tr>
+                <td>@Model.DepositToRepository.ToBooleanString()</td>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.DataRetention.DataRetentionLocations</th>
+            </tr>
+            <tr>
+                <td>@String.Join(",<br>", Model.DataRetentionLocations.GetDescriptions(DataRetentionLocations.None))</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataRetention.DataRetentionLocationsDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.DataRetentionLocationsDescription</td>
+            </tr>
+        </table>       
+        <table>
+            <tr>
+                <th><h2>Data sharing</h2></th>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.DataSharing.DataSharingAvailability</th>
+            </tr>
+            <tr>
+                <td>@Model.DataSharingAvailability.GetDescription()</td>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.DataSharing.DataSharingAvailabilityDate</th>
+            </tr>
+            <tr>
+                <td>@(Model.DataSharingAvailabilityDate != null ? Model.DataSharingAvailabilityDate.Value.ToShortDateString() : "")</td>
+            </tr>
+            <tr>
+                <th>@DataManagementViewModelTitles.DataSharing.ShareAccess</th>
+            </tr>
+            <tr>
+                <td>@Model.ShareAccess.GetDescription()</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataSharing.ShareAccessDescription</th>
+            </tr>
+            <tr>
+                <td>@Model.ShareAccessDescription</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataSharing.DataLicensingType</th>
+            </tr>
+            <tr>
+                <td>@Model.DataLicensingType.GetDescription()</td>
+            </tr>
+            
+            <tr>
+                <th>@DataManagementViewModelTitles.DataSharing.ReuseByOrganisations</th>
+            </tr>
+            <tr>               
+                <td>@Model.ReuseByOrganisations</td>              
+            </tr>
+        </table>
+    </div>
+    <hr />
+    <div id="disclaimer">
+        <p><strong>Disclaimer:</strong>The data management plan template provides a mechanism for documenting requirements that are needed in a data management plan. It is strongly recommended that you address all the issues related to respective project's data management requirements.</p>
+    </div>
+</body>
+</html>

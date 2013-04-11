@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.Dsp.Sts</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.Dsp.Sts.StsAdapter">
+      <summary>Represents the adapter service used to perform queries against sites and lists in Microsoft Windows SharePoint Services.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Sts.StsAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Sts.StsAdapter" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Sts.StsAdapter.Query(Microsoft.SharePoint.Dsp.QueryRequest)">
+      <summary>Executes a query expressed as a predefined request object. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.QueryResponse" /> object that contains the data in response to the request query.</returns>
+      <param name="Request">A <see cref="T:Microsoft.SharePoint.Dsp.QueryRequest" /> object that expresses a query in DSPQ (data retrieval service query) or Pass-Through format.</param>
+    </member>
+  </members>
+</doc>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.Dsp.SoapPT</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.Dsp.SoapPT.SoapPTAdapter">
+      <summary>Represents the adapter service used to perform pass-through queries against Web services. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.SoapPT.SoapPTAdapter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.SoapPT.SoapPTAdapter" /> class.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.SoapPT.SoapPTAdapter.c_szVersionEncodingEnd">
+      <summary>Specifies the end of a processing instruction. </summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.SoapPT.SoapPTAdapter.c_szVersionEncodingScheme">
+      <summary>Specifies a complete processing instruction that includes utf-8 encoding. </summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.SoapPT.SoapPTAdapter.c_szVersionEncodingStart">
+      <summary>Specifies the start of a processing instruction.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.SoapPT.SoapPTAdapter.Query(Microsoft.SharePoint.Dsp.QueryRequest)">
+      <summary>Executes a query expressed as a predefined request object. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.QueryResponse" /> object that contains the data in response to the request query.</returns>
+      <param name="request">A <see cref="T:Microsoft.SharePoint.Dsp.QueryRequest" /> object that expresses a query in DSPQ (data retrieval service query) or Pass-Through format.</param>
+    </member>
+  </members>
+</doc>

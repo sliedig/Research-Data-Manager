@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.IdentityModel</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.IdentityModel.SPRoleManagerModuleEvents"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.SPRoleManagerModuleEvents.GetRoles(System.Object,System.Web.Security.RoleManagerEventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.SPSessionAuthenticationModuleEvents"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.SPSessionAuthenticationModuleEvents.SessionSecurityTokenReceived(System.Object,Microsoft.IdentityModel.Web.SessionSecurityTokenReceivedEventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Configuration.SPSecurityTokenServiceConfiguration"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Configuration.SPSecurityTokenServiceConfiguration.#ctor"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Pages.FormsSignInPage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.FormsSignInPage.#ctor"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Pages.IDFxPage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.IDFxPage.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.IdentityModel.Pages.IDFxPage.Web"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage.CreateWSFederationMessage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage.IssueTicket(Microsoft.IdentityModel.Claims.IClaimsPrincipal,Microsoft.IdentityModel.SecurityTokenService.RequestSecurityToken)"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage.Page_Load(System.Object,System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage.Redirect(Microsoft.IdentityModel.Protocols.WSFederation.SignInRequestMessage,Microsoft.IdentityModel.SecurityTokenService.RequestSecurityTokenResponse,Microsoft.IdentityModel.Protocols.WSFederation.WSFederationSerializer,Microsoft.IdentityModel.Protocols.WSTrust.WSTrustSerializationContext)"></member>
+    <member name="P:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage.RequestPrincipal"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.IDFxSignInPage.SpecifyPageRequestArguments(Microsoft.IdentityModel.Claims.IClaimsPrincipal,Microsoft.IdentityModel.SecurityTokenService.RequestSecurityToken)"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Pages.MultiLogonPage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.MultiLogonPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.MultiLogonPage.Page_Load(System.Object,System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Pages.NTLMSignInPage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.NTLMSignInPage.#ctor"></member>
+    <member name="P:Microsoft.SharePoint.IdentityModel.Pages.NTLMSignInPage.RequestPrincipal"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Pages.PersonalCardSignInPage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.PersonalCardSignInPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.PersonalCardSignInPage.Page_Load(System.Object,System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Pages.TrustedProviderSignInPage"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.TrustedProviderSignInPage.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Pages.TrustedProviderSignInPage.Page_Load(System.Object,System.EventArgs)"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.Services.SecurityTokenService.SPSecurityTokenService"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Services.SecurityTokenService.SPSecurityTokenService.#ctor(Microsoft.SharePoint.IdentityModel.Configuration.SPSecurityTokenServiceConfiguration)"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Services.SecurityTokenService.SPSecurityTokenService.Issue(Microsoft.IdentityModel.Claims.IClaimsPrincipal,Microsoft.IdentityModel.SecurityTokenService.RequestSecurityToken)"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.Services.SecurityTokenService.SPSecurityTokenService.Renew(Microsoft.IdentityModel.Claims.IClaimsPrincipal,Microsoft.IdentityModel.SecurityTokenService.RequestSecurityToken)"></member>
+    <member name="T:Microsoft.SharePoint.IdentityModel.WebControls.LogonSelector"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.WebControls.LogonSelector.#ctor"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.WebControls.LogonSelector.OnInit(System.EventArgs)"></member>
+    <member name="M:Microsoft.SharePoint.IdentityModel.WebControls.LogonSelector.OnSelectedIndexChanged(System.EventArgs)"></member>
+  </members>
+</doc>

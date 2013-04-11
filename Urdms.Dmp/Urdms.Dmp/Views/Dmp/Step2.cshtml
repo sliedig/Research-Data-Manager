@@ -1,0 +1,163 @@
+﻿@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataManagementPlanViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("research-data");
+    AddScript("jquery.prettyPhoto");
+    AddStylesheet("prettyPhoto");
+
+    var metadataStandardHints = new[]
+                                    {
+                                        new FaqItem {Text = "What is metadata?", Url = "#faq1"}
+                                    };
+    var directoryStructureHints = new[]
+                                     {
+                                         new FaqItem {Text = "What shall I consider when naming files and folders?", Url = "#faq2"}
+                                     };
+}
+@helper DataDocumentationInstructions()
+    {
+    <p>Metadata is often defined as data about data. Applying standards to the way you describe
+        the data facilitates the discovery of, and access to, information. Metadata describes
+        attributes of a data item or resource, for example, metadata may explain the origin,
+        purpose, time reference, geographic location, creator, access conditions and terms
+        of use of a data collection. Documentation and metadata requirements will differ
+        depending on the discipline and the nature of the research.</p>
+}
+@helper DataOrganisationInstructions()
+    {
+    <p>Applying standards to the structure and organisation of your research data, will
+        help you, and other researchers, to manage, access and re-use your data. Adopting
+        a consistent organisation strategy makes it easier to find and keep track of data
+        files. This will include:
+        <ul>
+            <li>Logical and consistent directory structure</li>
+            <li>Appropriate and easily identifiable file naming conventions</li>
+            <li>Suitable version control measures</li>
+        </ul>
+    </p>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ProjectId)
+    @Html.HiddenFor(m => m.Step)
+    @Html.HiddenFor(m => m.Start)
+    @f.Steps(ViewBag.Steps, 2, ViewBag.MaxStep, true, true)
+	
+    @f.Header("Data Documentation and Organisation")
+    <h2>Data Management Plan for: @Model.ProjectTitle</h2>
+    using (var s = f.BeginSection("Data Documentation", "data-documentation", DataDocumentationInstructions()))
+    {
+    @s.FieldFor(m => m.DataDocumentation.MetadataStandards, new FieldConfiguration { Before = metadataStandardHints.GenerateFaqPlaceHolder() })
+    }
+
+    using (var s = f.BeginSection("Data Organisation", "data-organisation", DataOrganisationInstructions()))
+    {
+    @s.FieldFor(m => m.DataOrganisation.DirectoryStructure, new FieldConfiguration { Before = directoryStructureHints.GenerateFaqPlaceHolder() })
+    }
+
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit(ViewBag.NavigationButton.Previous, name: "stepAction", id: "PreviousButton", classes: "float-left")
+            @n.Submit(ViewBag.NavigationButton.Next, name: "stepAction", id: "NextButton", classes: "float-right")
+        }
+    </div>
+    
+    
+    <div id="faq1" class="hide">
+        <h2>What is metadata?</h2>
+        <p>One element of data documentation is the description of the data, commonly referred
+            to as metadata. Metadata is&nbsp;often defined as <b>data about data</b>. Metadata
+            refers to the information used to describe an item's&nbsp;attributes in a standardised
+            format e.g. the author's name and title of a book in a library catalogue.</p>
+        <p>What are common metadata standards used in different disciplines?</p>
+        <p><strong>General</strong></p>
+        <ul>
+            <li><a href="http://dublincore.org/" target="_blank">Dublin Core (DC)</a></li>
+            <li><a href="http://www.loc.gov/standards/mods/" target="_blank">Metadata Object Description
+                Schema (MODS)</a></li>
+            <li><a href="http://www.loc.gov/standards/mets/" title="METS" target="_blank">Metadata
+                Encoding and Transmission Standard (METS)</a></li>
+        </ul>
+        <p><strong>Arts</strong></p>
+        <ul>
+            <li><a href="http://www.getty.edu/research/publications/electronic_publications/cdwa/index.html"
+                target="_blank">Categories for the Description of Works of Art (CDWA)</a></li>
+            <li><a href="http://www.vraweb.org/projects/vracore4/" target="_blank">Visual Resources
+                Association (VRA Core)</a></li>
+        </ul>
+        <p><strong>Astronomy</strong></p>
+        <ul>
+            <li><a href="http://virtualastronomy.org/AVM_DRAFTVersion12_rlh02.pd%20target=" f=""
+                _blank="">Astronomy Visualization Metadata (AVM)</a></li>
+        </ul>
+        <p><strong>Biology</strong></p>
+        <ul>
+            <li><a href="http://wiki.tdwg.org/twiki/bin/view/DarwinCore/WebHome" target="_blank">
+                Darwin Core</a></li>
+        </ul>
+        <p><strong>Ecology</strong></p>
+        <ul>
+            <li><a href="http://knb.ecoinformatics.org/software/eml/" target="_blank">Ecological
+                Metadata Language (EML)</a></li>
+        </ul>
+        <p><strong>Geographic</strong></p>
+        <ul>
+            <li><a href="http://www.fgdc.gov/metadata/csdgm" target="_blank">Content Standard for
+                Digital Geospatial Metadata (CSDGM)</a></li>
+            <li><a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=26020"
+                target="_blank">ISO 19115:2003 Geographic information -- Metadata</a></li>
+        </ul>
+        <p><strong>Social sciences</strong></p>
+        <ul>
+            <li><a href="http://www.ddialliance.org/" target="_blank">Data Documentation Initiative
+                (DDI)</a></li>
+        </ul>
+    </div>
+    
+    <div id="faq2" class="hide">
+        <h2>What shall I consider when naming files and folders?</h2>
+        <p>Meaningful file and folder names can be important for identifying and finding digital
+            objects. Appropriate naming will provide useful cues to the content and status of
+            a file, including its version. Poor naming conventions may lead to hours of frustration
+            as you, or others, search for information. </p>
+        <p>Consider the following:</p>
+        <ul>
+            <li>Make the file name meaningful and be specific and concise </li>
+            <li>Use sentence case and use a capital letter for names and proper nouns</li>
+            <li>Use people’s full names and type family names in UPPER CASE </li>
+            <li>For dates use the format: yyyy-mm-dd. When referring to year only, always use four
+                digits </li>
+            <li>Use a space, dash and another space if you want to separate terms </li>
+        </ul>
+        <p>Avoid:</p>
+        <ul>
+            <li>Too short - 25 to 100 characters is generally adequate </li>
+            <li>Use terms that accurately describe the subject or topic of the document’s contents
+            </li>
+            <li>Avoid abbreviations - temp could mean template, temporary etc. Use the full word
+                instead. </li>
+            <li>Do not use following characters within your document name: . , ; : = \ / * ? &quot;
+                &lt; &gt; </li>
+        </ul>
+    </div>
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+
+    
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ default_width: 600 });
+        });
+    </script>
+}

@@ -1,0 +1,165 @@
+﻿@using Urdms.Dmp.Models.DataCollectionModels
+@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataCollectionModels.DataCollectionViewModelStep1
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("jquery-ui.min");
+    AddScript("collection-dependency");
+    AddScript("jquery.prettyPhoto");
+    AddStylesheet("prettyPhoto");
+
+    var typeHints = new[]
+    {
+        new FaqItem{ Text = "What is a collection?", Url = "#faq1"},
+        new FaqItem{ Text = "What is a dataset?", Url = "#faq2"}
+    };
+
+    var accessRightHints = new[] { new FaqItem { Text = "What is access rights?", Url = "#faq3" } };
+    var dataStoreLocationDetailHints = new[] { new FaqItem { Text = "What other details can I add?", Url = "#faq4" } };
+    var identifierHints = new[]
+    {
+        new FaqItem {Text = "What is an Identifier?", Url = "#faq5" },
+        new FaqItem {Text = "What is a handle and can obtain it?", Url = "#faq6" },
+        new FaqItem {Text = "What is a Digital Object Identifier and can obtain it?", Url = "#faq7"}
+    };
+
+    var dataStoreLocationNameConfiguration = Model.IsFirstCollection ?
+        new FieldConfiguration { ReadOnly = true } : new FieldConfiguration { HtmlAttributes = new { @class = "middlinglength" } };
+
+    var dataStoreLocationUrlConfiguration = Model.IsFirstCollection ?
+        new FieldConfiguration { ReadOnly = true } : new FieldConfiguration { HtmlAttributes = new { @class = "middlinglength" } };
+                           
+}
+@helper LocationInstructions()
+    {
+    <p>Record the location where the data is stored. This is especially helpful if data
+        is not stored in the Project Storage Space.</p>
+}
+@helper IdentifierInstructions()
+{
+    <p>An identifier is a sequence of characters or words that uniquely identify your data.
+        Identifiers are unique and therefore could be used to reference the data in citations.</p>
+}
+@using (var f = Html.BeginFlowForm(encType: FormEncType.Multipart))
+{
+    @Html.HiddenFor(m => m.Id)
+    @f.Steps(ViewBag.Steps, 1, Model.Id == 0 ? 1 : ViewBag.MaxStep, true, true)
+    @f.Header(DataCollectionViewModelTitles.Headers.Step1)
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Description, "data-collection-description"))
+    {
+    @s.FieldFor(m => m.ProjectTitle, new FieldConfiguration { ReadOnly = true })
+    @Html.HiddenFor(m => m.ProjectTitle)                                                             
+    @s.FieldFor(m => m.Title, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+    @s.FieldFor(m => m.Type, new FieldConfiguration { ReadOnly = Model.IsFirstCollection, Before = typeHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.ResearchDataDescription, new FieldConfiguration { HtmlAttributes = new { @class = "largeHeight" } })
+    <dt>@Html.LabelFor(m => m.StartDate)</dt>
+    <dd>@Html.TextBox("StartDate", Model.StartDate != null ? Model.StartDate.Value.ToShortDateString() : string.Empty, new { @class = "date" })</dd>
+    <dt>@Html.LabelFor(m => m.EndDate)</dt>
+    <dd>@Html.TextBox("EndDate", Model.EndDate != null ? Model.EndDate.Value.ToShortDateString() : string.Empty, new { @class = "date" })</dd>
+    }
+
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.DataAccess, "data-collection-access"))
+    {
+    @s.FieldFor(m => m.DataLicensingRights, new FieldConfiguration { As = ElementType.RadioButtons })
+    @s.FieldFor(m => m.ShareAccess, new FieldConfiguration { As = ElementType.RadioButtons, Before = accessRightHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.ShareAccessDescription, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } }) 
+    }
+
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.DataStoreLocation, "data-store-location", LocationInstructions()))
+    {
+    @s.FieldFor(m => m.DataStoreLocationName, dataStoreLocationNameConfiguration)
+    @s.FieldFor(m => m.DataStoreLocationUrl, dataStoreLocationUrlConfiguration)
+    @s.FieldFor(m => m.DataStoreAdditionalDetails, new FieldConfiguration { HtmlAttributes = new { @class = "middlinglength" }, Before = dataStoreLocationDetailHints.GenerateFaqPlaceHolder() })
+    }
+    using (var s = f.BeginSection(DataCollectionViewModelTitles.Sections.Identifiers, "data-collection-identifiers", IdentifierInstructions()))
+    {
+    @s.FieldFor(m => m.DataCollectionIdentifier, new FieldConfiguration { Before = identifierHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.DataCollectionIdentifierValue, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+    }
+    
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Save and Next", "SaveAndNext", "float-right", "SaveAndNext")
+        }
+    </div>
+    
+    <div id="faq1" class="hide">
+        <h2>What is a collection?</h2>
+        <p>Collections of particular object types based on intellectual themes together with
+            curatorial requirements. An example might be a collection of photographs or music
+            with a common theme that are stored and managed as a group. A collection might include
+            a number of datasets. Example: John Curtin Prime Ministerial Library Collection</p>
+    </div>
+    <div id="faq2" class="hide">
+        <h2>What is a dataset?</h2>
+        <p>A grouping of data might include scientific observations in a digital format, together
+            with information about scientific equipment and methods used to compile them. Example:
+            Water Quality dataset, Great Barrier Reef.</p>
+        <p>What are start and end dates for collections or datasets?</p>
+        <p>Start and end dates for collections or datasets (temporal coverage) examples include
+            a time period during which data was collected or observations made.</p>
+    </div>
+    <div id="faq3" class="hide">
+        <h2>What are access rights?</h2>
+        <p>Access rights describe constraints around how right to use the dataset or collection
+            is defined. The options are:</p>
+        <ul>
+            <li><strong>No access:</strong> No one will be given access to the dataset or collection.</li>
+            <li><strong>Restricted access: </strong>Access can be provided via a mediated mechanism.
+                Example, username/password</li>
+            <li><strong>Open access:</strong> Dataset or collection can be made publicly available.
+                Example, URL linking to the dataset</li>
+            <li><strong>Other:</strong> provide a description of the specific access right that
+                might apply to your dataset or collection. Restrictions may be based on security,
+                privacy or other policies.</li>
+        </ul>
+    </div>
+    <div id="faq4" class="hide">
+        <h2>What other details can I add?</h2>
+        <p>Addition details can include access details to the data store, who has access to
+            it and how often is it accessed.</p>
+    </div>
+    <div id="faq5" class="hide">
+        <h2>What is an Identifier?</h2>
+        <p>An identifier is a sequence of characters or words that uniquely identify an object
+            within a particular context or the domain of a specified authority. It may be globally
+            unique if the specified authority has a global domain. Identifiers that are useful
+            for discovery, linking of metadata records,&nbsp;re-use, or to support the functions
+            of the metadata provider, can be recorded, even if they are not unique or persistent.
+            Tow implementations of identifiers are the handle and Digital Object Identifier
+            (DOI).</p>
+    </div>
+   
+    
+    
+    <div id="faq6" class="hide">
+        <h2>What is a handle and can obtain it?</h2>
+		<p>A handle is a unique identifier generated by the Handle System. The requirements
+			to obtain a handle are less stringent than Digital Object Identifiers (DOI). Therefore,
+			it is sometimes deemed as less persistent than the DOI.</p>
+    </div>
+    <div id="faq7" class="hide">
+        <h2>What is a Digital Object Identifier and can obtain it?</h2>
+		<p>The Digital Object Identifier system is used for identifying intellectual property
+			in the digital environment. It is used principally by publishers, and is an implementation
+			of the Handle System for persistent identifiers. The International DOI Federation
+			(IDF) appoints Registration Agencies who allocate DOI prefixes, register DOI Names,
+			and provide the necessary infrastructure to allow registrants to declare and maintain
+			metadata.</p>
+    </div>
+    
+    
+    
+    
+    
+    
+
+    @f.Footer(area: "AREA HERE", id: "FORM ID HERE", date: "DATE HERE")
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ default_width: 600 });
+        });
+    </script>
+}

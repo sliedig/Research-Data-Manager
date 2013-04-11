@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SharePoint.Dsp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SharePoint.Dsp.AllFields">
+      <summary>Used in a query to specify that all the fields be returned from the data source.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.AllFields.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.AllFields" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.AllFields.IncludeHiddenFields">
+      <summary>Gets or sets a Boolean value that specifies whether hidden fields are included in the query.</summary>
+      <returns>true if hidden fields are included in the query; otherwise, false. The default value is false.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.Authentication">
+      <summary>The Authentication class represents the authentication mode that is used to connect to the back-end server.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Authentication.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Authentication" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Authentication.#ctor(System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Authentication" /> class.</summary>
+      <param name="uid">A string that contains the ID.</param>
+      <param name="pwd">A string that specifies the password.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Authentication.Authentications">
+      <summary>Gets or sets the authentications specified in the authentication header.</summary>
+      <returns>A System.Xml.XmlElement array that specifies the authentications.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.ColumnMappingType">
+      <summary>Indicates the type of XML format used for data returned in a query.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.ColumnMappingType.Element">
+      <summary>Element-centric.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.ColumnMappingType.Attribute">
+      <summary>Attribute-centric.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.Connection">
+      <summary>Represents a connection to a data retrieval service adapter.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Connection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Connection" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Connection.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Connection" /> class.</summary>
+      <param name="connectionString">A string that contains the connection string.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Connection.ConnectionString">
+      <summary>Gets or sets the connection string for the connection.</summary>
+      <returns>A string that contains the connection string.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.DataRoot">
+      <summary>Represents the root of the content document for a particular adapter instance. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DataRoot.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DataRoot" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DataRoot.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DataRoot" /> class based on the specified data root.</summary>
+      <param name="root">A string that specifies the data root.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DataRoot.AllowRemoteDataAccess">
+      <summary>Gets or sets a Boolean value that specifies whether the adapter accesses data that resides on a different server. </summary>
+      <returns>true if the adapter is allowed to attempt access to remote data using the credentials supplied by the client; otherwise, false. The default value is true.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DataRoot.Root">
+      <summary>Gets or sets a string that identifies the data root for a particular adapter instance. </summary>
+      <returns>A string that specifies the data root. In the case of a Microsoft SQL Server adapter, this property contains the SQL Server name. In the case of a Microsoft Windows SharePoint Services adapter, this property contains the URL for the SharePoint site.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.DocumentType">
+      <summary>Specifies the document type for a request.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.DocumentType.Content">
+      <summary>Service-specific document that represents data stored in the back-end data source. The schema for this document is a function of the schema of the data source. For example, in the case of the adapter service for Microsoft Windows SharePoint Services, the content document represents data stored on the SharePoint Web site where the service instance resides.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.DocumentType.System">
+      <summary>Service-specific document that contains system data. Clients may query the system document using standard methods to obtain data about the service, including supported authentication modes, the data root format of the adapter, supported query types, and version support.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.DspQuery">
+      <summary>Defines the filter used in a query against a data source provider. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DspQuery.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DspQuery" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspQuery.Fields">
+      <summary>Gets or sets the fields that are included in the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Fields" /> object that contains the fields.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspQuery.OrderBy">
+      <summary>Gets or sets the columns by which the data returned is ordered. </summary>
+      <returns>An array of <see cref="T:Microsoft.SharePoint.Dsp.OrderField" /> objects representing the columns.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspQuery.RowLimit">
+      <summary>Gets or sets a limit for the number of rows returned in the query. </summary>
+      <returns>A 64-bit integer that specifies the row limit.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspQuery.ServerParameterInfo">
+      <summary>Gets or sets server parameter information in a query. </summary>
+      <returns>A <see cref="Microsoft.SharePoint.Dsp.ServerParameterInfo" /> object that contains the server parameter information.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspQuery.ServerParameters">
+      <summary>Gets or sets the server parameters required by the data source in the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.ServerParameter" /> array that contains the server parameters.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DspQuery.WhereCondition">
+      <summary>Gets or sets the Where clause used in the filter for the query. </summary>
+      <returns>A System.Xml.XmlNode object that contains the Where clause used in the query in the following form:  Copy Code&lt;Where&gt; 
+   &lt;And&gt; 
+      &lt;Or&gt; 
+         &lt;Eq&gt; 
+            &lt;FieldRef Name="Region"/&gt;
+            &lt;Value&gt;BC&lt;/Value&gt; 
+         &lt;/Eq&gt; 
+         &lt;Eq&gt; 
+            &lt;FieldRef Name="Region"/&gt; 
+            &lt;Value&gt;OR&lt;/Value&gt; 
+         &lt;/Eq&gt; 
+      &lt;/Or&gt; 
+      &lt;IsNotNull&gt; 
+         &lt;FieldRef Name="Phone"/&gt; 
+      &lt;/IsNotNull&gt; 
+   &lt;/And&gt; 
+&lt;/Where&gt; </returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.DSQuery">
+      <summary>Represents a query used by a data retrieval service. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.DSQuery.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.DSQuery" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.ColumnMapping">
+      <summary>Gets or sets the XML format that is used for data returned in the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.ColumnMappingType" /> value that specifies the XML format.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.ComparisonLocale">
+      <summary>Gets or sets the locale that the server uses for string comparisons. </summary>
+      <returns>A string that contains the locale ID (LCID).</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.DspQuery">
+      <summary>Gets or sets the filter, column selection, sorting, and row limit used in the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.DspQuery" /> object that specifies the filter, column selection, sorting, and row limit.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.HasStartPosition">
+      <summary>Gets a Boolean value that indicates whether the <see cref="P:Microsoft.SharePoint.Dsp.DSQuery.StartPosition" /> property has been set.</summary>
+      <returns>true if the <see cref="P:Microsoft.SharePoint.Dsp.DSQuery.StartPosition" /> property has been set; otherwise, false.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.ResultContent">
+      <summary>Gets or sets the type of content that is returned through the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.ResultContentType" /> value that specifies the type of content. The default value is Both.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.ResultNamespace">
+      <summary>Gets or sets the namespace to use on the query result. </summary>
+      <returns>A string that specifies the namespace.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.ResultPrefix">
+      <summary>Gets or sets a prefix for the result namespace. </summary>
+      <returns>A string that contains the prefix.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.ResultRoot">
+      <summary>Gets or sets the root name for the XML payload. </summary>
+      <returns>A string that contains the root name.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.ResultRow">
+      <summary>Gets or sets a row element name for the XML payload. </summary>
+      <returns>A string that specifies the row element name.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.Select">
+      <summary>Gets or sets an XPath expression that specifies the data item that the client is querying against. </summary>
+      <returns>A string that contains the XPath expression that specifies the data item. This value may be a non-row-returning item, such as a Microsoft SQL Server database or a Microsoft Windows SharePoint Services site, in which the query is a metadata query; or a row-returning item such as a SQL Server table or a Windows SharePoint Services view, in which case the query is a data query.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.DSQuery.StartPosition">
+      <summary>Gets or sets a string that identifies the beginning of the next page when paging is supported by the data retrieval service. </summary>
+      <returns>A string that identifies the beginning of the next page.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.Field">
+      <summary>Represents a single column in a query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Field.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Field" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Field.#ctor(System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Field" /> class based on the specified column name and column display name. </summary>
+      <param name="name">A string that contains the name of the column.</param>
+      <param name="alias">A string that contains the display name of the column.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Field.Alias">
+      <summary>Gets or sets the display name of the column. </summary>
+      <returns>A string that contains the display name of the column.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Field.Name">
+      <summary>Gets or sets the name of the column. </summary>
+      <returns>A string that contains the name of the column.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.Fields">
+      <summary>Represents the collection of columns that are included in a query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Fields.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Fields" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Fields.#ctor(Microsoft.SharePoint.Dsp.AllFields)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Fields" /> class that includes all the columns in a Microsoft Windows SharePoint Services list.</summary>
+      <param name="allFields">A <see cref="T:Microsoft.SharePoint.Dsp.AllFields" /> object that specifies all the columns.</param>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Fields.#ctor(Microsoft.SharePoint.Dsp.Field[])">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Fields" /> class based on the specified collection of columns. </summary>
+      <param name="fieldArray">An array of <see cref="T:Microsoft.SharePoint.Dsp.Field" /> objects that specifies the columns.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Fields.AllFields">
+      <summary>Gets or sets all columns included in the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.AllFields" /> object that represents all the columns.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Fields.FieldArray">
+      <summary>Gets or sets the columns included in a query. </summary>
+      <returns>An array of <see cref="T:Microsoft.SharePoint.Dsp.Field" /> objects that represents the columns.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.IDspAdapter">
+      <summary>Provides a COM interface for clients to access a data retrieval service adapter locally.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.IDspAdapter.Authentication">
+      <summary>Gets or sets the authentication mode that is used to connect to the back-end server.</summary>
+      <returns>An <see cref="T:Microsoft.SharePoint.Dsp.Authentication" /> object that specifies the authentication mode. When query execution finishes, this property contains the actual authentication method used to access the back-end server by the adapter.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.IDspAdapter.Connection">
+      <summary>Gets or sets the connection to the data retrieval service adapter.</summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Connection" /> object that represents the connection.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.IDspAdapter.DataRoot">
+      <summary>Gets or sets the root of a particular data source.</summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.DataRoot" /> object that represents the root of the data source. The root format can be one of the following three forms: a server name, a UNC share, or a URL. When query execution finishes, the adapter resets this property to null.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.IDspAdapter.LocalClient">
+      <summary>Gets or sets a Boolean value that specifies whether the client is a server component that loads the adapter through the object model interface of the adapter.</summary>
+      <returns>true if the client is a server component that loads the adapter through the object model interface. The default value is false, indicating that the request arrives through SOAP.</returns>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.IDspAdapter.Query(Microsoft.SharePoint.Dsp.QueryRequest)">
+      <summary>Executes a query expressed as a predefined request object.</summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.QueryResponse" /> object that contains the data in response to the request query.</returns>
+      <param name="request"></param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.IDspAdapter.Request">
+      <summary>Gets or sets the operation type and the document type of the query.</summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.RequestHeader" /> object that specifies the operation type and the document type of the query. The only supported operation type is query. The document type can be either content or system.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.IDspAdapter.Versions">
+      <summary>Gets or sets the versions of the data retrieval service that are supported by the adapter or the versions being used by the client to query against the service.</summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Versions" /> object that specifies the versions of the data retrieval service. When query execution finishes, this property contains the versions supported by the adapter.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.MethodType">
+      <summary>Specifies the action of the request.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.MethodType.Query">
+      <summary>Represents a query.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.OrderDirection">
+      <summary>The OrderDirection enumeration specifies the direction in which a field or column is sorted.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.OrderDirection.ASC">
+      <summary>Specifies ascending sort.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.OrderDirection.DESC">
+      <summary>Specifies descending sort.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.OrderField">
+      <summary>Represents the column by which the result is ordered. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.OrderField.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.OrderField" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.OrderField.#ctor(System.String,Microsoft.SharePoint.Dsp.OrderDirection)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.OrderField" /> class based on the specified column name and sort direction. </summary>
+      <param name="name">A string that contains the name of the column.</param>
+      <param name="direction">A <see cref="T:Microsoft.SharePoint.Dsp.OrderDirection" /> value that specifies the sort direction.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.OrderField.Direction">
+      <summary>Gets or sets the sort direction for the column by which the result is ordered. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.OrderDirection" /> value that specifies the sort direction.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.OrderField.Name">
+      <summary>Gets or sets the name of the column by which the result is ordered. </summary>
+      <returns>A string that contains the name of the column.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.PagingSupportType">
+      <summary>Indicates the type of paging that is supported for a query.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.PagingSupportType.None">
+      <summary>Indicates paging is not supported.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.PagingSupportType.ForwardOnly">
+      <summary>Indicates paging only moves forward.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.PagingSupportType.TwoWay">
+      <summary>Indicates paging can move forward or backward.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.PTQuery">
+      <summary>Represents a pass-through query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.PTQuery.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.PTQuery" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.PTQuery.Any">
+      <summary>Gets or sets a placeholder where the content of the pass-through query is specified. </summary>
+      <returns>A System.Xml.XmlNode array whose structure each adapter defines.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.QueryRequest">
+      <summary>Represents the request in a query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.QueryRequest.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.QueryRequest" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.QueryRequest.DSQuery">
+      <summary>Gets or sets the data retrieval service query for the request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.DSQuery" /> object that represents the query.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.QueryRequest.PTQuery">
+      <summary>Gets or sets the pass-through query for the request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.PTQuery" /> object that represents the pass-through query.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.QueryResponse">
+      <summary>Represents the response in a query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.QueryResponse.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.QueryResponse" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.QueryResponse.DSResponse">
+      <summary>Gets or sets the response for the data retrieval service query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Response" /> object that represents the response.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.QueryResponse.PTResponse">
+      <summary>Gets or sets the response for the pass-through query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.Response" /> object that represents the response.</returns>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.QueryResponse.System#Xml#Serialization#IXmlSerializable#GetSchema"></member>
+    <member name="M:Microsoft.SharePoint.Dsp.QueryResponse.System#Xml#Serialization#IXmlSerializable#ReadXml(System.Xml.XmlReader)"></member>
+    <member name="M:Microsoft.SharePoint.Dsp.QueryResponse.System#Xml#Serialization#IXmlSerializable#WriteXml(System.Xml.XmlWriter)"></member>
+    <member name="T:Microsoft.SharePoint.Dsp.QueryType">
+      <summary>Specifies a type of query that is used in a request.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.QueryType.DSPQ">
+      <summary>Specifies data retrieval service query format.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.QueryType.PassThrough">
+      <summary>Specifies Pass-Through query format.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.Request">
+      <summary>Represents the request header in a query, containing information about the operation type and the document type of the query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Request.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Request" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Request.Select">
+      <summary>Gets or sets an XPath expression that specifies the data item that the client is querying against. </summary>
+      <returns>A string that contains the XPath expression that specifies the data item. This value may be a non-row-returning item, such as a Microsoft SQL Server database or a Microsoft Windows SharePoint Services site, in which the query is a metadata query; or a row-returning item such as a SQL Server table or a Windows SharePoint Services view, in which case the query is a data query.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.RequestHeader">
+      <summary>Represents the request header in a query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.RequestHeader.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.RequestHeader" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.RequestHeader.#ctor(Microsoft.SharePoint.Dsp.DocumentType,Microsoft.SharePoint.Dsp.MethodType)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.RequestHeader" /> class based on the specified document type and action. </summary>
+      <param name="document">A <see cref="T:Microsoft.SharePoint.Dsp.DocumentType" /> value that specifies the document type.</param>
+      <param name="method">A <see cref="T:Microsoft.SharePoint.Dsp.MethodType" /> value that specifies the action.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.RequestHeader.Document">
+      <summary>Gets or sets the document type of the request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.DocumentType" /> value that specifies the document type.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.RequestHeader.Method">
+      <summary>Gets or sets the action of the request. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.MethodType" /> value that specifies the action of the request.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.Response">
+      <summary>Represents the response in a query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Response.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Response" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Response.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Response" /> class based on the specified XML data. </summary>
+      <param name="dataXml">A string that contains the XML data.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Response.DataXml">
+      <summary>Gets or sets the XML data of the response. </summary>
+      <returns>A string that contains the XML data in the following form: If the schema was requested in the <see cref="P:Microsoft.SharePoint.Dsp.DSQuery.ResultContent" /> property, the first top-level element is the XML schema (XSD), starting with the &lt;schema&gt; element.If the data was requested in the ResultContent property, the next top-level element is the data.The final top-level element is the pagingInfo element, which corresponds to the PagingInfo block. The XML string can then be set to the startPosition property to get the next page of data.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Response.ErrorCode">
+      <summary>Gets or sets an error message for the response. </summary>
+      <returns>A string that contains the error message.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Response.Status">
+      <summary>Gets or sets the response status of the query. </summary>
+      <returns>A <see cref="T:Microsoft.SharePoint.Dsp.ResponseStatus" /> value that specifies the response status.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.ResponseStatus">
+      <summary>Specifies the status of a query response.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.ResponseStatus.Success">
+      <summary>Indicates the query succeeded.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.ResponseStatus.Failure">
+      <summary>Indicates the query failed.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.ResultContentType">
+      <summary>Indicates the type of content that is returned through a query.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.ResultContentType.Both">
+      <summary>Returns both the schema (XSD) and XML payload parts of the query result.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.ResultContentType.SchemaOnly">
+      <summary>Returns only the schema (XSD) part of the query result.</summary>
+    </member>
+    <member name="F:Microsoft.SharePoint.Dsp.ResultContentType.DataOnly">
+      <summary>Returns only the XML payload part of the query result.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.ServerParameter">
+      <summary>Represents a server parameter required by the server containing the data source. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.ServerParameter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.ServerParameter" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.ServerParameter.#ctor(System.String,System.String,System.Boolean)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.ServerParameter" /> class based on the specified parameter name, parameter value, and a Boolean value specifying whether the value of the parameter is null.</summary>
+      <param name="name">A string that contains the name of the parameter.</param>
+      <param name="val">A string that contains the value of the parameter.</param>
+      <param name="nil">true to specify that the value of the parameter is null; false to specify that the value of the server parameter be interpreted as an empty string ("").</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.ServerParameter.Name">
+      <summary>Gets or sets the name of the server parameter. </summary>
+      <returns>A string that contains the name.</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.ServerParameter.Null">
+      <summary>Gets or sets a Boolean value that specifies whether the value of the server parameter is null.</summary>
+      <returns>true to specify that the value of the parameter is null; false to specify that the value of the server parameter will be interpreted as an empty string ("").</returns>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.ServerParameter.Value">
+      <summary>Gets or sets the value of the server parameter. </summary>
+      <returns>A string that contains the value.</returns>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.ServerParameterInfo">
+      <summary>Represents information about the parameters used by the server containing the data source. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.ServerParameterInfo.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.ServerParameterInfo" /> class.</summary>
+    </member>
+    <member name="T:Microsoft.SharePoint.Dsp.Versions">
+      <summary>Represents the versions of the data retrieval service that are supported by an adapter or the versions being used in a query. </summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Versions.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Versions" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.SharePoint.Dsp.Versions.#ctor(System.String[])">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.SharePoint.Dsp.Versions" /> class based on the specified version. </summary>
+      <param name="version">A string array that specifies the version of the data retrieval service.</param>
+    </member>
+    <member name="P:Microsoft.SharePoint.Dsp.Versions.Version">
+      <summary>Gets or sets a version within the collection of versions supported by the data retrieval service adapter. </summary>
+      <returns>A string array that contains the version information.</returns>
+    </member>
+  </members>
+</doc>

@@ -1,0 +1,15 @@
+﻿using %dbtestbasenamespace%;
+using NUnit.Framework;
+
+namespace %namespace%
+{
+    class MigrationsShould : DbTestBase
+    {
+        [Test]
+        public void Go_down_and_up()
+        {
+            Migrator.MigrateTo(0);
+            Migrator.MigrateToLatestVersion();
+        }
+    }
+}

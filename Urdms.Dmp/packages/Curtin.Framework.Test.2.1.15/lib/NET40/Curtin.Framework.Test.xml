@@ -1,0 +1,499 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Curtin.Framework.Test</name>
+    </assembly>
+    <members>
+        <member name="T:Curtin.Framework.Test.Utils.CompareObjects">
+            <summary>
+            Class that allows comparison of two objects of the same type to each other.  Supports classes, lists, arrays, dictionaries, child comparison and more.
+            </summary>
+        </member>
+        <member name="F:Curtin.Framework.Test.Utils.CompareObjects.TimeToleranceInSeconds">
+            <summary>
+            Adding tollerance in comparing datetimes and timespans.
+            </summary>
+        </member>
+        <member name="F:Curtin.Framework.Test.Utils.CompareObjects._parents">
+            <summary>
+            Keep track of parent objects in the object hiearchy
+            </summary>
+        </member>
+        <member name="F:Curtin.Framework.Test.Utils.CompareObjects._propertyCache">
+            <summary>
+            Reflection Cache for property info
+            </summary>
+        </member>
+        <member name="F:Curtin.Framework.Test.Utils.CompareObjects._fieldCache">
+            <summary>
+            Reflection Cache for field info
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.#ctor">
+            <summary>
+            Set up defaults for the comparison
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.Compare(System.Object,System.Object)">
+            <summary>
+            Compare two objects of the same type to each other.
+            </summary>
+            <remarks>
+            Check the Differences or DifferencesString Properties for the differences.
+            Default MaxDifferences is 1 for performance
+            </remarks>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <returns>True if they are equal</returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.ClearCache">
+            <summary>
+            Reflection properties and fields are cached. By default this cache is cleared automatically after each compare.
+            </summary>
+            <seealso cref="P:Curtin.Framework.Test.Utils.CompareObjects.AutoClearCache"/>
+            <seealso cref="P:Curtin.Framework.Test.Utils.CompareObjects.Caching"/>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.Compare(System.Object,System.Object,System.String)">
+            <summary>
+            Compare two objects
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb">Where we are in the object hiearchy</param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.IgnoredByAttribute(System.Type)">
+            <summary>
+            Check if any type has attributes that should be bypassed
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.CompareTimespan(System.Object,System.Object)">
+            <summary>
+            Compare a timespan struct
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.ComparePointer(System.Object,System.Object,System.String)">
+            <summary>
+            Compare a pointer struct
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.CompareEnum(System.Object,System.Object,System.String)">
+            <summary>
+            Compare an enumeration
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.CompareSimpleType(System.Object,System.Object,System.String)">
+            <summary>
+            Compare a simple type
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.CompareStruct(System.Object,System.Object,System.String)">
+            <summary>
+            Compare a struct
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.CompareClass(System.Object,System.Object,System.String)">
+            <summary>
+            Compare the properties, fields of a class
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.PerformCompareFields(System.Type,System.Object,System.Object,System.String)">
+            <summary>
+            Compare the fields of a class
+            </summary>
+            <param name="t1"></param>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.PerformCompareProperties(System.Type,System.Object,System.Object,System.String)">
+            <summary>
+            Compare the properties of a class
+            </summary>
+            <param name="t1"></param>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.CompareIDictionary(System.Object,System.Object,System.String)">
+            <summary>
+            Compare a dictionary
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.cStr(System.Object)">
+            <summary>
+            Convert an object to a nicely formatted string
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.CompareIList(System.Object,System.Object,System.String)">
+            <summary>
+            Compare an array or something that implements IList
+            </summary>
+            <param name="object1"></param>
+            <param name="object2"></param>
+            <param name="breadCrumb"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.AddBreadCrumb(System.String,System.String,System.String,System.String)">
+            <summary>
+            Add a breadcrumb to an existing breadcrumb
+            </summary>
+            <param name="existing"></param>
+            <param name="name"></param>
+            <param name="extra"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.CompareObjects.AddBreadCrumb(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Add a breadcrumb to an existing breadcrumb
+            </summary>
+            <param name="existing"></param>
+            <param name="name"></param>
+            <param name="extra"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.ElementsToIgnore">
+            <summary>
+            Ignore classes, properties, or fields by name during the comparison.
+            Case sensitive.
+            </summary>
+            <example>ElementsToIgnore.Add("CreditCardNumber")</example>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.ComparePrivateProperties">
+            <summary>
+            If true, private properties and fields will be compared. The default is false.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.ComparePrivateFields">
+            <summary>
+            If true, private fields will be compared. The default is false.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.CompareStaticProperties">
+            <summary>
+            If true, static properties will be compared.  The default is true.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.CompareStaticFields">
+            <summary>
+            If true, static fields will be compared.  The default is true.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.CompareChildren">
+            <summary>
+            If true, child objects will be compared. The default is true. 
+            If false, and a list or array is compared list items will be compared but not their children.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.CompareReadOnly">
+            <summary>
+            If true, compare read only properties (only the getter is implemented).
+            The default is true.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.CompareFields">
+            <summary>
+            If true, compare fields of a class (see also CompareProperties).
+            The default is true.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.CompareProperties">
+            <summary>
+            If true, compare properties of a class (see also CompareFields).
+            The default is true.
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.MaxDifferences">
+            <summary>
+            The maximum number of differences to detect
+            </summary>
+            <remarks>
+            Default is 1 for performance reasons.
+            </remarks>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.Differences">
+            <summary>
+            The differences found during the compare
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.DifferencesString">
+            <summary>
+            The differences found in a string suitable for a textbox
+            </summary>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.AutoClearCache">
+            <summary>
+            Reflection properties and fields are cached. By default this cache is cleared after each compare.  Set to false to keep the cache for multiple compares.
+            </summary>
+            <seealso cref="P:Curtin.Framework.Test.Utils.CompareObjects.Caching"/>
+            <seealso cref="M:Curtin.Framework.Test.Utils.CompareObjects.ClearCache"/>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.Caching">
+            <summary>
+            By default properties and fields for types are cached for each compare.  By default this cache is cleared after each compare.
+            </summary>
+            <seealso cref="P:Curtin.Framework.Test.Utils.CompareObjects.AutoClearCache"/>
+            <seealso cref="M:Curtin.Framework.Test.Utils.CompareObjects.ClearCache"/>
+        </member>
+        <member name="P:Curtin.Framework.Test.Utils.CompareObjects.AttributesToIgnore">
+            <summary>
+            A list of attributes to ignore a class, property or field
+            </summary>
+            <example>AttributesToIgnore.Add(typeof(XmlIgnoreAttribute));</example>
+        </member>
+        <member name="T:Curtin.Framework.Test.Utils.PerformanceCounterReader">
+            <summary>
+            Wraps around reading a performance counter that has instances.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.PerformanceCounterReader.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Construct a PerformanceCounterReader.
+            </summary>
+            <param name="categoryName">The performance counter category name</param>
+            <param name="counterName">The performance counter name</param>
+            <param name="instanceNameContains">A string to search instance names by to find the instance to connect to</param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.PerformanceCounterReader.Get">
+            <summary>
+            Returns the next performance counter value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Utils.PerformanceCounterReader.WaitTillClear">
+            <summary>
+            Waits until the performance counter value is 0.
+            </summary>
+        </member>
+        <member name="T:Curtin.Framework.Test.Web.RouteTestingExtensions">
+             <summary>
+             Used to simplify testing routes and restful testing routes
+             <example>
+             This tests that incoming PUT on resource is redirected to Update
+             "~/banner/1"
+             .WithMethod(HttpVerbs.Put)
+             .ShouldMapTo&lt;BannerController>(action => action.Update(1));
+            
+             This tests that incoming POST was a faux PUT using the _method=PUT form parameter
+             "~/banner/1"
+             .WithMethod(HttpVerbs.Post, HttpVerbs.Put)
+             .ShouldMapTo&lt;BannerController>(action => action.Update(1));
+             </example>
+             </summary>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.WithMethod(System.String,System.String)">
+            <summary>
+            A way to start the fluent interface and and which method to use
+            since you have a method constraint in the route.
+            </summary>
+            <param name="url"></param>
+            <param name="httpMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.WithMethod(System.String,System.Web.Mvc.HttpVerbs)">
+            <summary>
+            </summary>
+            <param name="url"></param>
+            <param name="verb"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.Route(System.String,System.String)">
+            <summary>
+            Find the route for a URL and an Http Method
+            because you have a method contraint on the route
+            </summary>
+            <param name="url"></param>
+            <param name="httpMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.Route(System.String)">
+            <summary>
+            Returns the corresponding route for the URL. Returns null if no route was found.
+            </summary>
+            <param name="url">The app relative url to test.</param>
+            <returns>A matching <see cref="T:System.Web.Routing.RouteData"/>, or null.</returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.Route(System.String,System.Web.Mvc.HttpVerbs,System.Web.Mvc.HttpVerbs)">
+            <summary>
+            Returns the corresponding route for the URL. Returns null if no route was found.
+            </summary>
+            <param name="url">The URL.</param>
+            <param name="httpMethod">The HTTP method.</param>
+            <param name="formMethod">The form method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.Route(System.String,System.Web.Mvc.HttpVerbs)">
+            <summary>
+            Returns the corresponding route for the URL. Returns null if no route was found.
+            </summary>
+            <param name="url">The URL.</param>
+            <param name="httpMethod">The HTTP method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.WithMethod(System.String,System.Web.Mvc.HttpVerbs,System.Web.Mvc.HttpVerbs)">
+            <summary>
+            Asserts that the route matches the expression specified based on the incoming HttpMethod and FormMethod for Simply Restful routing. Checks controller, action, and any method arguments
+            into the action as route values.
+            </summary>
+            <param name="relativeUrl">The relative URL.</param>
+            <param name="httpMethod">The HTTP method.</param>
+            <param name="formMethod">The form method.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldMapTo``1(System.Web.Routing.RouteData,System.Linq.Expressions.Expression{System.Func{``0,System.Web.Mvc.ActionResult}})">
+            <summary>
+            Asserts that the route matches the expression specified. Checks controller, action, and any method arguments
+            into the action as route values.
+            </summary>
+            <typeparam name="TController">The controller.</typeparam>
+            <param name="routeData">The routeData to check</param>
+            <param name="action">The action to call on TController.</param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldMapTo``1(System.String,System.Linq.Expressions.Expression{System.Func{``0,System.Web.Mvc.ActionResult}})">
+            <summary>
+            Converts the URL to matching RouteData and verifies that it will match a route with the values specified by the expression.
+            </summary>
+            <typeparam name="TController">The type of controller</typeparam>
+            <param name="relativeUrl">The ~/ based url</param>
+            <param name="action">The expression that defines what action gets called (and with which parameters)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldMapTo``1(System.Web.Routing.RouteData)">
+            <summary>
+            Verifies the <see cref="T:System.Web.Routing.RouteData">routeData</see> maps to the controller type specified.
+            </summary>
+            <typeparam name="TController"></typeparam>
+            <param name="routeData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldBeIgnored(System.String)">
+            <summary>
+            Verifies the <see cref="T:System.Web.Routing.RouteData">routeData</see> will instruct the routing engine to ignore the route.
+            </summary>
+            <param name="relativeUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.GetValue(System.Web.Routing.RouteValueDictionary,System.String)">
+            <summary>
+            Gets a value from the <see cref="T:System.Web.Routing.RouteValueDictionary"/> by key. Does a
+            case-insensitive search on the keys.
+            </summary>
+            <param name="routeValues"></param>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ReadValue``2(``0,System.Func{``0,``1})">
+            <summary>
+            Returns the result of <paramref name="func"/> if <paramref name="obj"/> is not null.
+            <example>
+            <code>
+            Request.Url.ReadValue(x => x.Query)
+            </code>
+            </example>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="obj">The obj.</param>
+            <param name="func">The func.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ReadValue``2(``0,System.Func{``0,``1},``1)">
+            <summary>
+            Returns the result of <paramref name="func"/> if <paramref name="obj"/> is not null.
+            Otherwise, <paramref name="defaultValue"/> is returned.
+            <example>
+            <code>
+            Request.Url.ReadValue(x => x.Query, "default")
+            </code>
+            </example>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="obj"></param>
+            <param name="func"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldBe``1(System.Object,System.String)">
+            <summary>
+            Asserts that the object is of type T. Also returns T to enable method chaining.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="actual"></param>
+            <param name="message">Message to display when assertion fails</param>
+            <returns></returns>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldBe(System.Object,System.Object)">
+            <summary>
+            Asserts that the object is the expected value.
+            </summary>
+            <param name="actual"></param>
+            <param name="expected"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.AssertSameStringAs(System.String,System.String)">
+            <summary>
+            Compares the two strings (case-insensitive).
+            </summary>
+            <param name="actual"></param>
+            <param name="expected"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.AssertStringContains(System.String,System.String)">
+            <summary>
+            Compares the two strings (case-insensitive).
+            </summary>
+            <param name="fullstring"></param>
+            <param name="expected"></param>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldNotBeNull(System.Object,System.String)">
+            <summary>
+             Asserts that the object should not be null.
+            </summary>
+            <param name="actual"></param>
+            <param name="message"></param>
+            <exception cref="T:Curtin.Framework.Test.Web.RouteTestingExtensions.AssertionException"></exception>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.ShouldEqual(System.Object,System.Object,System.String)">
+            <summary>
+             Asserts that two objects are equal.
+            </summary>
+            <param name="actual"></param>
+            <param name="expected"></param>
+            <param name="message"></param>
+            <exception cref="T:Curtin.Framework.Test.Web.RouteTestingExtensions.AssertionException"></exception>
+        </member>
+        <member name="T:Curtin.Framework.Test.Web.RouteTestingExtensions.AssertionException">
+            <summary>
+            Exception that is thrown when an assertion fails.
+            </summary>
+        </member>
+        <member name="M:Curtin.Framework.Test.Web.RouteTestingExtensions.AssertionException.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:Curtin.Framework.Test.Web.RouteTestingExtensions.AssertionException"/> class.
+            </summary>
+            <param name="message">Message thrown in the exception.</param>
+        </member>
+    </members>
+</doc>

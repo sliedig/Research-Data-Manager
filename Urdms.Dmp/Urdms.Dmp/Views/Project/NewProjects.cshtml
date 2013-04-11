@@ -1,0 +1,25 @@
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+
+@helper IntroductionCreate()
+{
+    <p>You can create a Data Management Plan for a research project.</p>
+}
+
+@helper DepositInstructions()
+    {
+    <p>Use this form to capture basic information about data relating to a completed research project.</p>
+}
+
+@using (var f = Html.BeginFlowForm())
+{
+    using (var s = f.BeginSection("Create New Data Management Plan (DMP)", "create-dmp", IntroductionCreate()))
+    {
+        @Html.ActionLink("Data Management Plan for Research-Initiated Project", "Introduction", "Project", new { }, new { @class = "action_button" })
+    }
+    using (var s = f.BeginSection("Completed Research Projects", "data-deposit", DepositInstructions()))
+    {
+        @Html.ActionLink("Completed Projects", "Project", "DataDeposit", new { }, new { @class = "action_button" })
+    }
+}

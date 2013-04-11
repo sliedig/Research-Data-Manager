@@ -1,0 +1,10 @@
+::Run this file to install all of the Urdms services
+@ECHO OFF
+CALL ProvisioningService\UninstallService.bat ProvisioningService
+CALL ProvisioningService.SharePoint\UninstallService.bat ProvisioningService.SharePoint
+CALL ProvisioningService.ViewModelUpdater\UninstallService.bat ProvisioningService.ViewModelUpdater
+CALL Approvals.ApprovalService\UninstallService.bat Approvals.ApprovalService
+CALL Approvals.ViewModelUpdater\UninstallService.bat Approvals.ViewModelUpdater
+CALL Approvals.VivoPublisher\UninstallService.bat Approvals.VivoPublisher
+CALL NotificationService\UninstallService.bat NotificationService
+CALL DocumentBuilderService\UninstallService.bat DocumentBuilderService

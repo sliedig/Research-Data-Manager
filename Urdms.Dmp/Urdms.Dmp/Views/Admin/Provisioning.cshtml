@@ -1,0 +1,47 @@
+﻿@model Urdms.Dmp.Models.ProvisioningViewModel
+@helper DataCollectionInstructions()
+{
+    <p>Before resolving these provisioning errors, please contact Systems Support to make sure that the site for the given project exists.</p>
+    <p>Once created, enter the <strong>full URL</strong> of the site (e.g. https://www.domain.edu.au/research/project123) into the textbox, select the items you wish to resolve, and submit.</p>
+}
+
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+
+@{
+    var collectionDescriptionGrid = Html.Grid(Model.ProvisioningInformation)
+        .Columns(column =>
+        {
+            column.For(o=>o.RequestDate == null ? "None" : o.RequestDate.Value.ToString("d MMM yyyy")).Named("Date");
+            column.For(o => o.Id).Named("Project Id");
+            column.For(o => o.Title).Named("Project Title");
+            column.For(o => o.ProvisioningStatus).Named("Provisioning Status");
+            column.For(o => o.RequestId).Named("Request Id");
+            column.For(o => new MvcHtmlString(string.Format(@"<input type=""hidden"" name=""ProvisioningInformation[{1}].Id"" value=""{0}"" /><label><span class=""reader"">Site URL</span><input type=""text"" name=""ProvisioningInformation[{1}].SiteUrl"" value=""{2}"" /></label>", o.Id, o.Item, Html.Encode(o.SiteUrl)))).Named("URL");
+            column.For(o => new MvcHtmlString(string.Format(@"<label><span class=""reader"">Select this project</span><input type=""checkbox"" name=""ProvisioningInformation[{0}].Select"" value=""true""{1} /></label>", o.Item, o.Select ? @" checked=""true""" : ""))).Named("Select");
+        })
+        .Empty("No Data Descriptions for the selected project.")
+        .Attributes(@class => "fullwidth");
+}
+
+@using (var f = Html.BeginFlowForm(htmlAttributes: new { @style = "width:764px" }))
+{
+    <h1>Provisioning Error Resolution Management</h1>
+    
+    if (ViewBag.Message != null)
+    {
+        <p>@ViewBag.Message</p>
+    }
+
+    using (var s = f.BeginSection("Provisioning Requests", instructions: DataCollectionInstructions()))
+    {
+        @collectionDescriptionGrid;
+    }
+
+    using (var n = f.BeginNavigation())
+    {
+       @n.Submit("Resolve Provisioning Requests", name: "ResolveRequest", id: "ResolveRequest", classes: "float-right")
+    }
+     
+}

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Urdms.Dmp.Database.Entities.ClassificationBase>
+
+<table id="fieldsOfResearchGrid">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Description</th>
+            <th>&nbsp;</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @Html.Partial("_FieldOfResearch", item)
+        }
+    </tbody>
+</table>

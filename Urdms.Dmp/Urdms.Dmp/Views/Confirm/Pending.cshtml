@@ -1,0 +1,31 @@
+﻿@model Urdms.Dmp.Models.DataManagementPlanInfoViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+}
+@helper ConfirmationInstructions()
+    {
+    <span style="font-style: normal;">Your request for the creation of a Project Storage
+        Space for this research project is in progress. You will be notified by email upon
+        successful creation of the Project Storage Space. You will have the ability
+        to update the PDF of the Data Management Plan as soon as you get access to the Project
+        Storage Space.</span>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.DataManagementPlanId)
+    @Html.HiddenFor(m => m.ProjectTitle)
+    @f.Steps(ViewBag.Steps, 6, 6, true, true)
+    @f.Header("Data Management Review")
+    <h2>Data Management Plan for: <strong>@Model.ProjectTitle</strong></h2>
+    using (var s = f.BeginSection("Provisioning In Progress", "inprogress"))
+    {
+    <label>@ConfirmationInstructions()</label>
+    }
+
+    using (var n = f.BeginNavigation())
+    {
+    @n.Submit("Previous", name: "Previous", id: "Previous")
+    }
+
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+}

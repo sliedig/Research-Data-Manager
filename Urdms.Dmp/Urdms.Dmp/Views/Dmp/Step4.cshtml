@@ -1,0 +1,253 @@
+﻿@using Urdms.Dmp.Models
+@using Urdms.Dmp.Models.Enums
+@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataManagementPlanViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("research-data");
+    AddScript("jquery.prettyPhoto");
+    AddStylesheet("prettyPhoto");
+    AddScript("dmp-data-storage");
+    AddScript("ajax-users");
+
+    var researchDataHints = new[]
+                                {
+                   new FaqItem { Text = "What are the advantages and disadvantages of the various storage solutions?", Url = "#faq1" }
+                                };
+                                
+    var backupLocationHints = new[]
+                                  {
+                                      new FaqItem { Text = "Why is backup important and what shall I consider when backing up my data?", Url = "#faq4"}
+                                  };
+
+    var versionControlHints = new[]
+                                        {
+                                            new FaqItem { Text = "What is version control?", Url = "#faq5" }
+                                        };
+    var principalInvestigatorHints = new[]
+                                         {
+                                            new FaqItem {Text = "Who should have access to the data?", Url = "#faq6"}
+                                         };
+}
+@helper DataStorageInstructions()
+    {
+    <p>A data storage strategy addresses where and how the data is to be physically stored
+        during the project. Unless stored appropriately, digital storage media are inherently
+        unreliable. You will also need to consider the most appropriate format, both for
+        analysing the data, and for storage. File formats and physical storage media may
+        require specific data-reading equipment and will ultimately become obsolete. Considering
+        these requirements at the start of the project will ensure your data remains accessible.</p>
+}
+@helper AccessInstructions()
+    {
+    <p>Access to the project data should only be given to authorised users; understand the
+        implications of providing access to others, in terms of copyright and IP ownership,
+        and ethical requirements. Mixed levels of access regulations may be put in place
+        for some data collections, combining regulated access to confidential data with
+        user access to non-confidential data. Access regulations should always be proportionate
+        to the kind of data and confidentiality involved.</p>
+}
+@helper BackupInstructions()
+    {
+    <p>It is important to keep copies of your data in more than one location. Keeping backups,
+        or copies of files enables you to restore original versions if there is loss of
+        data. Choosing a precise back-up procedure depends on local circumstances, the perceived
+        value of the data and the levels of risk considered appropriate. Where data contain
+        personal information, care should be taken to only create the minimal number of
+        copies needed, e.g. a master file and one back-up copy.</p>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ProjectId)
+    @Html.HiddenFor(m => m.ProjectTitle)
+    @Html.HiddenFor(m => m.Step)
+    @Html.HiddenFor(m => m.Start)
+    @Html.HiddenFor(m => m.PrincipalInvestigator.UserId)
+    @f.Steps(ViewBag.Steps, 4, ViewBag.MaxStep, true, true)
+    @Html.HiddenFor(m => m.PrincipalInvestigator.FullName)
+    
+    @f.Header("Data Storage and Backup")
+    <h2>Data Management Plan for: @Model.ProjectTitle</h2>
+    using (var s = f.BeginSection("Data Storage", "data-storage", DataStorageInstructions()))
+    {
+    <dt style="width: auto;">Where will you store the research data?</dt>
+    <dd>
+        <dl style="background: none repeat scroll 0 0 #a4e292; border: 1px solid #84c273;
+            margin: 0.5em 0; padding: 0 16px 16px;">
+            @s.FieldFor(m => m.DataStorage.InstitutionalStorageTypes, new FieldConfiguration { As = ElementType.Checkboxes })
+            @s.FieldFor(m => m.DataStorage.InstitutionalOtherTypeDescription, new FieldConfiguration { DisplayFieldName = false })
+        </dl>
+        <dl style="background: none repeat scroll 0 0 #bfdfb5; border: 1px solid #84c273;
+            margin: 0.5em 0; padding: 0 16px 16px;">
+            @s.FieldFor(m => m.DataStorage.ExternalStorageTypes, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { ExternalStorageTypes.None } })
+            @s.FieldFor(m => m.DataStorage.ExternalOtherTypeDescription, new FieldConfiguration { DisplayFieldName = false })
+        </dl>
+        <dl style="background: none repeat scroll 0 0 #cddec8; border: 1px solid #84c273;
+            margin: 0.5em 0; padding: 0 16px 16px;">
+            @s.FieldFor(m => m.DataStorage.PersonalStorageTypes, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { PersonalStorageTypes.None } })
+            @s.FieldFor(m => m.DataStorage.PersonalOtherTypeDescription, new FieldConfiguration { DisplayFieldName = false })
+        </dl>
+    </dd>
+    @s.FieldFor(m => m.DataStorage.MaxDataSize, new FieldConfiguration { As = ElementType.RadioButtons, Exclude = new Enum[] { MaxDataSize.None } })
+    @s.FieldFor(m => m.DataStorage.FileFormats)
+    @s.FieldFor(m => m.DataStorage.VersionControl, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { VersionControl.None }, Before = versionControlHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.DataStorage.VersionControlDescription)
+    }
+
+    using (var s = f.BeginSection("Access", "access", AccessInstructions()))
+    {
+    <dt>@Html.LabelFor(m => m.PrincipalInvestigator)</dt>
+    <dd>@Model.PrincipalInvestigator.FullName @MvcHtmlString.Create(principalInvestigatorHints.GenerateFaqPlaceHolder())</dd>
+    @Html.NonPersistentFieldFor(m => m.FindUserId, null, "inlineField")
+    <input type="submit" name="AddUrdmsUser" id="AddUrdmsUser" value="Add User" class="project" /> @*Do not remove class*@
+    <div id="urdmsUsers">
+        @Html.Partial("_UrdmsUsers", new ProjectUrdmsUsersViewModel(Model.UrdmsUsers))
+        <input type="submit" class="refresh" name="DeleteUrdmsUser" id="DeleteUrdmsUser"
+            value="Remove users" />
+    </div>
+    
+    @Html.NonPersistentFieldFor(m => m.NonUrdmsNewUserName, null, "inlineField")
+    <input type="submit" name="AddNonUrdmsUser" id="AddNonUrdmsUser" value="Add User"
+        class="project" /> @*Do not remove class*@
+    <div id="nonUrdmsUsers">
+        @Html.Partial("_NonUrdmsUsers", new ProjectNonUrdmsUsersViewModel(Model.NonUrdmsUsers))
+        <input type="submit" class="refresh" name="DeleteNonUrdmsUser" id="DeleteNonUrdmsUser"
+            value="Remove users" />
+    </div>
+    }
+
+    using (var s = f.BeginSection("Backup", "backup", BackupInstructions()))
+    {
+    @s.FieldFor(m => m.BackupPolicy.BackupLocations, new FieldConfiguration { As = ElementType.Checkboxes })
+    @s.FieldFor(m => m.BackupPolicy.BackupPolicyLocationsDescription, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+    @s.FieldFor(m => m.BackupPolicy.BackupPolicyResponsibilities, new FieldConfiguration { As = ElementType.Checkboxes, Exclude = new Enum[] { DataResponsibilities.None } })
+    @s.FieldFor(m => m.BackupPolicy.BackupPolicyResponsibilitiesDescription)
+    }
+
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit(ViewBag.NavigationButton.Previous, name: "stepAction", id: "PreviousButton", classes: "float-left")
+            @n.Submit(ViewBag.NavigationButton.Next, name: "stepAction", id: "NextButton", classes: "float-right")
+        }
+    </div>
+    
+    
+    
+    <div id="faq1" class="hide">
+        <h2>What are the advantages and disadvantages of availablestorage options?</h2>
+        <p><strong>Onlinestorage space</strong></p>
+        <ul>
+            <li>Advantages: URDMS User ID and password protected, enables collaboration on data, automatically
+                backed up and can be mounted to a local computer.</li>
+            <li>Disadvantages: Not accessible to non-URDMS users.</li>
+        </ul>
+        <p><strong>Personal Network Drive</strong></p>
+        <ul>
+            <li>Advantages: URDMS User ID and password protected, automatically backed up and gets automatically
+                mounted if you login to an Institutional computer.</li>
+            <li>Disadvantages: Data in the personal network drive cannot be shared with others, not
+                easily accessible outside of organisation...</li>
+        </ul>
+        <p><strong>Shared Network Drive</strong></p>
+        <ul>
+            <li>Advantages: URDMS User ID and password protected, datails accessible to all users who
+                have access to the shared network drive, automaticallybacked up andgets automatically
+                mounted if you log into an organisational computer.</li>
+            <li>Disadvantages: Not easily accessible outside of organisation...</li>
+        </ul>
+        <p><a href="http://www.arcs.org.au/index.php/arcs-data-fabric" target="_blank"><strong>
+            ARCS Data Fabric</strong></a> (national data storage system)</p>
+        <ul>
+            <li>Advantages: It’s free, accessible via the Internet and data in the ARCS Data Fabric can
+                be shared with the public. </li>
+            <li>Disadvantages: Not automaticallybacked up and not suitable for long-term storage.</li>
+        </ul>
+        <p><strong>External hard drives</strong></p>
+        <ul>
+            <li>Advantages:Cheap and portable.</li>
+            <li>Disadvantages: Insecure, unless kept in securelocation and sensitive data are encrypted,
+                not automatically backed up and not suitable for long-term storage.</li>
+        </ul>
+        <p><strong>Portable media (includes DVDs and CDs)</strong></p>
+        <ul>
+            <li>Advantages:Cheap and portable.</li>
+            <li>Disadvantages: Usually used as read-only media,Insecure, not automatically backed
+                up and not suitable for long-term storage.</li>
+        </ul>
+        <p><strong>Local Hard Drives (Desktop computers)</strong></p>
+        <ul>
+            <li>Advantages:Easily accessible.</li>
+            <li>Disadvantages: Insecure, unless password protectedand sensitive data are encrypted,
+                not automatically backed up and not suitable for long-term storage.</li>
+        </ul>
+    </div>
+    
+    <div id="faq2" class="hide">
+        <h2>How can I find out a URDMS member's staff ID?</h2>
+        <p>Answer...</p>
+    </div>
+    
+    <div id="faq3" class="hide">
+        <h2>How can I get a non-URDMS member access to Institutional facilities?</h2>
+        <p>Answer...</p>
+    </div>
+    
+    <div id="faq4" class="hide">
+        <h2>Why is backup important and what shall I consider when backing up my data?</h2>
+        <p>Backing up refers to preserving additional copies of your data in a separate physical
+            location from data files in storage. Keeping reliable backups is an integral part
+            of data management. Data is backed up so that it can be:</p>
+        <ul>
+            <li>Recovered after loss </li>
+            <li>Recovered from an earlier time </li>
+        </ul>
+        <p>Data storage options can be used for backup too. To increase the probability of safeguarding
+            your data you can make two or three copies of the data and distribute them geographically.</p>
+        <p>Backup considerations can include:</p>
+        <ul>
+            <li>Who will be responsible for backing up the data? </li>
+            <li>Does the data need to be encrypted before backing it up? </li>
+            <li>How often does the data need to be backed up? </li>
+            <li>How will versioning be managed in backups? </li>
+        </ul>
+    </div>
+    
+    
+    <div id="faq5" class="hide">
+        <h2>What is version control?</h2>
+        <p>Version control is useful when data is constantly updated and/or is accessed by more
+            than one person. Version control can be implemented by agreeing on a standard for
+            naming files or folders. For example, date and time stamp can be part of the file
+            name, adopt a numbering system and/or even append the authors name to the filename.
+            It can even be as simple as adding a version number after each major edit e.g. v01,
+            v02. The method adopted for file and folder naming shall be suitable for your needs,
+            readable and easy to implement and adhere to.</p>
+    </div>
+    
+    <div id="faq6" class="hide">
+        <h2>Who should have access to the data?</h2>
+        <p>Regulating who should have access to your data and the appropriate level of access
+            are important considerations of your data management process. Determining the authorised
+            users may also have implications on the most appropriate storage solution.</p>
+        <p>Access regulations should always be proportionate to the kind of data and confidentiality
+            involved. It is important to understand the implications of providing access to
+            others, in terms of:</p>
+        <ul>
+            <li>Copyright, IP and ownership </li>
+            <li>Ethical requirements </li>
+            <li>Data sensitivity </li>
+            <li>Data privacy </li>
+        </ul>
+    </div>
+    
+    
+    @f.Footer(area: "", id: "XXXXX", date: "2011-08-16")
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ default_width: 600 });
+        });
+    </script>
+}

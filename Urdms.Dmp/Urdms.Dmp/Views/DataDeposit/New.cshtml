@@ -1,0 +1,192 @@
+﻿@using Urdms.Dmp.Models
+@using Urdms.Dmp.Models.Enums
+@using Urdms.Dmp.Utils
+@model Urdms.Dmp.Models.DataDeposit.DataDepositViewModel
+@{
+    Helper.FlowFormCssAndJs(this);
+    AddScript("ajax-users");
+    AddScript("deposit-datasharing");
+    AddScript("jquery.prettyPhoto");
+    AddStylesheet("prettyPhoto");
+
+    var researchDataHints = new[]
+    {
+        new FaqItem { Text = "What can I include in a data description?", Url = "#faq1" }
+    };
+    var availabilityHints = new[]
+    {
+        new FaqItem { Text = "What are the benefits of data sharing?", Url = "#faq4" }
+    };
+    var shareAccessHints = new[]
+    {
+        new FaqItem { Text = "What are the restrictions on sharing data?", Url = "#faq5" }
+    };
+    var dataLicensingHints = new[] 
+    { 
+        new FaqItem { Text = "What is data licensing?", Url = "#faq6" }, 
+        new FaqItem { Text = "What is the Creative Commons?", Url = "#faq7" }, 
+        new FaqItem { Text = "What is the Restrictive License?", Url = "#faq8" } 
+    };
+}
+@helper DataDescriptionInstructions()
+    {
+    <p>Provide details of the research data that was captured or collected during the research
+        project</p>
+}
+@helper DataStorageAndAccessInstructions()
+    {
+    <p>Provide details of the research data that was captured or collected during the research
+        project</p>
+}
+@using (var f = Html.BeginFlowForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.ProjectId)
+    @Html.HiddenFor(m => m.ProjectTitle)
+
+    @f.Header("Data Deposit Form")
+    <h2>Data Desposit for: @Model.ProjectTitle</h2>
+    using (var s = f.BeginSection("Data Description", "data-description", DataDescriptionInstructions()))
+    {
+    @s.FieldFor(m => m.ResearchDataDescription, new FieldConfiguration { HtmlAttributes = new { @class = "largeHeight" }, Before = researchDataHints.GenerateFaqPlaceHolder() })
+    }
+
+    using (var s = f.BeginSection("Data Storage and Access", "data-storage-and-acess", DataStorageAndAccessInstructions()))
+    {
+    @s.FieldFor(m => m.MaxDataSize, new FieldConfiguration { As = ElementType.RadioButtons, Exclude = new Enum[] { MaxDataSize.None } })
+    @s.Field("Principal Investigator", Model.PrincipalInvestigator.FullName)
+    @Html.NonPersistentFieldFor(m => m.FindUserId, null, "inlineField")
+    <input type="submit" name="AddUrdmsUser" id="AddUrdmsUser" value="Add User" class="project" /> @*Do not remove class*@
+    <div id="urdmsUsers">
+        @Html.Partial("_UrdmsUsers", new ProjectUrdmsUsersViewModel(Model.UrdmsUsers))
+        <input type="submit" class="refresh" name="DeleteUrdmsUser" id="DeleteUrdmsUser"
+            value="Remove users" />
+    </div>
+    
+    @Html.NonPersistentFieldFor(m => m.NonUrdmsNewUserName, null, "inlineField")
+    <input type="submit" name="AddNonUrdmsUser" id="AddNonUrdmsUser" value="Add User"
+        class="project" /> @*Do not remove class*@
+    <div id="nonUrdmsUsers">
+        @Html.Partial("_NonUrdmsUsers", new ProjectNonUrdmsUsersViewModel(Model.NonUrdmsUsers))
+        <input type="submit" class="refresh" name="DeleteNonUrdmsUser" id="DeleteNonUrdmsUser"
+            value="Remove users" />
+    </div>
+    }
+    using (var s = f.BeginSection("Data Sharing", "data-sharing"))
+    {
+    @s.FieldFor(m => m.Availability, new FieldConfiguration { As = ElementType.RadioButtons, Before = availabilityHints.GenerateFaqPlaceHolder() })
+    <dt>@Html.LabelFor(m => m.AvailabilityDate)</dt>
+    <dd>@Html.TextBox("AvailabilityDate", Model.AvailabilityDate != null ? Model.AvailabilityDate.Value.ToShortDateString() : string.Empty, new { @class = "date", id = "AvailabilityDate" })</dd>
+    @s.FieldFor(m => m.ShareAccess, new FieldConfiguration { As = ElementType.RadioButtons, Before = shareAccessHints.GenerateFaqPlaceHolder() })
+    @s.FieldFor(m => m.ShareAccessDescription, new FieldConfiguration { HtmlAttributes = new { @class = "longer" } })
+    @s.FieldFor(m => m.DataLicensingType, new FieldConfiguration { As = ElementType.RadioButtons, Before = dataLicensingHints.GenerateFaqPlaceHolder() })
+    }
+     
+    <div id="faq1" class="hide">
+        <h2>What needs to be included in a data description?</h2>
+        <p>Data description can include:</p>
+        <ul>
+            <li>Type of data (e.g., survey, interviews, sensors, etc.)</li>
+            <li>Data capture methods</li>
+            <li>Source of data</li>
+            <li>Data analysis methodology</li>
+        </ul>
+    </div>
+    
+    <div id="faq4" class="hide">
+        <h2>What are the benefits of data sharing?</h2>
+        <p>Research data generated for a specific project may have potential value beyond its
+            original intent. Making your data available may be useful to other scholars for
+            further research.</p>
+        <p>You may choose to share a part or all of your data collection or just make the metadata
+            available. Access should always be proportionate to the level of confidentiality
+            attached to your data. Your funding body may also put contractual restrictions in
+            place that will determine the accessibility.</p>
+        <p>Research data generated and collected for a specific project may have potential valuebeyond
+            its original intent, andsharingit provides many benefits.</p>
+    </div>
+    
+    <div id="faq5" class="hide">
+        <h2>What are the restrictions on sharing data?</h2>
+        <p>There may be instances when you may be unable to share your data due to the type
+            of information you are generating or collecting, including:</p>
+        <ul>
+            <li>Medical research records that disclose highly sensitive personal information
+            </li>
+            <li>Information of cultural and ethnic sensitivity </li>
+            <li>Commercial, political or legal reasons </li>
+            <li>Non-disclosure agreements, contractual or institutional policies attached to your
+                data </li>
+        </ul>
+        <p>In these instances you may be able to share your metadata only. Alternatively, you
+            may consider creating a public use version of your dataset, which may involve <b>anonymising</b>
+            data to prevent disclosing individuals’ or organisations’ identities, using pseudonyms
+            or generalising the meaning of detailed text. These techniques may allow you to
+            share your data. You may also consider providing a mix of access levels to your
+            data, making the confidential information closed access while allowing restricted
+            or open access to the non-confidential information.</p>
+    </div>
+    
+    
+    <div id="faq6" class="hide">
+        <h2>What is data licensing?</h2>
+        <p>To make your data shareable and re-usable, you need to specify the permissions and
+            conditions of usage that apply to the data, asresearchers wishing to use your data
+            need to be aware of what exactly they are permitted to do with it. These conditions
+            need to be explicitly stated, and this can be achievedby attaching alicenceto your
+            data.</p>
+        <p>ANDS supports the use of the <u><a href="http://www.ausgoal.gov.au/" target="_blank">
+            AusGOAL</a> </u>framework of <u><a href="http://creativecommons.org.au/learn-more/licences"
+                target="_blank">Creative Commons licences</a></u>, which provide the appropriate
+            attribution requirements of the data creator or originator. To determine the most
+            suitable licence to attach to your data, you can use the <u><a href="http://www.ausgoal.gov.au/licence-chooser"
+                target="_blank">Licence Chooser</a></u> available from the AusGOAL website.
+            Also read the ANDS <a href="http://ands.org.au/guides/ausgoal-awareness.pdf" target="_blank">
+                AusGOAL Awareness</a> guide.</p>
+    </div>    
+    
+    <div id="faq7" class="hide">
+        <h2>What is the Creative Commons?</h2>
+        <p><u><a href="http://creativecommons.org.au/" target="_blank">Creative Commons (CC)</a></u>
+            is an international non-profit organisation that provides free licences and tools
+            that copyright owners can use to allow others to share, reuse and remix their material,
+            legally. <a href="http://creativecommons.org.au/learn-more/licences" target="_blank">
+                CC licences</a> are standardized copyright licences which grant permission to
+            use copyright works, in accordance with the particular standard set of conditions
+            selected by the copyright owner (“licensor”). The copyright owner retains ownership
+            of their work and licenses others to use the work on liberal terms. You can use
+            a <u><a href="http://creativecommons.org/choose/" target="_blank">free tool</a></u>
+            developed by the CC to assess a CC license that might be applicable to your data.</p>
+    </div>    
+    
+    <div id="faq8" class="hide">
+        <h2>What is a Restrictive Licence?</h2>
+        <p>The Restrictive Licence is part of the <u><a href="http://www.ausgoal.gov.au/"
+            target="_blank">AusGOAL</a> </u>suite of licences. AusGOAL is the Australian Governments
+            Open Access and Licensing Framework which within its licensing suite includes the
+            Creative Commons licenses and the Restrictive Licence. The Restrictive Licence was
+            developed specifically for material that contains personal or other confidential
+            information. It may also be used for other reasons, including material that is to
+            be licensed under some form of limiting or restrictive condition (such as a time
+            limit on use, or payment arrangements other than an initial once-only fee).</p>
+    </div>
+    
+    
+    
+     
+     
+     
+    <div class="container">
+        @using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Save and Next", name: "save", id: "save", classes: "float-right")
+        }
+    </div>
+    
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            $("a[rel^='prettyPhoto']").prettyPhoto({ default_width: 600 });
+        });
+    </script>
+   
+}
