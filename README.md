@@ -13,6 +13,8 @@ National Collaborative Research Infrastructure Strategy Program and the
 Education Investment Fund (EIF) Super Science Initiative.
 
 ## URDMS DMP Application
+URDMS stands for University Research Data Management System.
+It is the program title for all ANDS projects at Curtin University.
 
 ### Overview
 
