@@ -37,16 +37,14 @@ namespace ClientEndpoint
             _userRoles.Add("Visitors", "FH13545");
 
 
-            _bus = Configure.With()
-                            //.Log4Net()
-                            .DefaultBuilder()
-                            .XmlSerializer()
-                            .MsmqTransport()
-                                .IsTransactional(true)
-                                .PurgeOnStartup(false)
+            _bus = Configure
+                .With()
+                    .DefaultBuilder()
+                    .UseTransport<Msmq>()
+                    .PurgeOnStartup(false)
                                 .InMemorySubscriptionStorage()
                             .UnicastBus()
-                                .ImpersonateSender(false)
+                       
                                 .LoadMessageHandlers()
                             .CreateBus()
                             .Start(() => Configure.Instance.ForInstallationOn<NServiceBus.Installation.Environments.Windows>().Install());
@@ -77,7 +75,7 @@ namespace ClientEndpoint
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger("Partner").Fatal("Exiting", ex);
+               Console.WriteLine(ex);
                 Console.Read();
             }
         }
@@ -146,7 +144,7 @@ namespace ClientEndpoint
             }
             catch (Exception ex)
             {
-                LogManager.GetLogger("Program").Fatal("Exiting", ex);
+                Console.WriteLine(ex);
                 Console.Read();
             }
 

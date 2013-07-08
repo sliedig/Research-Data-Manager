@@ -1,4 +1,5 @@
 ﻿using NServiceBus;
+using NServiceBus.Features;
 
 namespace Urdms.ProvisioningService
 {
@@ -7,16 +8,10 @@ namespace Urdms.ProvisioningService
         public void Init()
         {
             Configure.With()
-               .DefaultBuilder()
-               .XmlSerializer()
-               .RunTimeoutManagerWithInMemoryPersistence()
-               .DBSubcriptionStorage()
-                .Sagas()
-                   .NHibernateSagaPersister()
-                   .NHibernateUnitOfWork()
-                .UnicastBus()
-                   .DoNotAutoSubscribe()
-                   .LoadMessageHandlers();
+                     .DefaultBuilder();
+
+            Configure.Features.Enable<Sagas>()
+                .AutoSubscribe(settings => settings.DoNotAutoSubscribeSagas());
         }
     }
 

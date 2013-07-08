@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using Urdms.Approvals.VivoPublisher.Database.Entities;
 using Urdms.Approvals.VivoPublisher.Database.Enums;
 using Urdms.Approvals.VivoPublisher.Helpers;
-using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.Approvals.VivoPublisher.Database.Repositories
 {

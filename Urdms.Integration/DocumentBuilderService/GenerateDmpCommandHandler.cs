@@ -3,7 +3,7 @@ using NServiceBus;
 using Urdms.DocumentBuilderService.Commands;
 using Urdms.DocumentBuilderService.Database.Repositories;
 using Urdms.DocumentBuilderService.Models.Enums;
-using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.DocumentBuilderService
 {

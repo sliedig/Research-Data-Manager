@@ -3,7 +3,7 @@ using NServiceBus;
 using Urdms.Approvals.ApprovalService.Messages;
 using Urdms.Approvals.VivoPublisher.Database.Repositories;
 using Urdms.Approvals.VivoPublisher.Messages;
-using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.Approvals.VivoPublisher
 {

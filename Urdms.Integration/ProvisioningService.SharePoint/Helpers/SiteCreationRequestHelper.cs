@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.SharePoint.Client;
 using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.ProvisioningService.SharePoint.Helpers
 {

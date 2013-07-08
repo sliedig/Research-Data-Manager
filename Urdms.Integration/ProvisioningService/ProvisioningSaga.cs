@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NServiceBus;
+using NServiceBus.Logging;
 using NServiceBus.Saga;
 using Urdms.DocumentBuilderService.Commands;
 using Urdms.NotificationService.Messages;
@@ -16,7 +17,7 @@ namespace Urdms.ProvisioningService
         IHandleMessages<ForceProvisioningCompletionCommand>
     {
 
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// Configuartion for finding the saga instances

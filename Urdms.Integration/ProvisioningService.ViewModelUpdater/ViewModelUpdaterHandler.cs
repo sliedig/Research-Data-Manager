@@ -1,5 +1,6 @@
 ﻿using System;
 using NServiceBus;
+using NServiceBus.Logging;
 using Urdms.ProvisioningService.Events;
 using Urdms.ProvisioningService.ViewModelUpdater.Database.Repositories;
 
@@ -7,7 +8,7 @@ namespace Urdms.ProvisioningService.ViewModelUpdater
 {
     public class ViewModelUpdaterHandler : IHandleMessages<ProvisioningStatusChanged>
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         protected IDataCollectionRepository Repository { get; private set; }
 

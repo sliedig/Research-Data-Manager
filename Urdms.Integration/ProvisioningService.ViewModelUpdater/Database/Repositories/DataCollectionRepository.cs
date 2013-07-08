@@ -1,6 +1,6 @@
 using System.Configuration;
 using System.Data.SqlClient;
-using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.ProvisioningService.ViewModelUpdater.Database.Repositories
 {

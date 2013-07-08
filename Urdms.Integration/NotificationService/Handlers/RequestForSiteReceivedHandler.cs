@@ -3,7 +3,7 @@ using NServiceBus;
 using Urdms.NotificationService.Messages;
 using Urdms.NotificationService.Models;
 using Urdms.NotificationService.UserSearch;
-using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.NotificationService.Handlers
 {

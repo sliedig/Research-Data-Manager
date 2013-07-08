@@ -1,4 +1,5 @@
 using NServiceBus;
+using NServiceBus.Features;
 
 namespace Urdms.Approvals.ApprovalService
 {
@@ -8,15 +9,16 @@ namespace Urdms.Approvals.ApprovalService
         {
             Configure.With()
                .DefaultBuilder()
-               .XmlSerializer()
-               .RunTimeoutManagerWithInMemoryPersistence()
+               .UseInMemoryTimeoutPersister()
+               .UseInMemoryGatewayPersister()
                .DBSubcriptionStorage()
-                .Sagas()
-                   .NHibernateSagaPersister()
+                .NHibernateSagaPersister()
                    .NHibernateUnitOfWork()
                 .UnicastBus()
-                   .DoNotAutoSubscribe()
                    .LoadMessageHandlers();
+
+            Configure.Serialization.Xml();
+            Configure.Features.Enable<Sagas>().AutoSubscribe(settings => settings.DoNotAutoSubscribeSagas());
         }
     }
 }

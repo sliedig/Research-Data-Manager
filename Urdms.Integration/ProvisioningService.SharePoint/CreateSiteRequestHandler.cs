@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Configuration;
-using System.Linq;
 using NServiceBus;
 using Urdms.ProvisioningService.Messages;
 using Urdms.ProvisioningService.SharePoint.Helpers;
+using NServiceBus.Logging;
 
 namespace Urdms.ProvisioningService.SharePoint
 {
     public class CreateSiteRequestHandler : IHandleMessages<CreateSiteRequest>
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private SharePointHelper _sharePoint;
         private readonly string _spSiteNamePrefix = ConfigurationManager.AppSettings["SiteNamePrefix"];
 

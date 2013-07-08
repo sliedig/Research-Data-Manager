@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using Urdms.NotificationService.Database.Enums;
 using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.NotificationService.Database.Repositories
 {

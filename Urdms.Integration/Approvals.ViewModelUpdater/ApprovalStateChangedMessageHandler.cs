@@ -1,5 +1,6 @@
 using System;
 using NServiceBus;
+using NServiceBus.Logging;
 using Urdms.Approvals.ApprovalService.Events;
 using Urdms.Approvals.ViewModelUpdater.Database.Repositories;
 
@@ -7,7 +8,7 @@ namespace Urdms.Approvals.ViewModelUpdater
 {
     public class ApprovalStateChangedHandler : IHandleMessages<ApprovalStateChanged>
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public void Handle(ApprovalStateChanged message)
         {

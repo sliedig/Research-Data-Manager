@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using NServiceBus;
+using NServiceBus.Logging;
 using NServiceBus.Saga;
 using Urdms.Approvals.ApprovalService.Commands;
 using Urdms.Approvals.ApprovalService.Events;
@@ -17,16 +18,16 @@ namespace Urdms.Approvals.ApprovalService
         IHandleMessages<PublishDataCollection>,
         IHandleMessages<ExportToVivoResponse>
     {
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public override void ConfigureHowToFindSaga()
         {
-            ConfigureMapping<SubmitForApproval>(s => s.DataCollectionId, m => m.DataCollectionId);
-            ConfigureMapping<SubmitForSecondaryApproval>(s => s.DataCollectionId, m => m.DataCollectionId);
-            ConfigureMapping<SubmitForFinalApproval>(s => s.DataCollectionId, m => m.DataCollectionId);
-            ConfigureMapping<SubmitForSecondaryReApproval>(s => s.DataCollectionId, m => m.DataCollectionId);
-            ConfigureMapping<PublishDataCollection>(s => s.DataCollectionId, m => m.DataCollectionId);
-            ConfigureMapping<ExportToVivoResponse>(s => s.DataCollectionId, m => m.DataCollectionId);
+            ConfigureMapping<SubmitForApproval>(approval => approval.DataCollectionId ).ToSaga(data => data.DataCollectionId);
+            ConfigureMapping<SubmitForSecondaryApproval>(approval => approval.DataCollectionId).ToSaga(data => data.DataCollectionId);
+            ConfigureMapping<SubmitForFinalApproval>(approval => approval.DataCollectionId).ToSaga(data => data.DataCollectionId);
+            ConfigureMapping<SubmitForSecondaryReApproval>(approval => approval.DataCollectionId).ToSaga(data => data.DataCollectionId);
+            ConfigureMapping<PublishDataCollection>(approval => approval.DataCollectionId).ToSaga(data => data.DataCollectionId);
+            ConfigureMapping<ExportToVivoResponse>(approval => approval.DataCollectionId).ToSaga(data => data.DataCollectionId);
         }
 
         /// <summary>

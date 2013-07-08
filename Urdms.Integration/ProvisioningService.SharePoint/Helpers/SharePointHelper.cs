@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Net;
 using Microsoft.SharePoint.Client;
 using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.ProvisioningService.SharePoint.Helpers
 {

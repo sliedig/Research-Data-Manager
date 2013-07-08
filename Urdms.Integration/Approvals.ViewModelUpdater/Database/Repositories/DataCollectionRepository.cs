@@ -2,7 +2,7 @@ using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using Urdms.Approvals.ApprovalService.Events;
-using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.Approvals.ViewModelUpdater.Database.Repositories
 {

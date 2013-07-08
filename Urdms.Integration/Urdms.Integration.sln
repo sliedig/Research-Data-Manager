@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Provisioning Service BC", "Provisioning Service BC", "{56E376E0-4F02-45E7-8E13-680843630893}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Document Builder Service", "Document Builder Service", "{BC4C25FD-F35E-438C-B61C-04DDE5D1843D}"
@@ -74,6 +74,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Approvals.ApprovalService.Events", "Approvals.ApprovalService.Events\Approvals.ApprovalService.Events.csproj", "{5600F1A7-096F-4633-BE92-6DCFE63D1496}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotificationService.Messages", "NotificationService.Messages\NotificationService.Messages.csproj", "{54EE9EAE-E01E-4F62-B963-9CD97C984264}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F5CEFD88-1342-4F5F-A69B-C4542A93D736}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

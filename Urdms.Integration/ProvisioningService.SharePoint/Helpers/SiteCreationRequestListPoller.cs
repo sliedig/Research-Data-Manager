@@ -4,6 +4,7 @@ using System.Threading;
 using Microsoft.SharePoint.Client;
 using Urdms.ProvisioningService.Messages;
 using log4net;
+using NServiceBus.Logging;
 
 namespace Urdms.ProvisioningService.SharePoint.Helpers
 {
