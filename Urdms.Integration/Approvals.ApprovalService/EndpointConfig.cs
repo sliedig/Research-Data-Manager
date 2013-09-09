@@ -11,9 +11,6 @@ namespace Urdms.Approvals.ApprovalService
                .DefaultBuilder()
                .UseInMemoryTimeoutPersister()
                .UseInMemoryGatewayPersister()
-               .DBSubcriptionStorage()
-                .NHibernateSagaPersister()
-                   .NHibernateUnitOfWork()
                 .UnicastBus()
                    .LoadMessageHandlers();
 

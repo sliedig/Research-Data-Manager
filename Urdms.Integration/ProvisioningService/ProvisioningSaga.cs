@@ -24,8 +24,8 @@ namespace Urdms.ProvisioningService
         /// </summary>
         public override void ConfigureHowToFindSaga()
         {
-            ConfigureMapping<CreateSiteResponse>(s => s.ProjectId, m => m.ProjectId);
-            ConfigureMapping<ForceProvisioningCompletionCommand>(s => s.ProjectId, m => m.ProjectId);
+            ConfigureMapping<CreateSiteResponse>(approval => approval.ProjectId).ToSaga(data => data.ProjectId);
+            ConfigureMapping<ForceProvisioningCompletionCommand>(approval => approval.ProjectId).ToSaga(data => data.ProjectId);
         }
 
         #region Implementation of IMessageHandler<SiteRequestCommand>
